@@ -1,0 +1,81 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/typography';
+
+@theme {
+	--color-bg-primary: #0a0a0a;
+	--color-bg-secondary: #141414;
+	--color-bg-elevated: #1a1a1a;
+
+	--color-bronze-light: #D4AF7A;
+	--color-bronze: #CD7F32;
+	--color-bronze-dark: #8C4A1B;
+
+	--color-text-primary: #e5e5e5;
+	--color-text-secondary: #a3a3a3;
+	--color-text-tertiary: #737373;
+	--color-text-muted: #525252;
+
+	--color-border-subtle: #262626;
+	--color-border-medium: #404040;
+
+	--font-family-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+	--font-family-sans: 'Inter', 'SF Pro', system-ui, sans-serif;
+	--font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+	--font-size-hero: clamp(3rem, 8vw, 6rem);
+	--font-size-h1: clamp(2.5rem, 5vw, 4rem);
+	--font-size-h2: clamp(1.75rem, 3vw, 2.5rem);
+	--font-size-h3: clamp(1.25rem, 2vw, 1.75rem);
+	--font-size-body: clamp(1rem, 1.5vw, 1.125rem);
+	--font-size-small: clamp(0.875rem, 1vw, 1rem);
+	--font-size-tiny: 0.75rem;
+
+	--spacing-section: clamp(3rem, 8vw, 6rem);
+	--max-width-container: 1400px;
+
+	--animate-fade-in: fadeIn 0.6s ease-out;
+	--animate-slide-up: slideUp 0.8s ease-out;
+
+	--aspect-ratio-sculpture: 4/5;
+	--backdrop-blur-nav: 12px;
+	--transition-timing-function-sculpture: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+	0% { opacity: 0; }
+	100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+	0% { opacity: 0; transform: translateY(20px); }
+	100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Base styles - Let the bronze speak */
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background-color: theme(colors.bg.primary);
+	color: theme(colors.text.primary);
+	font-family: theme(fontFamily.sans);
+	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom font size utilities */
+.text-hero { font-size: var(--font-size-hero); }
+.text-h1 { font-size: var(--font-size-h1); }
+.text-h2 { font-size: var(--font-size-h2); }
+.text-h3 { font-size: var(--font-size-h3); }
+.text-body { font-size: var(--font-size-body); }
+.text-small { font-size: var(--font-size-small); }
+.text-tiny { font-size: var(--font-size-tiny); }
