@@ -56,7 +56,7 @@
 							d="M10 19l-7-7m0 0l7-7m-7 7h18"
 						/>
 					</svg>
-					<span class="text-small font-sans tracking-wider uppercase">Back to Gallery</span>
+					<span class="text-small font-sans tracking-wider uppercase">Back to Works</span>
 				</a>
 			</div>
 
@@ -153,7 +153,7 @@
 				href="/gallery"
 				class="text-small inline-block border border-bronze bg-transparent px-8 py-3 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
 			>
-				Return to Gallery
+				Return to Works
 			</a>
 		</div>
 	</main>

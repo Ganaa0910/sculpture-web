@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Gallery - Juraan</title>
+	<title>Works - Juraan</title>
 	<meta name="description" content="Explore Juraan's collection of bronze sculptures and mythological artworks" />
 	<!-- Preload critical background image -->
 	<link rel="preload" as="image" href="/backgrounds/gallery.png" fetchpriority="high" />
@@ -28,7 +28,7 @@
 		
 		<!-- Page Header -->
 		<header class="mb-16 text-center">
-			<h1 class="text-h1 text-bronze-light mb-6" style="font-family: var(--font-family-juraan);">Gallery</h1>
+			<h1 class="text-h1 text-bronze-light mb-6" style="font-family: var(--font-family-juraan);">Works</h1>
 			<p class="font-sans text-body text-secondary max-w-2xl mx-auto">
 				A collection of bronze sculptures exploring mythological themes, 
 				each piece crafted to embody timeless narratives of power, wisdom, and transcendence.

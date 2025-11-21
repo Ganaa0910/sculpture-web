@@ -60,7 +60,7 @@
 				href="/gallery"
 				class="text-small border border-bronze bg-transparent px-8 py-3 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
 			>
-				View Gallery
+				View Works
 			</a>
 			<button
 				on:click={() => document.querySelector('#about-section')?.scrollIntoView({ behavior: 'smooth' })}
@@ -129,7 +129,7 @@
 					href="/gallery"
 					class="border-b border-bronze-light font-sans text-bronze-light transition-colors hover:border-bronze hover:text-bronze"
 				>
-					View Full Gallery →
+					View Full Works →
 				</a>
 			</div>
 

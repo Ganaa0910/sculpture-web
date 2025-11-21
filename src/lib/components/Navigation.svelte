@@ -4,7 +4,7 @@
 
 	const links = [
 		{ href: '/', label: 'Home' },
-		{ href: '/gallery', label: 'Gallery' },
+		{ href: '/gallery', label: 'Works' },
 		{ href: '/contact', label: 'Contact' }
 	];
 
