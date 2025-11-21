@@ -19,56 +19,63 @@
 	}
 </script>
 
-<nav class="fixed top-0 w-full z-50 bg-bg-primary/80 backdrop-blur-nav border-b border-border-subtle">
-	<div class="max-w-container mx-auto px-6 py-4">
+<nav class="fixed top-0 w-full z-50 bg-bg-primary/85 backdrop-blur-nav border-b border-bronze-dark/20">
+	<div class="max-w-container mx-auto px-6 py-6">
 		<div class="flex justify-between items-center">
-			<a href="/" class="font-serif text-h3 text-primary hover:text-bronze-light transition-colors">
-				Juraan
+			<!-- Artist Name with decorative elements -->
+			<a href="/" class="group flex items-center space-x-3">
+				<div class="w-8 h-[1px] bg-bronze-dark group-hover:bg-bronze-light transition-colors duration-300"></div>
+				<span class="font-serif text-h3 text-primary group-hover:text-bronze-light transition-colors duration-300 tracking-wider">
+					JURAAN
+				</span>
+				<div class="w-8 h-[1px] bg-bronze-dark group-hover:bg-bronze-light transition-colors duration-300"></div>
 			</a>
 			
 			<!-- Desktop Navigation -->
-			<div class="hidden md:flex space-x-8">
+			<div class="hidden md:flex items-center space-x-12">
 				{#each links as link}
 					<a 
 						href={link.href}
-						class="font-sans text-small uppercase tracking-wider text-secondary hover:text-bronze-light transition-colors {$page.url.pathname === link.href ? 'text-bronze-light' : ''}"
+						class="relative group font-sans text-small tracking-[0.2em] text-tertiary hover:text-bronze-light transition-all duration-300 {$page.url.pathname === link.href ? 'text-bronze-light' : ''}"
 					>
-						{link.label}
+						<span class="relative z-10">{link.label}</span>
+						<!-- Underline animation -->
+						<div class="absolute bottom-[-4px] left-0 w-0 h-[1px] bg-bronze-light group-hover:w-full transition-all duration-300 {$page.url.pathname === link.href ? 'w-full' : ''}"></div>
 					</a>
 				{/each}
 			</div>
 
 			<!-- Mobile Menu Button -->
 			<button 
-				class="md:hidden text-secondary hover:text-bronze-light transition-colors"
+				class="md:hidden relative w-10 h-10 rounded-full border border-bronze-dark/40 hover:border-bronze-light text-secondary hover:text-bronze-light transition-all duration-300 group flex items-center justify-center"
 				on:click={toggleMobileMenu}
 				aria-label="Toggle menu"
 			>
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					{#if mobileMenuOpen}
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-					{:else}
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-					{/if}
-				</svg>
+				<div class="relative w-5 h-5 flex items-center justify-center">
+					<div class="absolute w-5 h-[1px] bg-current transition-all duration-300 ease-in-out origin-center {mobileMenuOpen ? 'rotate-45' : '-translate-y-1.5'}"></div>
+					<div class="absolute w-5 h-[1px] bg-current transition-all duration-300 ease-in-out {mobileMenuOpen ? 'opacity-0 scale-0' : ''}"></div>
+					<div class="absolute w-5 h-[1px] bg-current transition-all duration-300 ease-in-out origin-center {mobileMenuOpen ? '-rotate-45' : 'translate-y-1.5'}"></div>
+				</div>
 			</button>
 		</div>
 	</div>
 
 	<!-- Mobile Menu -->
-	{#if mobileMenuOpen}
-		<div class="md:hidden bg-bg-primary/95 backdrop-blur-nav border-b border-border-subtle">
-			<div class="px-6 py-4 space-y-4">
-				{#each links as link}
-					<a 
-						href={link.href}
-						class="block font-sans text-small uppercase tracking-wider text-secondary hover:text-bronze-light transition-colors {$page.url.pathname === link.href ? 'text-bronze-light' : ''}"
-						on:click={closeMobileMenu}
-					>
-						{link.label}
-					</a>
-				{/each}
-			</div>
+	<div class="md:hidden bg-bg-primary/95 backdrop-blur-nav border-b border-bronze-dark/20 overflow-hidden transition-all duration-300 ease-in-out {mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}">
+		<div class="px-6 py-8 space-y-6 transform transition-transform duration-300 ease-in-out {mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}">
+			{#each links as link, index}
+				<a 
+					href={link.href}
+					class="block relative group font-sans text-body tracking-[0.15em] text-secondary hover:text-bronze-light transition-all duration-300 {$page.url.pathname === link.href ? 'text-bronze-light' : ''} py-2 transform {mobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'}"
+					style="transition-delay: {mobileMenuOpen ? (index + 1) * 100 : 0}ms"
+					on:click={closeMobileMenu}
+				>
+					<div class="flex items-center space-x-4">
+						<div class="w-4 h-[1px] bg-bronze-dark group-hover:bg-bronze-light group-hover:w-6 transition-all duration-300 {$page.url.pathname === link.href ? 'bg-bronze-light w-6' : ''}"></div>
+						<span>{link.label}</span>
+					</div>
+				</a>
+			{/each}
 		</div>
-	{/if}
+	</div>
 </nav>

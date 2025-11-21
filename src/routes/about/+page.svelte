@@ -3,8 +3,19 @@
 	<meta name="description" content="Learn about Juraan's artistic journey, philosophy, and approach to bronze sculpture" />
 </svelte:head>
 
-<main class="pt-24 pb-section">
-	<div class="max-w-4xl mx-auto px-6">
+<main class="relative pt-24 pb-section">
+	<!-- About Background -->
+	<div class="fixed inset-0 z-0">
+		<img 
+			src="/backgrounds/about.png" 
+			alt="About background"
+			class="w-full h-full object-cover object-center"
+		/>
+		<div class="absolute inset-0 bg-bg-primary/85"></div>
+		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/30 to-bg-primary/75"></div>
+	</div>
+
+	<div class="relative z-10 max-w-4xl mx-auto px-6">
 		
 		<!-- Page Header -->
 		<header class="mb-16 text-center">

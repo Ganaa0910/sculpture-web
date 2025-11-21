@@ -4,40 +4,63 @@
 
 <svelte:head>
 	<title>Juraan - Bronze Sculptor</title>
-	<meta name="description" content="Juraan creates bronze sculptures exploring mythological themes, capturing timeless narratives of power, wisdom, and transcendence." />
+	<meta
+		name="description"
+		content="Juraan creates bronze sculptures exploring mythological themes, capturing timeless narratives of power, wisdom, and transcendence."
+	/>
 </svelte:head>
 
 <!-- Hero Section -->
-<main class="relative min-h-screen flex items-center justify-center">
-	
-	<!-- Background Image -->
-	<div class="absolute inset-0 z-0">
-		<img 
-			src={featuredSculpture.image} 
-			alt={featuredSculpture.title}
-			class="w-full h-full object-cover"
-		/>
-		<div class="absolute inset-0 bg-bg-primary/60"></div>
+<main class="relative flex min-h-screen items-center justify-center">
+	<!-- Background Video -->
+	<div class="absolute inset-0 z-0 overflow-hidden">
+		<video
+			autoplay
+			muted
+			loop
+			playsinline
+			class="h-full w-full object-cover min-w-full min-h-full"
+		>
+			<source src="/videos/3.mp4" type="video/mp4" />
+			<!-- Fallback image -->
+			<img
+				src={featuredSculpture.image}
+				alt={featuredSculpture.title}
+				class="h-full w-full object-cover"
+			/>
+		</video>
+		<!-- Base darkness overlay -->
+		<div class="absolute inset-0 bg-bg-primary/70"></div>
+		<!-- Primary vignette -->
+		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/40 to-bg-primary/95"></div>
+		<!-- Secondary vignette for depth -->
+		<div class="absolute inset-0 bg-gradient-radial-tight from-transparent to-bg-primary/60"></div>
+		<!-- Edge shadows -->
+		<div class="absolute inset-0 shadow-inner-refined"></div>
+		<!-- Enhanced corner gradients -->
+		<div class="absolute inset-0 bg-gradient-corners-intense"></div>
+		<!-- Edge burn -->
+		<div class="absolute inset-0 shadow-edge-burn"></div>
+		<!-- Film grain overlay -->
+		<div class="absolute inset-0 film-grain opacity-25"></div>
 	</div>
 
 	<!-- Hero Content -->
-	<div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
-		<h1 class="font-serif text-hero text-primary mb-8 animate-fade-in">
-			Juraan
-		</h1>
-		<p class="font-sans text-h3 text-secondary mb-12 animate-slide-up">
+	<div class="relative z-10 mx-auto max-w-4xl px-6 text-center">
+		<h1 class="text-hero text-primary mb-8 animate-fade-in font-serif">Juraan</h1>
+		<p class="text-h3 text-secondary mb-12 animate-slide-up font-sans">
 			Sculptor · Bronze · Mythology
 		</p>
-		<div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-			<a 
-				href="/gallery" 
-				class="bg-transparent border border-bronze text-bronze-light hover:bg-bronze hover:text-bg-primary transition-all duration-300 px-8 py-3 font-sans text-small uppercase tracking-wider"
+		<div class="flex animate-slide-up flex-col justify-center gap-4 sm:flex-row">
+			<a
+				href="/gallery"
+				class="text-small border border-bronze bg-transparent px-8 py-3 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
 			>
 				View Gallery
 			</a>
-			<a 
-				href="/about" 
-				class="bg-transparent border border-border-medium text-secondary hover:border-bronze hover:text-bronze-light transition-all duration-300 px-8 py-3 font-sans text-small uppercase tracking-wider"
+			<a
+				href="/about"
+				class="text-secondary text-small border border-border-medium bg-transparent px-8 py-3 font-sans tracking-wider uppercase transition-all duration-300 hover:border-bronze hover:text-bronze-light"
 			>
 				About the Artist
 			</a>
@@ -45,65 +68,64 @@
 	</div>
 
 	<!-- Scroll Indicator -->
-	<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-		<div class="w-6 h-10 border border-bronze-light rounded-full flex justify-center">
-			<div class="w-1 h-3 bg-bronze-light rounded-full mt-2 animate-bounce"></div>
+	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 transform text-center">
+		<div class="flex h-10 w-6 justify-center rounded-full border border-bronze-light">
+			<div class="mt-2 h-3 w-1 animate-bounce rounded-full bg-bronze-light"></div>
 		</div>
-		<p class="font-mono text-tiny text-muted mt-2 uppercase tracking-wider">Scroll</p>
+		<p class="text-tiny text-muted mt-2 font-mono tracking-wider uppercase">Scroll</p>
 	</div>
-
 </main>
 
 <!-- Featured Work Section -->
 <section class="py-section">
-	<div class="max-w-container mx-auto px-6">
-		<div class="text-center mb-16">
-			<h2 class="font-serif text-h2 text-primary mb-6">Latest Work</h2>
-			<p class="font-sans text-body text-secondary max-w-2xl mx-auto">
-				Each bronze sculpture emerges from mythological tradition, 
-				exploring timeless themes through contemporary artistic vision.
+	<div class="mx-auto max-w-container px-6">
+		<div class="mb-16 text-center">
+			<h2 class="text-h2 text-primary mb-6 font-serif">Latest Work</h2>
+			<p class="text-body text-secondary mx-auto max-w-2xl font-serif">
+				Each bronze sculpture emerges from mythological tradition, exploring timeless themes through
+				contemporary artistic vision.
 			</p>
 		</div>
-		
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+		<div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
 			<div class="order-2 lg:order-1">
-				<h3 class="font-serif text-h3 text-primary mb-4">{featuredSculpture.title}</h3>
+				<h3 class="text-h3 text-primary mb-4 font-serif">{featuredSculpture.title}</h3>
 				{#if featuredSculpture.year}
-					<p class="font-mono text-tiny text-tertiary uppercase tracking-wider mb-4">
+					<p class="text-tiny text-tertiary mb-4 font-mono tracking-wider uppercase">
 						{featuredSculpture.year}
 					</p>
 				{/if}
-				<p class="font-sans text-body text-secondary leading-relaxed mb-6">
+				<p class="text-body text-secondary mb-6 font-sans leading-relaxed">
 					{featuredSculpture.description}
 				</p>
 				{#if featuredSculpture.material || featuredSculpture.dimensions}
-					<div class="space-y-2 mb-8">
+					<div class="mb-8 space-y-2">
 						{#if featuredSculpture.material}
-							<p class="font-mono text-tiny text-muted uppercase tracking-wider">
+							<p class="text-tiny text-muted font-mono tracking-wider uppercase">
 								{featuredSculpture.material}
 							</p>
 						{/if}
 						{#if featuredSculpture.dimensions}
-							<p class="font-mono text-tiny text-muted uppercase tracking-wider">
+							<p class="text-tiny text-muted font-mono tracking-wider uppercase">
 								{featuredSculpture.dimensions}
 							</p>
 						{/if}
 					</div>
 				{/if}
-				<a 
-					href="/gallery" 
-					class="font-sans text-bronze-light hover:text-bronze transition-colors border-b border-bronze-light hover:border-bronze"
+				<a
+					href="/gallery"
+					class="border-b border-bronze-light font-sans text-bronze-light transition-colors hover:border-bronze hover:text-bronze"
 				>
 					View Full Gallery →
 				</a>
 			</div>
-			
+
 			<div class="order-1 lg:order-2">
-				<div class="aspect-sculpture overflow-hidden bg-bg-secondary border border-border-subtle">
-					<img 
-						src={featuredSculpture.image} 
+				<div class="aspect-sculpture overflow-hidden border border-border-subtle bg-bg-secondary">
+					<img
+						src={featuredSculpture.image}
 						alt={featuredSculpture.title}
-						class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+						class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
 					/>
 				</div>
 			</div>

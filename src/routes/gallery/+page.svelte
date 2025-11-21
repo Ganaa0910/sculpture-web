@@ -8,8 +8,19 @@
 	<meta name="description" content="Explore Juraan's collection of bronze sculptures and mythological artworks" />
 </svelte:head>
 
-<main class="pt-24 pb-section">
-	<div class="max-w-container mx-auto px-6">
+<main class="relative pt-24 pb-section">
+	<!-- Gallery Background -->
+	<div class="fixed inset-0 z-0">
+		<img 
+			src="/backgrounds/gallery.png" 
+			alt="Gallery background"
+			class="w-full h-full object-cover object-center"
+		/>
+		<div class="absolute inset-0 bg-bg-primary/85"></div>
+		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/20 to-bg-primary/70"></div>
+	</div>
+
+	<div class="relative z-10 max-w-container mx-auto px-6">
 		
 		<!-- Page Header -->
 		<header class="mb-16 text-center">
