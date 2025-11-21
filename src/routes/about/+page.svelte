@@ -1,15 +1,20 @@
 <svelte:head>
 	<title>About - Juraan</title>
 	<meta name="description" content="Learn about Juraan's artistic journey, philosophy, and approach to bronze sculpture" />
+	<!-- Preload critical images -->
+	<link rel="preload" as="image" href="/backgrounds/about.png" fetchpriority="high" />
+	<link rel="preload" as="image" href="/juraan-portrait.jpg" />
 </svelte:head>
 
 <main class="relative pt-24 pb-section">
 	<!-- About Background -->
 	<div class="fixed inset-0 z-0">
-		<img 
-			src="/backgrounds/about.png" 
+		<img
+			src="/backgrounds/about.png"
 			alt="About background"
 			class="w-full h-full object-cover object-center"
+			loading="eager"
+			fetchpriority="high"
 		/>
 		<div class="absolute inset-0 bg-bg-primary/85"></div>
 		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/30 to-bg-primary/75"></div>
@@ -27,10 +32,11 @@
 			<!-- Artist Portrait -->
 			<div class="order-2 lg:order-1">
 				<div class="aspect-[4/5] bg-bg-secondary border border-border-subtle overflow-hidden">
-					<img 
-						src="/juraan-portrait.jpg" 
+					<img
+						src="/juraan-portrait.jpg"
 						alt="Juraan in his studio"
 						class="w-full h-full object-cover"
+						loading="eager"
 					/>
 				</div>
 			</div>

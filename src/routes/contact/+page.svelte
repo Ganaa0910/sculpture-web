@@ -8,15 +8,19 @@
 <svelte:head>
 	<title>Contact - Juraan</title>
 	<meta name="description" content="Get in touch with Juraan for artwork inquiries, commissions, and exhibitions" />
+	<!-- Preload critical background image -->
+	<link rel="preload" as="image" href="/backgrounds/contact.png" fetchpriority="high" />
 </svelte:head>
 
 <main class="relative pt-24 pb-section">
 	<!-- Contact Background -->
 	<div class="fixed inset-0 z-0">
-		<img 
-			src="/backgrounds/contact.png" 
+		<img
+			src="/backgrounds/contact.png"
 			alt="Contact background"
 			class="w-full h-full object-cover object-center"
+			loading="eager"
+			fetchpriority="high"
 		/>
 		<div class="absolute inset-0 bg-bg-primary/85"></div>
 		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/25 to-bg-primary/80"></div>

@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
-	
+	import { onMount } from 'svelte';
+
 	const links = [
 		{ href: '/', label: 'Home' },
 		{ href: '/gallery', label: 'Gallery' },
@@ -8,7 +9,9 @@
 		{ href: '/contact', label: 'Contact' }
 	];
 
-	let mobileMenuOpen = false;
+	let mobileMenuOpen = $state(false);
+	let navHidden = $state(false);
+	let lastScroll = 0;
 
 	function toggleMobileMenu() {
 		mobileMenuOpen = !mobileMenuOpen;
@@ -17,9 +20,42 @@
 	function closeMobileMenu() {
 		mobileMenuOpen = false;
 	}
+
+	onMount(() => {
+		const handleScroll = () => {
+			const currentScroll = window.scrollY;
+			const isMobile = window.innerWidth < 768;
+
+			// Don't hide nav on mobile or when mobile menu is open
+			if (isMobile || mobileMenuOpen) {
+				navHidden = false;
+				lastScroll = currentScroll;
+				return;
+			}
+
+			// Always show nav when at top
+			if (currentScroll <= 100) {
+				navHidden = false;
+			}
+			// Hide when scrolling down, show when scrolling up
+			else if (currentScroll > lastScroll && currentScroll > 100) {
+				navHidden = true;
+			} else if (currentScroll < lastScroll) {
+				navHidden = false;
+			}
+
+			lastScroll = currentScroll;
+		};
+
+		window.addEventListener('scroll', handleScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener('scroll', handleScroll);
+		};
+	});
 </script>
 
-<nav class="fixed top-0 w-full z-50 bg-bg-primary/85 backdrop-blur-nav border-b border-bronze-dark/20">
+<nav class="fixed top-0 w-full z-50 bg-bg-primary/85 backdrop-blur-nav border-b border-bronze-dark/20 transition-transform duration-300 ease-in-out {navHidden ? '-translate-y-full' : 'translate-y-0'}">
 	<div class="max-w-container mx-auto px-6 py-6">
 		<div class="flex justify-between items-center">
 			<!-- Artist Name with decorative elements -->

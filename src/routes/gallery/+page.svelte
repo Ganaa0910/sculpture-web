@@ -6,15 +6,19 @@
 <svelte:head>
 	<title>Gallery - Juraan</title>
 	<meta name="description" content="Explore Juraan's collection of bronze sculptures and mythological artworks" />
+	<!-- Preload critical background image -->
+	<link rel="preload" as="image" href="/backgrounds/gallery.png" fetchpriority="high" />
 </svelte:head>
 
 <main class="relative pt-24 pb-section">
 	<!-- Gallery Background -->
 	<div class="fixed inset-0 z-0">
-		<img 
-			src="/backgrounds/gallery.png" 
+		<img
+			src="/backgrounds/gallery.png"
 			alt="Gallery background"
 			class="w-full h-full object-cover object-center"
+			loading="eager"
+			fetchpriority="high"
 		/>
 		<div class="absolute inset-0 bg-bg-primary/85"></div>
 		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/20 to-bg-primary/70"></div>
@@ -31,16 +35,18 @@
 			</p>
 		</header>
 
-		<!-- Sculpture Grid -->
-		<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in">
-			{#each sculptures as sculpture}
-				<SculptureCard 
-					{sculpture}
-					onClick={() => {
-						// TODO: Open lightbox modal
-						console.log('Open sculpture:', sculpture.title);
-					}}
-				/>
+		<!-- Bento Gallery Layout -->
+		<section class="bento-grid animate-fade-in">
+			{#each sculptures as sculpture, index}
+				{@const patterns = [1, 2, 3, 4, 5, 6, 2, 3, 4, 6, 1, 2]}
+				<div class="bento-item bento-size-{patterns[index % patterns.length]}">
+					<SculptureCard 
+						{sculpture}
+						onClick={() => {
+							window.location.href = `/sculpture/${sculpture.id}`;
+						}}
+					/>
+				</div>
 			{/each}
 		</section>
 

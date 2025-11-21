@@ -140,6 +140,44 @@ body {
 	90% { transform: translate(1px, -1px) rotate(1deg); }
 }
 
+/* Bento Grid Layout */
+.bento-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 1.5rem;
+	grid-auto-rows: 200px;
+}
+
+@media (max-width: 768px) {
+	.bento-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+		grid-auto-rows: 180px;
+	}
+}
+
+.bento-item {
+	overflow: hidden;
+}
+
+/* Bento size variations - More dynamic */
+.bento-size-1 { grid-column: span 2; grid-row: span 3; } /* Hero - Large */
+.bento-size-2 { grid-column: span 1; grid-row: span 1; } /* Small square */
+.bento-size-3 { grid-column: span 1; grid-row: span 2; } /* Portrait tall */
+.bento-size-4 { grid-column: span 2; grid-row: span 1; } /* Landscape wide */
+.bento-size-5 { grid-column: span 1; grid-row: span 2; } /* Portrait tall */
+.bento-size-6 { grid-column: span 2; grid-row: span 2; } /* Large square */
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+	.bento-size-1 { grid-column: span 2; grid-row: span 2; }
+	.bento-size-2 { grid-column: span 1; grid-row: span 1; }
+	.bento-size-3 { grid-column: span 1; grid-row: span 2; }
+	.bento-size-4 { grid-column: span 2; grid-row: span 1; }
+	.bento-size-5 { grid-column: span 1; grid-row: span 1; }
+	.bento-size-6 { grid-column: span 1; grid-row: span 1; }
+}
+
 /* Custom font utilities */
 .text-hero { 
 	font-size: var(--font-size-hero); 

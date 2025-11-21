@@ -8,6 +8,8 @@
 		name="description"
 		content="Juraan creates bronze sculptures exploring mythological themes, capturing timeless narratives of power, wisdom, and transcendence."
 	/>
+	<!-- Preload critical images for faster loading -->
+	<link rel="preload" as="image" href={featuredSculpture.image} fetchpriority="high" />
 </svelte:head>
 
 <!-- Hero Section -->
@@ -27,6 +29,8 @@
 				src={featuredSculpture.image}
 				alt={featuredSculpture.title}
 				class="h-full w-full object-cover"
+				loading="eager"
+				fetchpriority="high"
 			/>
 		</video>
 		<!-- Base darkness overlay -->
@@ -68,11 +72,20 @@
 	</div>
 
 	<!-- Scroll Indicator -->
-	<div class="absolute bottom-8 left-1/2 -translate-x-1/2 transform text-center">
-		<div class="flex h-10 w-6 justify-center rounded-full border border-bronze-light">
-			<div class="mt-2 h-3 w-1 animate-bounce rounded-full bg-bronze-light"></div>
+	<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+		<!-- Desktop: Mouse scroll -->
+		<div class="hidden sm:flex w-6 h-10 rounded-full border border-bronze-light justify-center items-start pt-2">
+			<div class="w-1 h-3 bg-bronze-light rounded-full animate-bounce"></div>
 		</div>
-		<p class="text-tiny text-muted mt-2 font-mono tracking-wider uppercase">Scroll</p>
+		<!-- Mobile: Swipe up gesture -->
+		<div class="sm:hidden flex flex-col items-center space-y-2">
+			<div class="w-8 h-1 bg-bronze-light rounded-full animate-pulse"></div>
+			<div class="w-6 h-1 bg-bronze-light/60 rounded-full"></div>
+			<div class="w-4 h-1 bg-bronze-light/30 rounded-full"></div>
+			<svg class="w-6 h-6 text-bronze-light animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12" />
+			</svg>
+		</div>
 	</div>
 </main>
 
@@ -126,6 +139,8 @@
 						src={featuredSculpture.image}
 						alt={featuredSculpture.title}
 						class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+						loading="eager"
+						fetchpriority="high"
 					/>
 				</div>
 			</div>
