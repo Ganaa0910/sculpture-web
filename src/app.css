@@ -2,6 +2,14 @@
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 
+@font-face {
+	font-family: 'Juraan';
+	src: url('/JuraanFont-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
 @theme {
 	--color-bg-primary: #0a0a0a;
 	--color-bg-secondary: #141414;
@@ -23,6 +31,7 @@
 	--font-family-display: 'Playfair Display', 'Cinzel', Georgia, serif;
 	--font-family-sans: 'Sabon', 'Minion Pro', Georgia, serif;
 	--font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+	--font-family-juraan: 'Juraan', serif;
 
 	--font-size-hero: clamp(3rem, 8vw, 6rem);
 	--font-size-h1: clamp(2.5rem, 5vw, 4rem);

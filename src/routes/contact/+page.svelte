@@ -30,7 +30,7 @@
 		
 		<!-- Page Header -->
 		<header class="mb-16 text-center">
-			<h1 class="font-serif text-h1 text-primary mb-6">Contact</h1>
+			<h1 class="text-h1 text-bronze-light mb-6" style="font-family: var(--font-family-juraan);">Contact</h1>
 			<p class="font-sans text-body text-secondary max-w-2xl mx-auto">
 				Interested in commissioning a piece, discussing exhibitions, or learning more about the work? 
 				I welcome conversations about art, mythology, and the stories bronze can tell.

@@ -5,7 +5,6 @@
 	const links = [
 		{ href: '/', label: 'Home' },
 		{ href: '/gallery', label: 'Gallery' },
-		{ href: '/about', label: 'About' },
 		{ href: '/contact', label: 'Contact' }
 	];
 
@@ -61,7 +60,7 @@
 			<!-- Artist Name with decorative elements -->
 			<a href="/" class="group flex items-center space-x-3">
 				<div class="w-8 h-[1px] bg-bronze-dark group-hover:bg-bronze-light transition-colors duration-300"></div>
-				<span class="font-serif text-h3 text-primary group-hover:text-bronze-light transition-colors duration-300 tracking-wider">
+				<span class="text-h3 text-primary group-hover:text-bronze-light transition-colors duration-300 tracking-wider" style="font-family: var(--font-family-juraan);">
 					JURAAN
 				</span>
 				<div class="w-8 h-[1px] bg-bronze-dark group-hover:bg-bronze-light transition-colors duration-300"></div>

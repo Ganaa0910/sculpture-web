@@ -51,7 +51,7 @@
 
 	<!-- Hero Content -->
 	<div class="relative z-10 mx-auto max-w-4xl px-6 text-center">
-		<h1 class="text-hero text-primary mb-8 animate-fade-in font-serif">Juraan</h1>
+		<h1 class="text-hero text-bronze-light mb-8 animate-fade-in" style="font-family: var(--font-family-juraan);">Juraan</h1>
 		<p class="text-h3 text-secondary mb-12 animate-slide-up font-sans">
 			Sculptor · Bronze · Mythology
 		</p>
@@ -62,12 +62,12 @@
 			>
 				View Gallery
 			</a>
-			<a
-				href="/about"
-				class="text-secondary text-small border border-border-medium bg-transparent px-8 py-3 font-sans tracking-wider uppercase transition-all duration-300 hover:border-bronze hover:text-bronze-light"
+			<button
+				on:click={() => document.querySelector('#about-section')?.scrollIntoView({ behavior: 'smooth' })}
+				class="text-secondary text-small border border-border-medium bg-transparent px-8 py-3 font-sans tracking-wider uppercase transition-all duration-300 hover:border-bronze hover:text-bronze-light cursor-pointer"
 			>
 				About the Artist
-			</a>
+			</button>
 		</div>
 	</div>
 
@@ -145,5 +145,104 @@
 				</div>
 			</div>
 		</div>
+	</div>
+</section>
+
+<!-- About Section -->
+<section id="about-section" class="relative py-section">
+	<!-- About Background -->
+	<div class="fixed inset-0 -z-10">
+		<img
+			src="/backgrounds/about.png"
+			alt="About background"
+			class="w-full h-full object-cover object-center"
+			loading="lazy"
+		/>
+		<div class="absolute inset-0 bg-bg-primary/85"></div>
+		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/30 to-bg-primary/75"></div>
+	</div>
+
+	<div class="relative z-10 mx-auto max-w-container px-6">
+
+		<!-- Section Header -->
+		<div class="mb-16 text-center">
+			<h2 class="text-h2 text-primary mb-6 font-serif">About the Artist</h2>
+		</div>
+
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+			<!-- Artist Portrait -->
+			<div>
+				<div class="aspect-[4/5] bg-bg-secondary border border-border-subtle overflow-hidden">
+					<img
+						src="/juraan-portrait.jpg"
+						alt="Juraan in his studio"
+						class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+						loading="lazy"
+					/>
+				</div>
+			</div>
+
+			<!-- Biography -->
+			<div class="space-y-8">
+
+				<section class="space-y-6">
+					<h3 class="font-serif text-h3 text-primary">Juraan</h3>
+					<p class="font-sans text-body text-secondary leading-relaxed">
+						Working primarily in bronze, Juraan creates sculptures that bridge ancient mythological narratives
+						with contemporary artistic expression. His work explores themes of power, transformation, and the
+						eternal human condition through figures that seem to emerge from legend itself.
+					</p>
+				</section>
+
+				<section class="space-y-6">
+					<h3 class="font-serif text-h3 text-primary">Artistic Philosophy</h3>
+					<p class="font-sans text-body text-secondary leading-relaxed">
+						"Bronze is memory made tangible. Each piece carries forward the stories our ancestors knew,
+						reimagined for our time. I seek to capture not just form, but the weight of narrative—
+						the burden and beauty of myth."
+					</p>
+				</section>
+
+				<section class="space-y-6">
+					<h3 class="font-serif text-h3 text-primary">Process</h3>
+					<p class="font-sans text-body text-secondary leading-relaxed">
+						Drawing from classical techniques while embracing modern approaches, Juraan's process begins
+						with extensive research into mythological sources. Each sculpture undergoes multiple iterations
+						before the final bronze casting, ensuring every detail serves the narrative purpose.
+					</p>
+				</section>
+
+				<!-- Exhibitions -->
+				<section class="space-y-6">
+					<h3 class="font-serif text-h3 text-primary">Selected Exhibitions</h3>
+					<div class="space-y-3">
+						<div class="flex justify-between items-start">
+							<div>
+								<p class="font-sans text-small text-primary">Mythological Forms</p>
+								<p class="font-mono text-tiny text-tertiary uppercase tracking-wider">Contemporary Gallery</p>
+							</div>
+							<p class="font-mono text-tiny text-muted">2024</p>
+						</div>
+						<div class="flex justify-between items-start">
+							<div>
+								<p class="font-sans text-small text-primary">Bronze Narratives</p>
+								<p class="font-mono text-tiny text-tertiary uppercase tracking-wider">Museum of Modern Sculpture</p>
+							</div>
+							<p class="font-mono text-tiny text-muted">2023</p>
+						</div>
+						<div class="flex justify-between items-start">
+							<div>
+								<p class="font-sans text-small text-primary">Ancient Echoes</p>
+								<p class="font-mono text-tiny text-tertiary uppercase tracking-wider">Cultural Arts Center</p>
+							</div>
+							<p class="font-mono text-tiny text-muted">2022</p>
+						</div>
+					</div>
+				</section>
+
+			</div>
+		</div>
+
 	</div>
 </section>
