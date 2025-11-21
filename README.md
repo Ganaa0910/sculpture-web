@@ -1,4 +1,4 @@
-# [Artist Name] Portfolio
+# Juraan Portfolio
 
 A refined digital gallery showcasing sculpture and drawing works.
 
@@ -90,7 +90,7 @@ Museum-quality presentation with dark gallery aesthetics. Every design decision 
 
 ### Font Pairing
 
-**Headings (Artist Name, Page Titles)**
+**Headings (Juraan, Page Titles)**
 ```css
 font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
 ```
@@ -119,7 +119,7 @@ letter-spacing: 0.1em;
 ### Type Scale
 
 ```css
-/* Hero/Artist Name */
+/* Hero/Juraan */
 --text-hero: clamp(3rem, 8vw, 6rem);      /* 48-96px responsive */
 font-weight: 400;  /* Light weight for elegance */
 line-height: 1.1;
@@ -269,7 +269,7 @@ font-size: 2rem;
 ```
 ┌─────────────────────────────────────┐
 │                                     │
-│         [ARTIST NAME]               │  ← Huge serif heading
+│             JURAAN                  │  ← Huge serif heading
 │                                     │
 │    ┌─────────────────────────┐     │
 │    │                         │     │
@@ -550,7 +550,7 @@ Before deployment, verify:
 ## Credits
 
 **Design & Development:** [910studio](https://910.studio)  
-**Artist:** [Artist Name]  
+**Artist:** Juraan  
 **Photography:** [Photographer Credit]  
 **Launch Date:** [Date]
 
@@ -558,7 +558,7 @@ Before deployment, verify:
 
 ## License
 
-© 2025 [Artist Name]. All artwork copyright the artist.  
+© 2025 Juraan. All artwork copyright the artist.  
 Website code © 2025 910studio. All rights reserved.
 
 ---
@@ -571,7 +571,7 @@ Email: hello@910.studio
 Web: https://910.studio
 
 For artwork inquiries:  
-**[Artist Name]**  
+**Juraan**  
 Email: [artist@email.com]  
 Facebook: [facebook.com/artistname]
 
