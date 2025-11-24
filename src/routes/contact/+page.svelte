@@ -12,9 +12,9 @@
 	<link rel="preload" as="image" href="/backgrounds/contact.png" fetchpriority="high" />
 </svelte:head>
 
-<main class="relative pt-24 pb-section">
+<main class="relative pt-24 pb-section bg-bg-primary">
 	<!-- Contact Background -->
-	<div class="fixed inset-0 z-0">
+	<div class="absolute inset-0 z-0">
 		<img
 			src="/backgrounds/contact.png"
 			alt="Contact background"

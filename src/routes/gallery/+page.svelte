@@ -1,6 +1,8 @@
 <script>
-	import { sculptures } from '$lib/data/sculptures';
+	import { getSculpturesByCategory } from '$lib/data/sculptures';
 	import SculptureCard from '$lib/components/SculptureCard.svelte';
+
+	const sculptures = getSculpturesByCategory('sculpture');
 </script>
 
 <svelte:head>
@@ -10,9 +12,9 @@
 	<link rel="preload" as="image" href="/backgrounds/gallery.png" fetchpriority="high" />
 </svelte:head>
 
-<main class="relative pt-24 pb-section">
+<main class="relative pt-24 pb-section bg-bg-primary">
 	<!-- Gallery Background -->
-	<div class="fixed inset-0 z-0">
+	<div class="absolute inset-0 z-0">
 		<img
 			src="/backgrounds/gallery.png"
 			alt="Gallery background"

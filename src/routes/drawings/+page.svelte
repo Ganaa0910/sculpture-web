@@ -20,9 +20,9 @@
 	<link rel="preload" as="image" href="/backgrounds/gallery.png" fetchpriority="high" />
 </svelte:head>
 
-<main class="relative pt-24 pb-section">
+<main class="relative pt-24 pb-section bg-bg-primary">
 	<!-- Gallery Background -->
-	<div class="fixed inset-0 z-0">
+	<div class="absolute inset-0 z-0">
 		<img
 			src="/backgrounds/gallery.png"
 			alt="Gallery background"
@@ -34,14 +34,14 @@
 		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/20 to-bg-primary/70"></div>
 	</div>
 
-	<div class="relative z-10 max-w-container mx-auto px-6">
+	<div class="relative z-10 max-w-container mx-auto px-4 sm:px-6 overflow-hidden">
 
 		<!-- Page Header -->
-		<header class="mb-16 text-center">
-			<h1 class="text-h1 text-bronze-light mb-6" style="font-family: var(--font-family-juraan);">Drawings</h1>
-			<p class="font-sans text-body text-secondary max-w-2xl mx-auto">
+		<header class="mb-8 sm:mb-16 text-center">
+			<h1 class="text-h1 text-bronze-light mb-4 sm:mb-6" style="font-family: var(--font-family-juraan);">Drawings</h1>
+			<p class="font-sans text-small sm:text-body text-secondary max-w-2xl mx-auto px-2">
 				Studies and sketches that inform the sculptural work—explorations of form,
-				anatomy, and mythological composition captured in graphite and ink.
+				anatomy, and mythological composition.
 			</p>
 		</header>
 
@@ -61,9 +61,6 @@
 							decoding="async"
 							fetchpriority="low"
 						/>
-					</div>
-					<div class="mt-3">
-						<h3 class="font-serif text-small text-primary group-hover:text-bronze-light transition-colors">{drawing.title}</h3>
 					</div>
 				</a>
 			{/each}
@@ -85,12 +82,14 @@
 		grid-template-columns: repeat(4, 1fr);
 		gap: 2rem;
 		contain: layout style;
+		width: 100%;
 	}
 
 	.drawing-card {
 		contain: layout style paint;
 		content-visibility: auto;
 		contain-intrinsic-size: auto 300px;
+		min-width: 0;
 	}
 
 	@media (max-width: 1024px) {
@@ -104,6 +103,17 @@
 		.drawings-grid {
 			grid-template-columns: repeat(2, 1fr);
 			gap: 1rem;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.drawings-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 0.75rem;
+		}
+
+		.drawing-card {
+			contain-intrinsic-size: auto 200px;
 		}
 	}
 </style>
