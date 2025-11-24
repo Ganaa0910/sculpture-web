@@ -20,9 +20,9 @@
 </svelte:head>
 
 {#if sculpture}
-	<main class="relative pt-24 pb-section">
+	<main class="relative pt-24 pb-section bg-bg-primary">
 		<!-- Detail Background -->
-		<div class="fixed inset-0 z-0">
+		<div class="absolute inset-0 z-0">
 			<img
 				src={sculpture.image}
 				alt={sculpture.title}
