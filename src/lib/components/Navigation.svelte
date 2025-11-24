@@ -4,7 +4,8 @@
 
 	const links = [
 		{ href: '/', label: 'Home' },
-		{ href: '/gallery', label: 'Works' },
+		{ href: '/gallery', label: 'Sculptures' },
+		{ href: '/drawings', label: 'Drawings' },
 		{ href: '/contact', label: 'Contact' }
 	];
 
@@ -23,10 +24,9 @@
 	onMount(() => {
 		const handleScroll = () => {
 			const currentScroll = window.scrollY;
-			const isMobile = window.innerWidth < 768;
 
-			// Don't hide nav on mobile or when mobile menu is open
-			if (isMobile || mobileMenuOpen) {
+			// Don't hide nav when mobile menu is open
+			if (mobileMenuOpen) {
 				navHidden = false;
 				lastScroll = currentScroll;
 				return;

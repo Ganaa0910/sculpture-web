@@ -1,5 +1,13 @@
 <script>
-	import { featuredSculpture } from '$lib/data/sculptures';
+	import { featuredSculpture, sculptures, getSculpturesByCategory } from '$lib/data/sculptures';
+
+	// Get a selection of sculptures for the gallery preview (excluding featured)
+	const galleryPreview = sculptures
+		.filter(s => s.category === 'sculpture' && !s.featured)
+		.slice(0, 6);
+
+	// Get a few drawings for preview
+	const drawingsPreview = getSculpturesByCategory('drawing').slice(0, 4);
 </script>
 
 <svelte:head>
@@ -141,6 +149,158 @@
 						class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
 						loading="eager"
 						fetchpriority="high"
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Gallery Preview Section -->
+<section class="py-section bg-bg-secondary/30">
+	<div class="mx-auto max-w-container px-6">
+		<div class="mb-12 flex items-end justify-between">
+			<div>
+				<h2 class="text-h2 text-primary mb-4 font-serif">Selected Works</h2>
+				<p class="text-body text-secondary max-w-xl font-sans">
+					Bronze sculptures exploring mythological narratives and the human form.
+				</p>
+			</div>
+			<a
+				href="/gallery"
+				class="hidden sm:inline-block text-small border border-bronze bg-transparent px-6 py-2 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
+			>
+				View All
+			</a>
+		</div>
+
+		<div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+			{#each galleryPreview as sculpture}
+				<a href="/sculpture/{sculpture.id}" class="group">
+					<div class="aspect-[3/4] overflow-hidden bg-bg-secondary border border-border-subtle group-hover:border-bronze-dark transition-all duration-300">
+						<img
+							src={sculpture.image}
+							alt={sculpture.title}
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+							loading="lazy"
+						/>
+					</div>
+					<div class="mt-3">
+						<h3 class="font-serif text-small text-primary group-hover:text-bronze-light transition-colors">{sculpture.title}</h3>
+						{#if sculpture.year}
+							<p class="font-mono text-tiny text-tertiary">{sculpture.year}</p>
+						{/if}
+					</div>
+				</a>
+			{/each}
+		</div>
+
+		<div class="mt-8 text-center sm:hidden">
+			<a
+				href="/gallery"
+				class="inline-block text-small border border-bronze bg-transparent px-6 py-2 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
+			>
+				View All Sculptures
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- Drawings Preview Section -->
+<section class="py-section">
+	<div class="mx-auto max-w-container px-6">
+		<div class="mb-12 flex items-end justify-between">
+			<div>
+				<h2 class="text-h2 text-primary mb-4 font-serif">Drawings</h2>
+				<p class="text-body text-secondary max-w-xl font-sans">
+					Studies and sketches that inform the sculptural process.
+				</p>
+			</div>
+			<a
+				href="/drawings"
+				class="hidden sm:inline-block text-small border border-bronze bg-transparent px-6 py-2 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
+			>
+				View All
+			</a>
+		</div>
+
+		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+			{#each drawingsPreview as drawing}
+				<a href="/sculpture/{drawing.id}" class="group">
+					<div class="aspect-[3/4] overflow-hidden bg-bg-secondary border border-border-subtle group-hover:border-bronze-dark transition-all duration-300">
+						<img
+							src={drawing.image}
+							alt={drawing.title}
+							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+							loading="lazy"
+						/>
+					</div>
+				</a>
+			{/each}
+		</div>
+
+		<div class="mt-8 text-center sm:hidden">
+			<a
+				href="/drawings"
+				class="inline-block text-small border border-bronze bg-transparent px-6 py-2 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
+			>
+				View All Drawings
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- Process Section -->
+<section class="py-section bg-bg-secondary/30">
+	<div class="mx-auto max-w-container px-6">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+			<div>
+				<h2 class="text-h2 text-primary mb-6 font-serif">The Process</h2>
+				<div class="space-y-6">
+					<div class="flex gap-4">
+						<div class="flex-shrink-0 w-8 h-8 rounded-full border border-bronze flex items-center justify-center">
+							<span class="font-mono text-tiny text-bronze-light">01</span>
+						</div>
+						<div>
+							<h3 class="font-serif text-h3 text-primary mb-2">Research & Concept</h3>
+							<p class="font-sans text-body text-secondary">Deep exploration of mythological sources and historical references to develop the narrative foundation.</p>
+						</div>
+					</div>
+					<div class="flex gap-4">
+						<div class="flex-shrink-0 w-8 h-8 rounded-full border border-bronze flex items-center justify-center">
+							<span class="font-mono text-tiny text-bronze-light">02</span>
+						</div>
+						<div>
+							<h3 class="font-serif text-h3 text-primary mb-2">Drawing & Maquette</h3>
+							<p class="font-sans text-body text-secondary">Detailed sketches and small-scale clay models refine the form before committing to bronze.</p>
+						</div>
+					</div>
+					<div class="flex gap-4">
+						<div class="flex-shrink-0 w-8 h-8 rounded-full border border-bronze flex items-center justify-center">
+							<span class="font-mono text-tiny text-bronze-light">03</span>
+						</div>
+						<div>
+							<h3 class="font-serif text-h3 text-primary mb-2">Bronze Casting</h3>
+							<p class="font-sans text-body text-secondary">Traditional lost-wax casting brings each piece to life, followed by meticulous patina work.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="grid grid-cols-2 gap-4">
+				<div class="aspect-[3/4] overflow-hidden bg-bg-secondary border border-border-subtle">
+					<img
+						src={drawingsPreview[0]?.image || '/sculptures/1.png'}
+						alt="Process - sketching"
+						class="w-full h-full object-cover"
+						loading="lazy"
+					/>
+				</div>
+				<div class="aspect-[3/4] overflow-hidden bg-bg-secondary border border-border-subtle mt-8">
+					<img
+						src={galleryPreview[0]?.image || '/sculptures/2.png'}
+						alt="Process - bronze work"
+						class="w-full h-full object-cover"
+						loading="lazy"
 					/>
 				</div>
 			</div>
