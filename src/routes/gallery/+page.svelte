@@ -1,6 +1,7 @@
 <script>
 	import { getSculpturesByCategory } from '$lib/data/sculptures';
 	import SculptureCard from '$lib/components/SculptureCard.svelte';
+	import { staggerReveal } from '$lib/actions/scrollReveal.js';
 
 	const sculptures = getSculpturesByCategory('sculpture');
 </script>
@@ -38,11 +39,14 @@
 		</header>
 
 		<!-- Bento Gallery Layout -->
-		<section class="bento-grid animate-fade-in">
+		<section class="bento-grid">
 			{#each sculptures as sculpture, index}
 				{@const patterns = [1, 2, 3, 4, 5, 6, 2, 3, 4, 6, 1, 2]}
-				<div class="bento-item bento-size-{patterns[index % patterns.length]}">
-					<SculptureCard 
+				<div
+					class="bento-item bento-size-{patterns[index % patterns.length]}"
+					use:staggerReveal={{ index, stagger: 40, distance: 15, duration: 350 }}
+				>
+					<SculptureCard
 						{sculpture}
 						onClick={() => {
 							window.location.href = `/sculpture/${sculpture.id}`;

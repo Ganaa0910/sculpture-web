@@ -250,59 +250,56 @@
 	</div>
 </section>
 
-<!-- Process Section -->
-<section class="py-section bg-bg-secondary/30">
+<!-- Exhibitions Section -->
+<section class="py-section">
 	<div class="mx-auto max-w-container px-6">
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+		<!-- Section Header -->
+		<div class="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
 			<div>
-				<h2 class="text-h2 text-primary mb-6 font-serif">The Process</h2>
-				<div class="space-y-6">
-					<div class="flex gap-4">
-						<div class="flex-shrink-0 w-8 h-8 rounded-full border border-bronze flex items-center justify-center">
-							<span class="font-mono text-tiny text-bronze-light">01</span>
-						</div>
-						<div>
-							<h3 class="font-serif text-h3 text-primary mb-2">Research & Concept</h3>
-							<p class="font-sans text-body text-secondary">Deep exploration of mythological sources and historical references to develop the narrative foundation.</p>
-						</div>
-					</div>
-					<div class="flex gap-4">
-						<div class="flex-shrink-0 w-8 h-8 rounded-full border border-bronze flex items-center justify-center">
-							<span class="font-mono text-tiny text-bronze-light">02</span>
-						</div>
-						<div>
-							<h3 class="font-serif text-h3 text-primary mb-2">Drawing & Maquette</h3>
-							<p class="font-sans text-body text-secondary">Detailed sketches and small-scale clay models refine the form before committing to bronze.</p>
-						</div>
-					</div>
-					<div class="flex gap-4">
-						<div class="flex-shrink-0 w-8 h-8 rounded-full border border-bronze flex items-center justify-center">
-							<span class="font-mono text-tiny text-bronze-light">03</span>
-						</div>
-						<div>
-							<h3 class="font-serif text-h3 text-primary mb-2">Bronze Casting</h3>
-							<p class="font-sans text-body text-secondary">Traditional lost-wax casting brings each piece to life, followed by meticulous patina work.</p>
-						</div>
-					</div>
-				</div>
+				<p class="font-mono text-tiny text-bronze-light uppercase tracking-widest mb-3">Solo Exhibition 2024</p>
+				<h2 class="text-h1 text-primary leading-tight" style="font-family: var(--font-family-juraan);">The World of Juraan</h2>
 			</div>
-			<div class="grid grid-cols-2 gap-4">
-				<div class="aspect-[3/4] overflow-hidden bg-bg-secondary border border-border-subtle">
-					<img
-						src={drawingsPreview[0]?.image || '/sculptures/1.png'}
-						alt="Process - sketching"
-						class="w-full h-full object-cover"
-						loading="lazy"
-					/>
-				</div>
-				<div class="aspect-[3/4] overflow-hidden bg-bg-secondary border border-border-subtle mt-8">
-					<img
-						src={galleryPreview[0]?.image || '/sculptures/2.png'}
-						alt="Process - bronze work"
-						class="w-full h-full object-cover"
-						loading="lazy"
-					/>
-				</div>
+			<p class="text-body text-secondary max-w-md font-sans md:text-right">
+				A journey into mythological bronze—where ancient narratives meet contemporary sculptural vision.
+			</p>
+		</div>
+
+		<!-- Editorial Layout -->
+		<div class="grid grid-cols-12 gap-4 md:gap-6">
+			<!-- Large Hero Image -->
+			<div class="col-span-12 md:col-span-8 aspect-[16/10] overflow-hidden group">
+				<img
+					src="/featured/at-expo-sculpture.JPG"
+					alt="God and Devil sculpture at exhibition"
+					class="w-full h-full object-cover md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-[1.02] transition-all duration-700 ease-out"
+					loading="lazy"
+				/>
+			</div>
+			<!-- Side Stack -->
+			<div class="col-span-6 md:col-span-4 aspect-[3/4] md:aspect-auto md:h-full overflow-hidden group">
+				<img
+					src="/featured/crowd-2.JPG"
+					alt="Visitors engaging with the work"
+					class="w-full h-full object-cover md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-[1.02] transition-all duration-700 ease-out"
+					loading="lazy"
+				/>
+			</div>
+			<!-- Bottom Row -->
+			<div class="col-span-6 md:col-span-4 aspect-[4/5] overflow-hidden group">
+				<img
+					src="/featured/crowd-1.JPG"
+					alt="Exhibition opening night"
+					class="w-full h-full object-cover md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-[1.02] transition-all duration-700 ease-out"
+					loading="lazy"
+				/>
+			</div>
+			<div class="col-span-12 md:col-span-8 aspect-[16/9] overflow-hidden group relative">
+				<img
+					src="/featured/1.JPG"
+					alt="Exhibition space"
+					class="w-full h-full object-cover md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-[1.02] transition-all duration-700 ease-out"
+					loading="lazy"
+				/>
 			</div>
 		</div>
 	</div>

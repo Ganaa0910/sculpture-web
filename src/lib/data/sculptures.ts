@@ -6,11 +6,23 @@ export interface Sculpture {
 	dimensions?: string;
 	description?: string;
 	image: string;
+	gallery?: string[];
 	category?: 'sculpture' | 'drawing';
 	featured?: boolean;
 }
 
 export const sculptures: Sculpture[] = [
+	{
+		id: 'god-and-devil',
+		title: 'God and Devil',
+		year: 2024,
+		material: 'Bronze',
+		dimensions: '240 × 120 × 80 cm',
+		description: 'The eternal duality of existence captured in bronze—Buddha and Devil seated facing each other, exploring the inseparable nature of enlightenment and temptation, virtue and shadow.',
+		image: '/featured/god-and-devil.JPG',
+		category: 'sculpture',
+		featured: true
+	},
 	{
 		id: 'sculpture-1',
 		title: 'Eternal Guardian',
@@ -19,8 +31,7 @@ export const sculptures: Sculpture[] = [
 		dimensions: '180 × 60 × 45 cm',
 		description: 'A powerful figure emerging from mythological tradition, capturing the eternal struggle between strength and vulnerability.',
 		image: '/sculptures/1.png',
-		category: 'sculpture',
-		featured: true
+		category: 'sculpture'
 	},
 	{
 		id: 'sculpture-2',

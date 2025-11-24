@@ -1,8 +1,19 @@
 <script>
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { getSculptureById } from '$lib/data/sculptures';
 
-	$: sculpture = getSculptureById($page.params.id);
+	let sculpture = $derived(getSculptureById(page.params.id));
+	let selectedImage = $state('');
+
+	$effect(() => {
+		if (sculpture) {
+			selectedImage = sculpture.image;
+		}
+	});
+
+	function selectImage(src) {
+		selectedImage = src;
+	}
 </script>
 
 <svelte:head>
@@ -61,17 +72,49 @@
 			</div>
 
 			<div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
-				<!-- Large Image -->
-				<div class="order-2 lg:order-1">
+				<!-- Large Image + Gallery -->
+				<div class="order-2 lg:order-1 space-y-4">
 					<div class="aspect-[4/5] overflow-hidden border border-border-subtle bg-bg-secondary">
 						<img
-							src={sculpture.image}
+							src={selectedImage || sculpture.image}
 							alt={sculpture.title}
-							class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+							class="h-full w-full object-cover transition-all duration-300 hover:scale-105"
 							loading="eager"
 							fetchpriority="high"
 						/>
 					</div>
+
+					<!-- Thumbnail Gallery -->
+					{#if sculpture.gallery && sculpture.gallery.length > 0}
+						<div class="grid grid-cols-5 gap-2">
+							<!-- Main image thumbnail -->
+							<button
+								onclick={() => selectImage(sculpture.image)}
+								class="aspect-square overflow-hidden border transition-all duration-200 cursor-pointer {selectedImage === sculpture.image ? 'border-bronze' : 'border-border-subtle hover:border-bronze-dark'}"
+							>
+								<img
+									src={sculpture.image}
+									alt="{sculpture.title} - main"
+									class="h-full w-full object-cover"
+									loading="lazy"
+								/>
+							</button>
+							<!-- Gallery thumbnails -->
+							{#each sculpture.gallery as img, i}
+								<button
+									onclick={() => selectImage(img)}
+									class="aspect-square overflow-hidden border transition-all duration-200 cursor-pointer {selectedImage === img ? 'border-bronze' : 'border-border-subtle hover:border-bronze-dark'}"
+								>
+									<img
+										src={img}
+										alt="{sculpture.title} - view {i + 2}"
+										class="h-full w-full object-cover"
+										loading="lazy"
+									/>
+								</button>
+							{/each}
+						</div>
+					{/if}
 				</div>
 
 				<!-- Sculpture Details -->

@@ -1,16 +1,15 @@
 <script>
 	import { getSculpturesByCategory } from '$lib/data/sculptures';
 	import { onMount } from 'svelte';
+	import { staggerReveal } from '$lib/actions/scrollReveal.js';
 
 	const drawings = getSculpturesByCategory('drawing');
-	let visible = $state(false);
 
 	onMount(() => {
 		// Disable Lenis smooth scroll on this page for performance
 		if (typeof window !== 'undefined' && window.lenis) {
 			window.lenis.destroy();
 		}
-		visible = true;
 	});
 </script>
 
@@ -46,11 +45,12 @@
 		</header>
 
 		<!-- Simple Grid Layout -->
-		<section class="drawings-grid animate-fade-in">
-			{#each drawings as drawing}
+		<section class="drawings-grid">
+			{#each drawings as drawing, index}
 				<a
 					href="/sculpture/{drawing.id}"
 					class="drawing-card group"
+					use:staggerReveal={{ index, stagger: 35, distance: 12, duration: 300 }}
 				>
 					<div class="aspect-[3/4] overflow-hidden bg-bg-secondary border border-border-subtle group-hover:border-bronze-dark transition-all duration-300">
 						<img
