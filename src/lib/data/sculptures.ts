@@ -12,432 +12,422 @@ export interface Sculpture {
 }
 
 export const sculptures: Sculpture[] = [
-	{
-		id: 'god-and-devil',
-		title: 'God and Devil',
-		year: 2024,
-		material: 'Bronze',
-		dimensions: '240 × 120 × 80 cm',
-		description: 'The eternal duality of existence captured in bronze—Buddha and Devil seated facing each other, exploring the inseparable nature of enlightenment and temptation, virtue and shadow.',
-		image: '/featured/god-and-devil.JPG',
-		category: 'sculpture',
-		featured: true
-	},
-	{
-		id: 'sculpture-1',
-		title: 'Eternal Guardian',
-		year: 2024,
-		material: 'Bronze',
-		dimensions: '180 × 60 × 45 cm',
-		description: 'A powerful figure emerging from mythological tradition, capturing the eternal struggle between strength and vulnerability.',
-		image: '/sculptures/1.png',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-2',
-		title: 'Mystic Sentinel',
-		year: 2024,
-		material: 'Bronze',
-		dimensions: '220 × 80 × 60 cm',
-		description: 'An imposing sentinel inspired by ancient protective deities, embodying watchfulness and ancient wisdom.',
-		image: '/sculptures/2.png',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-3',
-		title: 'Ancient Warrior',
-		year: 2023,
-		material: 'Bronze',
-		dimensions: '160 × 90 × 50 cm',
-		description: 'Movement captured in metal, exploring the fluidity of form and the rhythm of existence.',
-		image: '/sculptures/3.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-5',
-		title: 'Divine Herald',
-		year: 2022,
-		material: 'Bronze',
-		dimensions: '140 × 45 × 40 cm',
-		description: 'A contemplative figure representing the accumulation of knowledge across generations.',
-		image: '/sculptures/5.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-6',
-		title: 'Storm Bearer',
-		year: 2024,
-		material: 'Bronze',
-		dimensions: '200 × 70 × 55 cm',
-		description: 'Power and chaos intertwined, inspired by mythological figures who commanded the elements.',
-		image: '/sculptures/6.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-7',
-		title: 'Silent Prophet',
-		year: 2023,
-		material: 'Bronze',
-		dimensions: '170 × 50 × 45 cm',
-		description: 'A figure caught between worlds, channeling divine messages through bronze form.',
-		image: '/sculptures/7.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-8',
-		title: 'Titan\'s Rest',
-		year: 2023,
-		material: 'Bronze',
-		dimensions: '190 × 75 × 55 cm',
-		description: 'The weight of ages captured in bronze, a meditation on endurance and time.',
-		image: '/sculptures/8.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-9',
-		title: 'Phoenix Rising',
-		year: 2024,
-		material: 'Bronze',
-		dimensions: '165 × 85 × 50 cm',
-		description: 'Transformation and rebirth, the eternal cycle of destruction and renewal.',
-		image: '/sculptures/9.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-10',
-		title: 'Oracle\'s Vision',
-		year: 2023,
-		material: 'Bronze',
-		dimensions: '155 × 65 × 48 cm',
-		description: 'Ancient knowledge flowing through bronze, wisdom transcending time.',
-		image: '/sculptures/10.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-11',
-		title: 'Warrior\'s Lament',
-		year: 2022,
-		material: 'Bronze',
-		dimensions: '175 × 70 × 52 cm',
-		description: 'The aftermath of battle, strength tempered by reflection.',
-		image: '/sculptures/11.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-12',
-		title: 'Celestial Dance',
-		year: 2024,
-		material: 'Bronze',
-		dimensions: '185 × 80 × 58 cm',
-		description: 'Movement between realms, the dance of earthly and divine.',
-		image: '/sculptures/12.jpg',
-		category: 'sculpture'
-	},
-	{
-		id: 'sculpture-13',
-		title: 'Forgotten King',
-		year: 2023,
-		material: 'Bronze',
-		dimensions: '195 × 85 × 60 cm',
-		description: 'Majesty preserved in bronze, legends cast in eternal metal.',
-		image: '/sculptures/13.jpg',
-		category: 'sculpture'
-	},
-	// Drawings
-	{
-		id: 'drawing-1',
-		title: 'Study I',
-		image: '/drawings/DSC_9686.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-2',
-		title: 'Study II',
-		image: '/drawings/DSC_9687.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-3',
-		title: 'Study III',
-		image: '/drawings/DSC_9688.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-4',
-		title: 'Study IV',
-		image: '/drawings/DSC_9689.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-5',
-		title: 'Study V',
-		image: '/drawings/DSC_9690.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-6',
-		title: 'Study VI',
-		image: '/drawings/DSC_9691.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-7',
-		title: 'Study VII',
-		image: '/drawings/DSC_9692.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-8',
-		title: 'Study VIII',
-		image: '/drawings/DSC_9693.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-9',
-		title: 'Study IX',
-		image: '/drawings/DSC_9694.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-10',
-		title: 'Study X',
-		image: '/drawings/DSC_9695.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-11',
-		title: 'Study XI',
-		image: '/drawings/DSC_9696.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-12',
-		title: 'Study XII',
-		image: '/drawings/DSC_9697.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-13',
-		title: 'Study XIII',
-		image: '/drawings/DSC_9698.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-14',
-		title: 'Study XIV',
-		image: '/drawings/DSC_9699.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-15',
-		title: 'Study XV',
-		image: '/drawings/DSC_9700.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-16',
-		title: 'Study XVI',
-		image: '/drawings/DSC_9701.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-17',
-		title: 'Study XVII',
-		image: '/drawings/DSC_9702.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-18',
-		title: 'Study XVIII',
-		image: '/drawings/DSC_9703.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-19',
-		title: 'Study XIX',
-		image: '/drawings/DSC_9704.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-20',
-		title: 'Study XX',
-		image: '/drawings/DSC_9705.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-21',
-		title: 'Study XXI',
-		image: '/drawings/DSC_9706.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-22',
-		title: 'Study XXII',
-		image: '/drawings/DSC_9707.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-23',
-		title: 'Study XXIII',
-		image: '/drawings/DSC_9708.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-24',
-		title: 'Study XXIV',
-		image: '/drawings/DSC_9709.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-25',
-		title: 'Study XXV',
-		image: '/drawings/DSC_9710.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-26',
-		title: 'Study XXVI',
-		image: '/drawings/DSC_9711.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-27',
-		title: 'Study XXVII',
-		image: '/drawings/DSC_9712.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-28',
-		title: 'Study XXVIII',
-		image: '/drawings/DSC_9713.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-29',
-		title: 'Study XXIX',
-		image: '/drawings/DSC_9714.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-30',
-		title: 'Study XXX',
-		image: '/drawings/DSC_9715.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-31',
-		title: 'Study XXXI',
-		image: '/drawings/DSC_9716.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-32',
-		title: 'Study XXXII',
-		image: '/drawings/DSC_9717.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-33',
-		title: 'Study XXXIII',
-		image: '/drawings/DSC_9718.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-34',
-		title: 'Study XXXIV',
-		image: '/drawings/DSC_9719.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-35',
-		title: 'Study XXXV',
-		image: '/drawings/DSC_9720.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-36',
-		title: 'Study XXXVI',
-		image: '/drawings/DSC_9721.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-37',
-		title: 'Study XXXVII',
-		image: '/drawings/DSC_9722.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-38',
-		title: 'Study XXXVIII',
-		image: '/drawings/DSC08068.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-39',
-		title: 'Study XXXIX',
-		image: '/drawings/DSC08069.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-40',
-		title: 'Study XL',
-		image: '/drawings/DSC08070.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-41',
-		title: 'Study XLI',
-		image: '/drawings/DSC08071.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-42',
-		title: 'Study XLII',
-		image: '/drawings/DSC08072.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-43',
-		title: 'Study XLIII',
-		image: '/drawings/DSC08073.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-44',
-		title: 'Study XLIV',
-		image: '/drawings/DSC08074.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-45',
-		title: 'Study XLV',
-		image: '/drawings/DSC06851 (1).jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-46',
-		title: 'Study XLVI',
-		image: '/drawings/DSC06852 (1).jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-47',
-		title: 'Study XLVII',
-		image: '/drawings/DSC05181.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-48',
-		title: 'Study XLVIII',
-		image: '/drawings/DSC05100.jpg',
-		category: 'drawing'
-	},
-	{
-		id: 'drawing-49',
-		title: 'Study XLIX',
-		image: '/drawings/DSC00127 (1).jpg',
-		category: 'drawing'
-	}
+  {
+    id: "a-girl-blowing-a-dandelion",
+    title: "A Girl Blowing a Dandelion",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "68x25x18",
+    image: "/sculptures/A girl blowing a Dandelion/1.JPG",
+    gallery: [
+      "/sculptures/A girl blowing a Dandelion/1.JPG",
+      "/sculptures/A girl blowing a Dandelion/2.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "a-man-in-love",
+    title: "A Man in Love",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "72x25x18",
+    image: "/sculptures/A man in love/1.JPG",
+    gallery: [
+      "/sculptures/A man in love/1.JPG",
+      "/sculptures/A man in love/2.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "alpha",
+    title: "Alpha",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "44x64x20",
+    image: "/sculptures/Alpha/IMG_0465.JPG",
+    gallery: [
+      "/sculptures/Alpha/IMG_0465.JPG",
+      "/sculptures/Alpha/IMG_0466.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "anger",
+    title: "Anger",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "35x50x28",
+    image: "/sculptures/Anger/IMG_0471.JPG",
+    gallery: [
+      "/sculptures/Anger/IMG_0471.JPG",
+      "/sculptures/Anger/IMG_0472.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "black-stallion",
+    title: "Black Stallion",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "30x87x38",
+    image: "/sculptures/Black Stallion/IMG_0460.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "bow-wielding-warrior",
+    title: "Bow-Wielding Warrior",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "55x80x30",
+    image: "/sculptures/Bow-wielding-warrior/IMG_0484.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "brothers",
+    title: "Brothers",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "40x61x18",
+    image: "/sculptures/Brothers/IMG_0904.JPG",
+    gallery: [
+      "/sculptures/Brothers/IMG_0904.JPG",
+      "/sculptures/Brothers/IMG_0923.JPG",
+      "/sculptures/Brothers/IMG_0925.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "bull",
+    title: "Bull",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "33x46x27",
+    image: "/sculptures/Bull/IMG_0469.JPG",
+    gallery: [
+      "/sculptures/Bull/IMG_0469.JPG",
+      "/sculptures/Bull/IMG_0912.JPG",
+      "/sculptures/Bull/IMG_0914.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "chairman",
+    title: "Chairman",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "103x70x40",
+    image: "/sculptures/Chairman/IMG_0495.JPG",
+    gallery: [
+      "/sculptures/Chairman/IMG_0495.JPG",
+      "/sculptures/Chairman/IMG_0905.JPG",
+      "/sculptures/Chairman/IMG_0906.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "deer",
+    title: "Deer",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "83x70x36",
+    image: "/sculptures/Deer/IMG_0894.JPG",
+    gallery: [
+      "/sculptures/Deer/IMG_0894.JPG",
+      "/sculptures/Deer/IMG_0917.JPG",
+      "/sculptures/Deer/IMG_0921.JPG",
+      "/sculptures/Deer/IMG_0922.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "desireling",
+    title: "Desireling",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "114x66x60",
+    image: "/sculptures/Desireling/IMG_0489.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "dragon",
+    title: "Dragon",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "92x37x30",
+    image: "/sculptures/Dragon/IMG_0491.JPG",
+    gallery: [
+      "/sculptures/Dragon/IMG_0491.JPG",
+      "/sculptures/Dragon/IMG_0492.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "buddha",
+    title: "Buddha",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "45x50x32",
+    image: "/sculptures/God and devil/Buddha/Buddha.JPG",
+    gallery: [
+      "/sculptures/God and devil/Buddha/Buddha.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "devil",
+    title: "Devil in Meditation",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "45x50x32",
+    image: "/sculptures/God and devil/Devil/Devil in Meditation.JPG",
+    gallery: [
+      "/sculptures/God and devil/Devil/Devil in Meditation.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "god-and-devil",
+    title: "God and Devil",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "45x50x32 (each piece)",
+    image: "/featured/god-and-devil.JPG",
+    gallery: [
+      "/sculptures/God and devil/Buddha/Buddha.JPG",
+      "/sculptures/God and devil/Devil/Devil in Meditation.JPG"
+    ],
+    category: 'sculpture',
+    featured: true
+  },
+  {
+    id: "ibex",
+    title: "Ibex",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "56x70x40",
+    image: "/sculptures/Ibex/IMG_0473.JPG",
+    gallery: [
+      "/sculptures/Ibex/IMG_0473.JPG",
+      "/sculptures/Ibex/IMG_0474.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "love",
+    title: "Love",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "82x35x30",
+    image: "/sculptures/Love/IMG_0493.JPG",
+    gallery: [
+      "/sculptures/Love/IMG_0493.JPG",
+      "/sculptures/Love/IMG_0494.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "lynx",
+    title: "Lynx",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "44x40x30",
+    image: "/sculptures/Lynx/IMG_0461.JPG",
+    gallery: [
+      "/sculptures/Lynx/IMG_0461.JPG",
+      "/sculptures/Lynx/IMG_0462.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "memento-mori",
+    title: "Memento Mori",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "32x37x22",
+    image: "/sculptures/Memento Mori/IMG_0468.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "mind-s-cosmos",
+    title: "Mind’s Cosmos",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "100x45x35",
+    image: "/sculptures/Mind's Cosmos/IMG_0496.JPG",
+    gallery: [
+      "/sculptures/Mind's Cosmos/IMG_0496.JPG",
+      "/sculptures/Mind's Cosmos/IMG_0497.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "moose",
+    title: "Moose",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "81x90x40",
+    image: "/sculptures/Moose/IMG_0903.JPG",
+    gallery: [
+      "/sculptures/Moose/IMG_0903.JPG",
+      "/sculptures/Moose/IMG_0908.JPG",
+      "/sculptures/Moose/IMG_0913.JPG",
+      "/sculptures/Moose/IMG_0915.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "morning",
+    title: "Morning",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "10x60x34",
+    image: "/sculptures/Morning/IMG_0457.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "myth",
+    title: "Myth",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "53x30x20",
+    image: "/sculptures/Myth/IMG_0485.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "old-warrior",
+    title: "Old Warrior",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "25x40x35",
+    image: "/sculptures/Old warrior/IMG_0478.JPG",
+    gallery: [
+      "/sculptures/Old warrior/IMG_0478.JPG",
+      "/sculptures/Old warrior/IMG_0900.JPG",
+      "/sculptures/Old warrior/IMG_0907.JPG",
+      "/sculptures/Old warrior/IMG_0910.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "pegasus",
+    title: "Pegasus",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "115x85x30",
+    image: "/sculptures/Pegasus/IMG_0488.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "racing-horse",
+    title: "Racing Horse",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    image: "/sculptures/Racing Horse/IMG_0464.JPG",
+    gallery: [
+      "/sculptures/Racing Horse/IMG_0464.JPG",
+      "/sculptures/Racing Horse/IMG_0909.JPG",
+      "/sculptures/Racing Horse/IMG_0911.JPG",
+      "/sculptures/Racing Horse/IMG_0916.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "shaman",
+    title: "Shaman",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "Dimensions to be provided",
+    image: "/sculptures/Shaman/IMG_0898.JPG",
+    gallery: [
+      "/sculptures/Shaman/IMG_0898.JPG",
+      "/sculptures/Shaman/IMG_0901.JPG",
+      "/sculptures/Shaman/IMG_0902.JPG",
+      "/sculptures/Shaman/IMG_0918.JPG",
+      "/sculptures/Shaman/IMG_0919.JPG",
+      "/sculptures/Shaman/IMG_0920.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "strength-of-a-lion",
+    title: "Strength of a Lion",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "30x20x20",
+    image: "/sculptures/Strength-of-a-Lion/IMG_0454.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "stretch",
+    title: "Stretch",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "22x64x18",
+    image: "/sculptures/Stretch/IMG_0455.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "takhi",
+    title: "Takhi",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "44x70x20",
+    image: "/sculptures/Takhi/IMG_0476.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "the-king",
+    title: "The King",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "38x50x30",
+    image: "/sculptures/The King/The King-2024-38x.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "welcome",
+    title: "Welcome",
+    year: 2025,
+    material: "Bronze, cast and patinated",
+    dimensions: "37x66x28",
+    image: "/sculptures/Welcome/IMG_0480.JPG",
+    gallery: [
+      "/sculptures/Welcome/IMG_0480.JPG",
+      "/sculptures/Welcome/IMG_0481.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "wild-boar",
+    title: "Wild Boar",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "54x53x30",
+    image: "/sculptures/Wild Boar/IMG_0467.JPG",
+    category: 'sculpture'
+  },
+  {
+    id: "woman",
+    title: "Woman",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "113x35x30",
+    image: "/sculptures/Woman/IMG_0482.JPG",
+    gallery: [
+      "/sculptures/Woman/IMG_0482.JPG",
+      "/sculptures/Woman/IMG_0490.JPG"
+    ],
+    category: 'sculpture'
+  },
+  {
+    id: "pig",
+    title: "Pig",
+    year: 2024,
+    material: "Bronze, cast and patinated",
+    dimensions: "38x48x23",
+    image: "/sculptures/pig/image.JPG",
+    category: 'sculpture'
+  }
 ];
 
 export const featuredSculpture = sculptures.find(s => s.featured) || sculptures[0];

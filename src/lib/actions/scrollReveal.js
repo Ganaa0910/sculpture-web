@@ -67,13 +67,20 @@ export function staggerReveal(node, options = {}) {
 	const {
 		index = 0,
 		baseDelay = 0,
-		stagger = 30, // Faster stagger
-		duration = 400,
-		distance = 15 // Subtle movement
+		stagger = 20, // Much faster stagger
+		duration = 300,
+		distance = 10 // Minimal movement
 	} = options;
 
+	// Only animate first few items, rest appear instantly
+	if (index > 12) {
+		node.style.opacity = '1';
+		node.style.transform = 'translateY(0)';
+		return { destroy() {}, update() {} };
+	}
+
 	// Cap the stagger so items don't wait too long
-	const cappedIndex = Math.min(index, 8);
+	const cappedIndex = Math.min(index, 6);
 	const delay = baseDelay + (cappedIndex * stagger);
 
 	return scrollReveal(node, {

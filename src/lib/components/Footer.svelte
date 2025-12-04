@@ -9,8 +9,8 @@
 			<a href="/gallery" class="flex items-center justify-center py-4 border border-border-subtle bg-bg-secondary/50 text-body text-primary hover:border-bronze hover:text-bronze-light transition-all">
 				Sculptures
 			</a>
-			<a href="/drawings" class="flex items-center justify-center py-4 border border-border-subtle bg-bg-secondary/50 text-body text-primary hover:border-bronze hover:text-bronze-light transition-all">
-				Drawings
+			<a href="/about" class="flex items-center justify-center py-4 border border-border-subtle bg-bg-secondary/50 text-body text-primary hover:border-bronze hover:text-bronze-light transition-all">
+				About
 			</a>
 			<a href="/contact" class="flex items-center justify-center py-4 border border-bronze bg-bronze/10 text-body text-bronze-light hover:bg-bronze hover:text-bg-primary transition-all">
 				Contact
@@ -38,7 +38,7 @@
 				<nav class="space-y-3">
 					<a href="/" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">Home</a>
 					<a href="/gallery" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">Sculptures</a>
-					<a href="/drawings" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">Drawings</a>
+					<a href="/about" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">About</a>
 					<a href="/contact" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">Contact</a>
 				</nav>
 			</div>

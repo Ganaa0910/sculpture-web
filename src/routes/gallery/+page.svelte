@@ -2,6 +2,7 @@
 	import { getSculpturesByCategory } from '$lib/data/sculptures';
 	import SculptureCard from '$lib/components/SculptureCard.svelte';
 	import { staggerReveal } from '$lib/actions/scrollReveal.js';
+	import { goto } from '$app/navigation';
 
 	const sculptures = getSculpturesByCategory('sculpture');
 </script>
@@ -44,13 +45,11 @@
 				{@const patterns = [1, 2, 3, 4, 5, 6, 2, 3, 4, 6, 1, 2]}
 				<div
 					class="bento-item bento-size-{patterns[index % patterns.length]}"
-					use:staggerReveal={{ index, stagger: 40, distance: 15, duration: 350 }}
+					use:staggerReveal={{ index, stagger: 20, distance: 10, duration: 300 }}
 				>
 					<SculptureCard
 						{sculpture}
-						onClick={() => {
-							window.location.href = `/sculpture/${sculpture.id}`;
-						}}
+						onClick={() => goto(`/sculpture/${sculpture.id}`)}
 					/>
 				</div>
 			{/each}

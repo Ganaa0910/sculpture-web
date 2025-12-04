@@ -3,12 +3,13 @@
 	export let onClick = () => {};
 </script>
 
-<div 
+<div
 	class="bg-bg-secondary border border-border-subtle hover:border-bronze-dark transition-all duration-300 hover:-translate-y-1 cursor-pointer group h-full"
 	on:click={onClick}
 	on:keydown={(e) => e.key === 'Enter' && onClick()}
 	role="button"
 	tabindex="0"
+	style="will-change: transform; transform: translateZ(0);"
 >
 	<div class="relative h-full overflow-hidden">
 		<img
@@ -17,6 +18,9 @@
 			class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
 			loading="lazy"
 			decoding="async"
+			width="800"
+			height="1067"
+			style="will-change: transform;"
 		/>
 		
 		<!-- Overlay text -->

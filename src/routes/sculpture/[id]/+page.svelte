@@ -1,9 +1,11 @@
 <script>
 	import { page } from '$app/state';
 	import { getSculptureById } from '$lib/data/sculptures';
+	import ImageZoom from '$lib/components/ImageZoom.svelte';
 
 	let sculpture = $derived(getSculptureById(page.params.id));
 	let selectedImage = $state('');
+	let zoomModal = $state();
 
 	$effect(() => {
 		if (sculpture) {
@@ -13,6 +15,12 @@
 
 	function selectImage(src) {
 		selectedImage = src;
+	}
+
+	function openZoom() {
+		if (zoomModal) {
+			zoomModal.open();
+		}
 	}
 </script>
 
@@ -74,32 +82,30 @@
 			<div class="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
 				<!-- Large Image + Gallery -->
 				<div class="order-2 lg:order-1 space-y-4">
-					<div class="aspect-[4/5] overflow-hidden border border-border-subtle bg-bg-secondary">
+					<div class="aspect-[4/5] overflow-hidden border border-border-subtle bg-bg-secondary group cursor-zoom-in relative" onclick={openZoom} role="button" tabindex="0" onkeydown={(e) => e.key === 'Enter' && openZoom()}>
 						<img
 							src={selectedImage || sculpture.image}
 							alt={sculpture.title}
-							class="h-full w-full object-cover transition-all duration-300 hover:scale-105"
+							class="h-full w-full object-cover transition-all duration-300 group-hover:scale-105"
 							loading="eager"
 							fetchpriority="high"
 						/>
+						<!-- Zoom hint -->
+						<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
+							<div class="bg-bg-secondary/90 backdrop-blur px-4 py-2 rounded border border-bronze-light">
+								<p class="text-tiny text-bronze-light font-mono tracking-wider uppercase flex items-center gap-2">
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+									</svg>
+									Click to zoom
+								</p>
+							</div>
+						</div>
 					</div>
 
 					<!-- Thumbnail Gallery -->
 					{#if sculpture.gallery && sculpture.gallery.length > 0}
 						<div class="grid grid-cols-5 gap-2">
-							<!-- Main image thumbnail -->
-							<button
-								onclick={() => selectImage(sculpture.image)}
-								class="aspect-square overflow-hidden border transition-all duration-200 cursor-pointer {selectedImage === sculpture.image ? 'border-bronze' : 'border-border-subtle hover:border-bronze-dark'}"
-							>
-								<img
-									src={sculpture.image}
-									alt="{sculpture.title} - main"
-									class="h-full w-full object-cover"
-									loading="lazy"
-								/>
-							</button>
-							<!-- Gallery thumbnails -->
 							{#each sculpture.gallery as img, i}
 								<button
 									onclick={() => selectImage(img)}
@@ -107,7 +113,7 @@
 								>
 									<img
 										src={img}
-										alt="{sculpture.title} - view {i + 2}"
+										alt="{sculpture.title} - view {i + 1}"
 										class="h-full w-full object-cover"
 										loading="lazy"
 									/>
@@ -184,6 +190,9 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- Image Zoom Modal -->
+		<ImageZoom bind:this={zoomModal} src={selectedImage || sculpture.image} alt={sculpture.title} />
 	</main>
 {:else}
 	<main class="pt-24 pb-section">

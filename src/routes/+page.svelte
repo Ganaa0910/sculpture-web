@@ -5,9 +5,6 @@
 	const galleryPreview = sculptures
 		.filter(s => s.category === 'sculpture' && !s.featured)
 		.slice(0, 6);
-
-	// Get a few drawings for preview
-	const drawingsPreview = getSculpturesByCategory('drawing').slice(0, 4);
 </script>
 
 <svelte:head>
@@ -70,12 +67,12 @@
 			>
 				View Works
 			</a>
-			<button
-				on:click={() => document.querySelector('#about-section')?.scrollIntoView({ behavior: 'smooth' })}
-				class="text-secondary text-small border border-border-medium bg-transparent px-8 py-3 font-sans tracking-wider uppercase transition-all duration-300 hover:border-bronze hover:text-bronze-light cursor-pointer"
+			<a
+				href="/about"
+				class="text-secondary text-small border border-border-medium bg-transparent px-8 py-3 font-sans tracking-wider uppercase transition-all duration-300 hover:border-bronze hover:text-bronze-light"
 			>
 				About the Artist
-			</button>
+			</a>
 		</div>
 	</div>
 
@@ -96,65 +93,6 @@
 		</div>
 	</div>
 </main>
-
-<!-- Featured Work Section -->
-<section class="py-section">
-	<div class="mx-auto max-w-container px-6">
-		<div class="mb-16 text-center">
-			<h2 class="text-h2 text-primary mb-6 font-serif">Latest Work</h2>
-			<p class="text-body text-secondary mx-auto max-w-2xl font-serif">
-				Each bronze sculpture emerges from mythological tradition, exploring timeless themes through
-				contemporary artistic vision.
-			</p>
-		</div>
-
-		<div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-			<div class="order-2 lg:order-1">
-				<h3 class="text-h3 text-primary mb-4 font-serif">{featuredSculpture.title}</h3>
-				{#if featuredSculpture.year}
-					<p class="text-tiny text-tertiary mb-4 font-mono tracking-wider uppercase">
-						{featuredSculpture.year}
-					</p>
-				{/if}
-				<p class="text-body text-secondary mb-6 font-sans leading-relaxed">
-					{featuredSculpture.description}
-				</p>
-				{#if featuredSculpture.material || featuredSculpture.dimensions}
-					<div class="mb-8 space-y-2">
-						{#if featuredSculpture.material}
-							<p class="text-tiny text-muted font-mono tracking-wider uppercase">
-								{featuredSculpture.material}
-							</p>
-						{/if}
-						{#if featuredSculpture.dimensions}
-							<p class="text-tiny text-muted font-mono tracking-wider uppercase">
-								{featuredSculpture.dimensions}
-							</p>
-						{/if}
-					</div>
-				{/if}
-				<a
-					href="/gallery"
-					class="border-b border-bronze-light font-sans text-bronze-light transition-colors hover:border-bronze hover:text-bronze"
-				>
-					View Full Works →
-				</a>
-			</div>
-
-			<div class="order-1 lg:order-2">
-				<div class="aspect-sculpture overflow-hidden border border-border-subtle bg-bg-secondary">
-					<img
-						src={featuredSculpture.image}
-						alt={featuredSculpture.title}
-						class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-						loading="eager"
-						fetchpriority="high"
-					/>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
 
 <!-- Gallery Preview Section -->
 <section class="py-section bg-bg-secondary/30">
@@ -201,50 +139,6 @@
 				class="inline-block text-small border border-bronze bg-transparent px-6 py-2 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
 			>
 				View All Sculptures
-			</a>
-		</div>
-	</div>
-</section>
-
-<!-- Drawings Preview Section -->
-<section class="py-section">
-	<div class="mx-auto max-w-container px-6">
-		<div class="mb-12 flex items-end justify-between">
-			<div>
-				<h2 class="text-h2 text-primary mb-4 font-serif">Drawings</h2>
-				<p class="text-body text-secondary max-w-xl font-sans">
-					Studies and sketches that inform the sculptural process.
-				</p>
-			</div>
-			<a
-				href="/drawings"
-				class="hidden sm:inline-block text-small border border-bronze bg-transparent px-6 py-2 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
-			>
-				View All
-			</a>
-		</div>
-
-		<div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-			{#each drawingsPreview as drawing}
-				<a href="/sculpture/{drawing.id}" class="group">
-					<div class="aspect-[3/4] overflow-hidden bg-bg-secondary border border-border-subtle group-hover:border-bronze-dark transition-all duration-300">
-						<img
-							src={drawing.image}
-							alt={drawing.title}
-							class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-							loading="lazy"
-						/>
-					</div>
-				</a>
-			{/each}
-		</div>
-
-		<div class="mt-8 text-center sm:hidden">
-			<a
-				href="/drawings"
-				class="inline-block text-small border border-bronze bg-transparent px-6 py-2 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
-			>
-				View All Drawings
 			</a>
 		</div>
 	</div>
@@ -305,101 +199,3 @@
 	</div>
 </section>
 
-<!-- About Section -->
-<section id="about-section" class="relative py-section">
-	<!-- About Background -->
-	<div class="fixed inset-0 -z-10">
-		<img
-			src="/backgrounds/about.png"
-			alt="About background"
-			class="w-full h-full object-cover object-center"
-			loading="lazy"
-		/>
-		<div class="absolute inset-0 bg-bg-primary/85"></div>
-		<div class="absolute inset-0 bg-gradient-radial from-transparent via-bg-primary/30 to-bg-primary/75"></div>
-	</div>
-
-	<div class="relative z-10 mx-auto max-w-container px-6">
-
-		<!-- Section Header -->
-		<div class="mb-16 text-center">
-			<h2 class="text-h2 text-primary mb-6 font-serif">About the Artist</h2>
-		</div>
-
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-
-			<!-- Artist Portrait -->
-			<div>
-				<div class="aspect-[4/5] bg-bg-secondary border border-border-subtle overflow-hidden">
-					<img
-						src="/juraan-portrait.jpg"
-						alt="Juraan in his studio"
-						class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-						loading="lazy"
-					/>
-				</div>
-			</div>
-
-			<!-- Biography -->
-			<div class="space-y-8">
-
-				<section class="space-y-6">
-					<h3 class="font-serif text-h3 text-primary">Juraan</h3>
-					<p class="font-sans text-body text-secondary leading-relaxed">
-						Working primarily in bronze, Juraan creates sculptures that bridge ancient mythological narratives
-						with contemporary artistic expression. His work explores themes of power, transformation, and the
-						eternal human condition through figures that seem to emerge from legend itself.
-					</p>
-				</section>
-
-				<section class="space-y-6">
-					<h3 class="font-serif text-h3 text-primary">Artistic Philosophy</h3>
-					<p class="font-sans text-body text-secondary leading-relaxed">
-						"Bronze is memory made tangible. Each piece carries forward the stories our ancestors knew,
-						reimagined for our time. I seek to capture not just form, but the weight of narrative—
-						the burden and beauty of myth."
-					</p>
-				</section>
-
-				<section class="space-y-6">
-					<h3 class="font-serif text-h3 text-primary">Process</h3>
-					<p class="font-sans text-body text-secondary leading-relaxed">
-						Drawing from classical techniques while embracing modern approaches, Juraan's process begins
-						with extensive research into mythological sources. Each sculpture undergoes multiple iterations
-						before the final bronze casting, ensuring every detail serves the narrative purpose.
-					</p>
-				</section>
-
-				<!-- Exhibitions -->
-				<section class="space-y-6">
-					<h3 class="font-serif text-h3 text-primary">Selected Exhibitions</h3>
-					<div class="space-y-3">
-						<div class="flex justify-between items-start">
-							<div>
-								<p class="font-sans text-small text-primary">Mythological Forms</p>
-								<p class="font-mono text-tiny text-tertiary uppercase tracking-wider">Contemporary Gallery</p>
-							</div>
-							<p class="font-mono text-tiny text-muted">2024</p>
-						</div>
-						<div class="flex justify-between items-start">
-							<div>
-								<p class="font-sans text-small text-primary">Bronze Narratives</p>
-								<p class="font-mono text-tiny text-tertiary uppercase tracking-wider">Museum of Modern Sculpture</p>
-							</div>
-							<p class="font-mono text-tiny text-muted">2023</p>
-						</div>
-						<div class="flex justify-between items-start">
-							<div>
-								<p class="font-sans text-small text-primary">Ancient Echoes</p>
-								<p class="font-mono text-tiny text-tertiary uppercase tracking-wider">Cultural Arts Center</p>
-							</div>
-							<p class="font-mono text-tiny text-muted">2022</p>
-						</div>
-					</div>
-				</section>
-
-			</div>
-		</div>
-
-	</div>
-</section>

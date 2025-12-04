@@ -189,6 +189,9 @@ body {
 	grid-template-columns: repeat(4, 1fr);
 	gap: 1.5rem;
 	grid-auto-rows: 200px;
+	/* GPU acceleration */
+	transform: translateZ(0);
+	will-change: auto;
 }
 
 @media (max-width: 768px) {
@@ -201,6 +204,8 @@ body {
 
 .bento-item {
 	overflow: hidden;
+	/* Improve paint performance */
+	contain: layout style paint;
 }
 
 /* Bento size variations - More dynamic */
