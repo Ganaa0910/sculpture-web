@@ -138,13 +138,25 @@
 					<div class="space-y-3">
 						<div>
 							<p class="font-sans text-small text-tertiary">Email</p>
-							<a href="mailto:juraan@example.com" class="font-sans text-body text-bronze-light hover:text-bronze transition-colors">
-								juraan@example.com
+							<a href="mailto:Juraanaa1313@gmail.com" class="font-sans text-body text-bronze-light hover:text-bronze transition-colors">
+								Juraanaa1313@gmail.com
 							</a>
 						</div>
 						<div>
 							<p class="font-sans text-small text-tertiary">Phone</p>
-							<p class="font-sans text-body text-secondary">+1 (555) 123-4567</p>
+							<a href="tel:+97699441383" class="font-sans text-body text-secondary hover:text-bronze-light transition-colors">
+								+976 99 441 383
+							</a>
+							<br />
+							<a href="tel:+97693114813" class="font-sans text-body text-secondary hover:text-bronze-light transition-colors">
+								+976 93 114 813
+							</a>
+						</div>
+						<div>
+							<p class="font-sans text-small text-tertiary">Viber</p>
+							<a href="viber://chat?number=+97699441383" class="font-sans text-body text-secondary hover:text-bronze-light transition-colors">
+								+976 99 441 383
+							</a>
 						</div>
 					</div>
 				</section>

@@ -47,8 +47,9 @@
 			<div class="text-center sm:text-left">
 				<h4 class="font-serif text-small text-primary mb-4 uppercase tracking-wider">Connect</h4>
 				<div class="space-y-3">
-					<a href="mailto:hello@juraan.art" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">hello@juraan.art</a>
-					<a href="https://instagram.com/juraan" target="_blank" rel="noopener" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">Instagram</a>
+					<a href="mailto:Juraanaa1313@gmail.com" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">Juraanaa1313@gmail.com</a>
+					<a href="tel:+97699441383" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">+976 99 441 383</a>
+					<a href="viber://chat?number=+97699441383" class="block font-sans text-small text-secondary hover:text-bronze-light transition-colors">Viber</a>
 				</div>
 			</div>
 		</div>

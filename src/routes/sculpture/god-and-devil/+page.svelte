@@ -74,9 +74,9 @@
 			</div>
 
 			<!-- Mobile: Cinematic Side-by-Side -->
-			<div class="relative h-[70vh] flex gap-1">
+			<div class="relative h-[70vh] flex gap-0">
 				<!-- Devil - Left -->
-				<div class="relative flex-1 overflow-hidden group cursor-zoom-in"
+				<div class="relative w-[45%] overflow-hidden group cursor-zoom-in"
 					onclick={() => openZoom(devil.image)}
 					role="button"
 					tabindex="0"
@@ -99,7 +99,7 @@
 				</div>
 
 				<!-- Buddha - Right -->
-				<div class="relative flex-1 overflow-hidden group cursor-zoom-in"
+				<div class="relative w-[55%] overflow-hidden group cursor-zoom-in"
 					onclick={() => openZoom(buddha.image)}
 					role="button"
 					tabindex="0"
