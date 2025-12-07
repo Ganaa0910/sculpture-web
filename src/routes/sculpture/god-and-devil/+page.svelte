@@ -73,8 +73,9 @@
 				</p>
 			</div>
 
-			<!-- Mobile: Side-by-side Images -->
-			<div class="relative flex gap-0 px-4 min-h-[60vh] overflow-hidden">
+			<!-- Mobile: Cinematic Side-by-Side -->
+			<div class="relative h-[70vh] flex gap-1">
+				<!-- Devil - Left -->
 				<div class="relative flex-1 overflow-hidden group cursor-zoom-in"
 					onclick={() => openZoom(devil.image)}
 					role="button"
@@ -88,10 +89,16 @@
 						loading="eager"
 						fetchpriority="high"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary/90 to-transparent p-3 z-10">
+					<!-- Gradient overlay for depth -->
+					<div class="absolute inset-0 bg-gradient-to-r from-transparent to-bg-primary/30 pointer-events-none"></div>
+
+					<!-- Label -->
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary/95 to-transparent p-3 pointer-events-none">
 						<p class="text-tiny text-bronze-light font-serif text-center">Devil</p>
 					</div>
 				</div>
+
+				<!-- Buddha - Right -->
 				<div class="relative flex-1 overflow-hidden group cursor-zoom-in"
 					onclick={() => openZoom(buddha.image)}
 					role="button"
@@ -105,12 +112,17 @@
 						loading="eager"
 						fetchpriority="high"
 					/>
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary/90 to-transparent p-3 z-10">
+					<!-- Gradient overlay for depth -->
+					<div class="absolute inset-0 bg-gradient-to-l from-transparent to-bg-primary/30 pointer-events-none"></div>
+
+					<!-- Label -->
+					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary/95 to-transparent p-3 pointer-events-none">
 						<p class="text-tiny text-bronze-light font-serif text-center">Buddha</p>
 					</div>
 				</div>
-				<!-- Unified vignette over both images -->
-				<div class="absolute inset-0 pointer-events-none z-20" style="background: radial-gradient(ellipse 70% 65% at center, transparent 0%, transparent 20%, rgba(10, 10, 10, 0.4) 45%, rgba(10, 10, 10, 0.75) 65%, rgba(10, 10, 10, 0.95) 85%, #0a0a0a 95%); box-shadow: inset 0 0 80px 30px rgba(10, 10, 10, 0.8);"></div>
+
+				<!-- Cinematic vignette overlay -->
+				<div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 75% 70% at center, transparent 20%, rgba(10, 10, 10, 0.3) 50%, rgba(10, 10, 10, 0.7) 80%, rgba(10, 10, 10, 0.95) 95%);"></div>
 			</div>
 		</div>
 

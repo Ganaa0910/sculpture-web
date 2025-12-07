@@ -94,6 +94,29 @@
 	</div>
 </main>
 
+<!-- About the Artist Section -->
+<section class="py-section bg-bg-primary border-y border-border-subtle">
+	<div class="mx-auto max-w-4xl px-6 text-center">
+		<p class="font-mono text-tiny text-bronze-light uppercase tracking-widest mb-4">About the Artist</p>
+		<h2 class="text-h2 text-primary mb-8 font-serif">Juraan</h2>
+		<p class="text-body text-secondary font-sans leading-relaxed mb-6">
+			Juraan is a Mongolian sculptor whose bronze works explore the intersection of mythology, spirituality,
+			and the human condition. Drawing from Buddhist philosophy and shamanic traditions, his sculptures capture
+			timeless narratives of power, wisdom, and transcendence.
+		</p>
+		<p class="text-body text-secondary font-sans leading-relaxed mb-8">
+			Each piece is cast and patinated by hand, creating unique works that honor the ancient art of bronze
+			sculpture while speaking to contemporary concerns about duality, consciousness, and the nature of being.
+		</p>
+		<a
+			href="/about"
+			class="inline-block text-small border border-bronze bg-transparent px-8 py-3 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
+		>
+			Read Full Biography
+		</a>
+	</div>
+</section>
+
 <!-- Gallery Preview Section -->
 <section class="py-section bg-bg-secondary/30">
 	<div class="mx-auto max-w-container px-6">
