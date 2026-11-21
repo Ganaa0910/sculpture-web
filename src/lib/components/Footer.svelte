@@ -57,7 +57,7 @@
 		<!-- Bottom bar -->
 		<div class="pt-8 border-t border-border-subtle flex flex-col sm:flex-row justify-between items-center gap-4">
 			<p class="font-sans text-tiny text-muted">
-				© 2025 Juraan. All artwork copyright the artist.
+				© {new Date().getFullYear()} Juraan. All artwork copyright the artist.
 			</p>
 			<p class="font-sans text-tiny text-muted">
 				Built by <a href="https://910.studio" class="text-bronze hover:text-bronze-light transition-colors">910.studio</a>

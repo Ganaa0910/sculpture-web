@@ -1,4 +1,5 @@
 <script>
+	import Seo from '$lib/components/Seo.svelte';
 	import { getSculpturesByCategory } from '$lib/data/sculptures';
 	import SculptureCard from '$lib/components/SculptureCard.svelte';
 	import { staggerReveal } from '$lib/actions/scrollReveal.js';
@@ -7,9 +8,12 @@
 	const sculptures = getSculpturesByCategory('sculpture');
 </script>
 
+<Seo
+	title="Works — Juraan"
+	description="The complete collection of bronze sculptures by Mongolian sculptor Juraan (Lkhagvasuren Nyamkhuu)."
+/>
+
 <svelte:head>
-	<title>Works - Juraan</title>
-	<meta name="description" content="Explore Juraan's collection of bronze sculptures and mythological artworks" />
 	<!-- Preload critical background image -->
 	<link rel="preload" as="image" href="/backgrounds/gallery.png" fetchpriority="high" />
 </svelte:head>

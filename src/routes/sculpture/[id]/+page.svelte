@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { getSculptureById } from '$lib/data/sculptures';
 	import ImageZoom from '$lib/components/ImageZoom.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 
 	let sculpture = $derived(getSculptureById(page.params.id));
 	let selectedImageIndex = $state(0);
@@ -34,17 +35,32 @@
 	}
 </script>
 
+{#if sculpture}
+	<Seo
+		title="{sculpture.title} — Juraan"
+		description={sculpture.description ||
+			`${sculpture.title}${sculpture.year ? ` (${sculpture.year})` : ''}. ${sculpture.material || 'Bronze'}${sculpture.dimensions ? `, ${sculpture.dimensions} cm` : ''}. By Mongolian sculptor Juraan.`}
+		image={sculpture.image}
+		type="article"
+		jsonLd={{
+			'@context': 'https://schema.org',
+			'@type': 'VisualArtwork',
+			name: sculpture.title,
+			artform: sculpture.category === 'drawing' ? 'Drawing' : 'Sculpture',
+			artMedium: sculpture.material,
+			dateCreated: sculpture.year ? String(sculpture.year) : undefined,
+			image: new URL(encodeURI(sculpture.image), page.url.origin).href,
+			creator: { '@type': 'Person', name: 'Juraan', alternateName: 'Lkhagvasuren Nyamkhuu' }
+		}}
+	/>
+{/if}
+
 <svelte:head>
 	{#if sculpture}
-		<title>{sculpture.title} - Juraan</title>
-		<meta
-			name="description"
-			content={sculpture.description || `${sculpture.title} - Bronze sculpture by Juraan`}
-		/>
-		<!-- Preload sculpture image -->
 		<link rel="preload" as="image" href={sculpture.image} fetchpriority="high" />
 	{:else}
-		<title>Sculpture Not Found - Juraan</title>
+		<title>Sculpture Not Found — Juraan</title>
+		<meta name="robots" content="noindex" />
 	{/if}
 </svelte:head>
 

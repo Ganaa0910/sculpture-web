@@ -1,11 +1,14 @@
 <script>
+	import Seo from '$lib/components/Seo.svelte';
 	// No data needed for now - static content
 </script>
 
-<svelte:head>
-	<title>About - Juraan</title>
-	<meta name="description" content="Learn about Lkhagvasuren Nyamkhuu (Juraan), a Mongolian bronze sculptor whose work explores mythological themes and traditional narratives." />
-</svelte:head>
+<Seo
+	title="About Juraan — Lkhagvasuren Nyamkhuu"
+	description="Lkhagvasuren Nyamkhuu (Juraan) is a Mongolian bronze sculptor whose work explores myth, faith and traditional narrative."
+	image='/juraan-portrait.jpg'
+/>
+
 
 <main class="relative bg-bg-primary pt-24 pb-section">
 	<div class="mx-auto max-w-7xl px-6">

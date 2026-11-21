@@ -1,4 +1,5 @@
 <script>
+	import Seo from '$lib/components/Seo.svelte';
 	import { getSculptureById } from '$lib/data/sculptures';
 	import ImageZoom from '$lib/components/ImageZoom.svelte';
 
@@ -17,12 +18,13 @@
 	}
 </script>
 
+<Seo
+	title="God and Devil — Juraan"
+	description="A duality in bronze by Mongolian sculptor Juraan: the Buddha and the Devil, light and shadow, divinity and darkness."
+	image={godAndDevil?.image || '/og.jpg'}
+/>
+
 <svelte:head>
-	<title>God and Devil - Juraan</title>
-	<meta
-		name="description"
-		content="A profound duality in bronze - exploring the eternal dance between light and shadow, divinity and darkness."
-	/>
 	{#if buddha && devil}
 		<link rel="preload" as="image" href={buddha.image} fetchpriority="high" />
 		<link rel="preload" as="image" href={devil.image} fetchpriority="high" />

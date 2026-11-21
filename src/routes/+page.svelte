@@ -1,4 +1,6 @@
 <script>
+	import OptimizedImage from '$lib/components/OptimizedImage.svelte';
+	import Seo from '$lib/components/Seo.svelte';
 	import { featuredSculpture, sculptures, getSculpturesByCategory, getSculptureById } from '$lib/data/sculptures';
 
 	// Get a selection of sculptures for the gallery preview (excluding featured)
@@ -12,12 +14,21 @@
 	const devil = getSculptureById('devil');
 </script>
 
+<Seo
+	title="Juraan — Mongolian Bronze Sculptor"
+	description="Bronze sculptures by Juraan (Lkhagvasuren Nyamkhuu), a Mongolian sculptor exploring myth, faith and the human figure. Works, exhibitions and commissions."
+	jsonLd={{
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: 'Juraan',
+		alternateName: 'Lkhagvasuren Nyamkhuu',
+		jobTitle: 'Sculptor',
+		nationality: 'Mongolian',
+		knowsAbout: ['Bronze sculpture', 'Figurative sculpture', 'Drawing']
+	}}
+/>
+
 <svelte:head>
-	<title>Juraan - Bronze Sculptor</title>
-	<meta
-		name="description"
-		content="Juraan creates bronze sculptures exploring mythological themes, capturing timeless narratives of power, wisdom, and transcendence."
-	/>
 	<!-- Preload critical images for faster loading -->
 	<link rel="preload" as="image" href={featuredSculpture.image} fetchpriority="high" />
 </svelte:head>
@@ -302,48 +313,47 @@
 		<!-- Editorial Layout -->
 		<div class="grid grid-cols-12 gap-4 md:gap-6">
 			<!-- Large Hero Image -->
-			<div class="group col-span-12 aspect-[16/10] overflow-hidden md:col-span-8">
-				<img
-					src="/featured/at-expo-sculpture.JPG"
+			<div class="group col-span-12 aspect-[3/4] overflow-hidden md:aspect-[16/10] md:col-span-8">
+				<OptimizedImage
+					src="/featured/at-expo-sculpture-desktop.JPG"
+					srcMobile="/featured/at-expo-sculpture-mobile.JPG"
 					alt="Sculpture at exhibition"
 					class="h-full w-full object-cover transition-all duration-700 ease-out md:grayscale md:group-hover:scale-[1.02] md:group-hover:grayscale-0"
-					loading="lazy"
 				/>
 			</div>
 			<!-- Side Stack -->
 			<div
 				class="group col-span-6 aspect-[3/4] overflow-hidden md:col-span-4 md:aspect-auto md:h-full"
 			>
-				<img
+				<OptimizedImage
 					src="/featured/crowd-2.JPG"
 					alt="Visitors engaging with the work"
 					class="h-full w-full object-cover transition-all duration-700 ease-out md:grayscale md:group-hover:scale-[1.02] md:group-hover:grayscale-0"
-					loading="lazy"
 				/>
 			</div>
 			<!-- Bottom Row -->
 			<div class="group col-span-6 aspect-[4/5] overflow-hidden md:col-span-4">
-				<img
-					src="/featured/crowd-1.JPG"
+				<OptimizedImage
+					src="/featured/crowd-1-desktop.JPG"
+					srcMobile="/featured/crowd-1-mobile.JPG"
 					alt="Exhibition opening night"
 					class="h-full w-full object-cover transition-all duration-700 ease-out md:grayscale md:group-hover:scale-[1.02] md:group-hover:grayscale-0"
-					loading="lazy"
 				/>
 			</div>
 			<div class="group col-span-6 aspect-[4/5] overflow-hidden md:col-span-4">
-				<img
-					src="/featured/musician.JPG"
+				<OptimizedImage
+					src="/featured/musician-desktop.JPG"
+					srcMobile="/featured/musician-mobile.JPG"
 					alt="Traditional musician at exhibition"
 					class="h-full w-full object-cover transition-all duration-700 ease-out md:grayscale md:group-hover:scale-[1.02] md:group-hover:grayscale-0"
-					loading="lazy"
 				/>
 			</div>
-			<div class="group relative col-span-12 aspect-[16/9] overflow-hidden md:col-span-8">
-				<img
-					src="/featured/god-and-devil.JPG"
+			<div class="group relative col-span-12 aspect-[3/4] overflow-hidden md:aspect-[16/9] md:col-span-8">
+				<OptimizedImage
+					src="/featured/god-and-devil-desktop.JPG"
+					srcMobile="/featured/god-and-devil-mobile.JPG"
 					alt="Exhibition space"
 					class="h-full w-full object-cover transition-all duration-700 ease-out md:grayscale md:group-hover:scale-[1.02] md:group-hover:grayscale-0"
-					loading="lazy"
 				/>
 			</div>
 		</div>

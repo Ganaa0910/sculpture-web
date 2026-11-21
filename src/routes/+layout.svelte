@@ -1,6 +1,5 @@
 <script>
 	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import { onMount } from 'svelte';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import Footer from '$lib/components/Footer.svelte';
@@ -29,7 +28,6 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link

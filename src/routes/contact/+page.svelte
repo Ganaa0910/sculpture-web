@@ -1,13 +1,17 @@
 <script>
+	import Seo from '$lib/components/Seo.svelte';
 	import { enhance } from '$app/forms';
 	
 	let form;
 	let submitted = false;
 </script>
 
+<Seo
+	title="Contact — Juraan"
+	description="Get in touch with Juraan about acquiring works, commissions and exhibitions."
+/>
+
 <svelte:head>
-	<title>Contact - Juraan</title>
-	<meta name="description" content="Get in touch with Juraan for artwork inquiries, commissions, and exhibitions" />
 	<!-- Preload critical background image -->
 	<link rel="preload" as="image" href="/backgrounds/contact.png" fetchpriority="high" />
 </svelte:head>
