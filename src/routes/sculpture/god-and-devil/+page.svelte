@@ -1,7 +1,7 @@
 <script>
-	import Seo from '$lib/components/Seo.svelte';
-	import { getSculptureById } from '$lib/data/sculptures';
-	import ImageZoom from '$lib/components/ImageZoom.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import { getSculptureById } from '#lib/data/sculptures.ts';
+	import ImageZoom from '#lib/components/ImageZoom.svelte';
 
 	const godAndDevil = getSculptureById('god-and-devil');
 	const buddha = getSculptureById('buddha');
@@ -66,19 +66,19 @@
 				>
 					{godAndDevil.title}
 				</h1>
-				<p class="text-h3 text-bronze-light font-serif mb-6">
-					A Meditation on Duality
-				</p>
-				<p class="text-body text-secondary font-sans leading-relaxed max-w-xl mx-auto">
-					Two pieces in eternal dialogue—Buddha in serene contemplation, Devil in introspective meditation.
-					Neither purely good nor evil, both exist as reflections of human consciousness.
+				<p class="text-h3 mb-6 font-serif text-bronze-light">A Meditation on Duality</p>
+				<p class="text-body text-secondary mx-auto max-w-xl font-sans leading-relaxed">
+					Two pieces in eternal dialogue—Buddha in serene contemplation, Devil in introspective
+					meditation. Neither purely good nor evil, both exist as reflections of human
+					consciousness.
 				</p>
 			</div>
 
 			<!-- Mobile: Cinematic Side-by-Side -->
-			<div class="relative h-[70vh] flex gap-0">
+			<div class="relative flex h-[70vh] gap-0">
 				<!-- Devil - Left -->
-				<div class="relative w-[45%] overflow-hidden group cursor-zoom-in"
+				<div
+					class="group relative w-[45%] cursor-zoom-in overflow-hidden"
 					onclick={() => openZoom(devil.image)}
 					role="button"
 					tabindex="0"
@@ -92,16 +92,21 @@
 						fetchpriority="high"
 					/>
 					<!-- Gradient overlay for depth -->
-					<div class="absolute inset-0 bg-gradient-to-r from-transparent to-bg-primary/30 pointer-events-none"></div>
+					<div
+						class="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent to-bg-primary/30"
+					></div>
 
 					<!-- Label -->
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary/95 to-transparent p-3 pointer-events-none">
-						<p class="text-tiny text-bronze-light font-serif text-center">Devil</p>
+					<div
+						class="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-bg-primary/95 to-transparent p-3"
+					>
+						<p class="text-tiny text-center font-serif text-bronze-light">Devil</p>
 					</div>
 				</div>
 
 				<!-- Buddha - Right -->
-				<div class="relative w-[55%] overflow-hidden group cursor-zoom-in"
+				<div
+					class="group relative w-[55%] cursor-zoom-in overflow-hidden"
 					onclick={() => openZoom(buddha.image)}
 					role="button"
 					tabindex="0"
@@ -115,23 +120,31 @@
 						fetchpriority="high"
 					/>
 					<!-- Gradient overlay for depth -->
-					<div class="absolute inset-0 bg-gradient-to-l from-transparent to-bg-primary/30 pointer-events-none"></div>
+					<div
+						class="pointer-events-none absolute inset-0 bg-gradient-to-l from-transparent to-bg-primary/30"
+					></div>
 
 					<!-- Label -->
-					<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary/95 to-transparent p-3 pointer-events-none">
-						<p class="text-tiny text-bronze-light font-serif text-center">Buddha</p>
+					<div
+						class="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-bg-primary/95 to-transparent p-3"
+					>
+						<p class="text-tiny text-center font-serif text-bronze-light">Buddha</p>
 					</div>
 				</div>
 
 				<!-- Cinematic vignette overlay -->
-				<div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 75% 70% at center, transparent 20%, rgba(10, 10, 10, 0.3) 50%, rgba(10, 10, 10, 0.7) 80%, rgba(10, 10, 10, 0.95) 95%);"></div>
+				<div
+					class="pointer-events-none absolute inset-0"
+					style="background: radial-gradient(ellipse 75% 70% at center, transparent 20%, rgba(10, 10, 10, 0.3) 50%, rgba(10, 10, 10, 0.7) 80%, rgba(10, 10, 10, 0.95) 95%);"
+				></div>
 			</div>
 		</div>
 
 		<!-- Desktop: Split Layout -->
-		<div class="hidden lg:flex items-center min-h-screen relative overflow-hidden">
+		<div class="relative hidden min-h-screen items-center overflow-hidden lg:flex">
 			<!-- Devil - Left Side -->
-			<div class="relative flex-1 h-screen overflow-hidden group cursor-zoom-in"
+			<div
+				class="group relative h-screen flex-1 cursor-zoom-in overflow-hidden"
 				onclick={() => openZoom(devil.image)}
 				role="button"
 				tabindex="0"
@@ -144,14 +157,27 @@
 					loading="eager"
 					fetchpriority="high"
 				/>
-				<div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-bg-primary/90"></div>
+				<div
+					class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-bg-primary/90"
+				></div>
 
 				<!-- Zoom hint -->
-				<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
-					<div class="bg-bg-secondary/90 backdrop-blur px-4 py-2 rounded border border-bronze-light">
-						<p class="text-tiny text-bronze-light font-mono tracking-wider uppercase flex items-center gap-2">
-							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+				<div
+					class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+				>
+					<div
+						class="rounded border border-bronze-light bg-bg-secondary/90 px-4 py-2 backdrop-blur"
+					>
+						<p
+							class="text-tiny flex items-center gap-2 font-mono tracking-wider text-bronze-light uppercase"
+						>
+							<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+								/>
 							</svg>
 							Click to zoom
 						</p>
@@ -160,8 +186,10 @@
 			</div>
 
 			<!-- Center - Title Section -->
-			<div class="relative flex-shrink-0 w-[600px] flex items-center justify-center bg-bg-primary z-10 px-12">
-				<div class="text-center max-w-xl">
+			<div
+				class="relative z-10 flex w-[600px] flex-shrink-0 items-center justify-center bg-bg-primary px-12"
+			>
+				<div class="max-w-xl text-center">
 					<!-- Back Navigation -->
 					<div class="mb-8">
 						<a
@@ -191,22 +219,32 @@
 					>
 						{godAndDevil.title}
 					</h1>
-					<p class="text-h3 text-bronze-light font-serif mb-6">
-						A Meditation on Duality
-					</p>
-					<p class="text-body text-secondary font-sans leading-relaxed mb-8">
-						Two pieces in eternal dialogue—Buddha in serene contemplation, Devil in introspective meditation.
-						Neither purely good nor evil, both exist as reflections of human consciousness.
+					<p class="text-h3 mb-6 font-serif text-bronze-light">A Meditation on Duality</p>
+					<p class="text-body text-secondary mb-8 font-sans leading-relaxed">
+						Two pieces in eternal dialogue—Buddha in serene contemplation, Devil in introspective
+						meditation. Neither purely good nor evil, both exist as reflections of human
+						consciousness.
 					</p>
 
 					<!-- Scroll indicator -->
 					<div class="flex justify-center">
 						<button
-							onclick={() => document.querySelector('#details-section')?.scrollIntoView({ behavior: 'smooth' })}
-							class="text-bronze-light hover:text-bronze transition-colors"
+							onclick={() =>
+								document.querySelector('#details-section')?.scrollIntoView({ behavior: 'smooth' })}
+							class="text-bronze-light transition-colors hover:text-bronze"
 						>
-							<svg class="w-6 h-6 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+							<svg
+								class="h-6 w-6 animate-bounce"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M19 14l-7 7m0 0l-7-7m7 7V3"
+								/>
 							</svg>
 						</button>
 					</div>
@@ -214,7 +252,8 @@
 			</div>
 
 			<!-- Buddha - Right Side -->
-			<div class="relative flex-1 h-screen overflow-hidden group cursor-zoom-in"
+			<div
+				class="group relative h-screen flex-1 cursor-zoom-in overflow-hidden"
 				onclick={() => openZoom(buddha.image)}
 				role="button"
 				tabindex="0"
@@ -227,14 +266,27 @@
 					loading="eager"
 					fetchpriority="high"
 				/>
-				<div class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-bg-primary/90"></div>
+				<div
+					class="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-bg-primary/90"
+				></div>
 
 				<!-- Zoom hint -->
-				<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20">
-					<div class="bg-bg-secondary/90 backdrop-blur px-4 py-2 rounded border border-bronze-light">
-						<p class="text-tiny text-bronze-light font-mono tracking-wider uppercase flex items-center gap-2">
-							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+				<div
+					class="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+				>
+					<div
+						class="rounded border border-bronze-light bg-bg-secondary/90 px-4 py-2 backdrop-blur"
+					>
+						<p
+							class="text-tiny flex items-center gap-2 font-mono tracking-wider text-bronze-light uppercase"
+						>
+							<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+								/>
 							</svg>
 							Click to zoom
 						</p>
@@ -243,67 +295,75 @@
 			</div>
 
 			<!-- Unified vignette over entire desktop layout -->
-			<div class="absolute inset-0 pointer-events-none z-20" style="background: radial-gradient(ellipse 80% 75% at center, transparent 0%, transparent 30%, rgba(10, 10, 10, 0.35) 55%, rgba(10, 10, 10, 0.65) 75%, rgba(10, 10, 10, 0.9) 92%, #0a0a0a 98%);"></div>
+			<div
+				class="pointer-events-none absolute inset-0 z-20"
+				style="background: radial-gradient(ellipse 80% 75% at center, transparent 0%, transparent 30%, rgba(10, 10, 10, 0.35) 55%, rgba(10, 10, 10, 0.65) 75%, rgba(10, 10, 10, 0.9) 92%, #0a0a0a 98%);"
+			></div>
 		</div>
 
 		<!-- Details Section -->
 		<div class="relative" id="details-section">
 			<div class="bg-bg-primary py-section">
+				<div class="mx-auto max-w-7xl px-6">
+					<!-- Combined Details -->
+					<div class="mx-auto max-w-4xl space-y-8">
+						<section class="space-y-4">
+							<h2 class="text-h2 text-primary font-serif">The Duality</h2>
+							<p class="text-body text-secondary font-sans leading-relaxed">
+								These two pieces exist as a unified work, exploring the Buddhist concept that
+								enlightenment comes not from rejecting the shadow self, but from understanding it.
+								God and Devil are not adversaries—they are aspects of the same consciousness, two
+								faces of the human condition sitting in parallel meditation.
+							</p>
+							<p class="text-body text-secondary font-sans leading-relaxed">
+								In Mongolian tradition, spiritual forces exist in balance. This work draws from both
+								Buddhist philosophy and shamanic understanding: that wisdom comes from integrating
+								opposites, not from choosing one over the other.
+							</p>
+						</section>
 
-			<div class="mx-auto max-w-7xl px-6">
-				<!-- Combined Details -->
-				<div class="max-w-4xl mx-auto space-y-8">
-				<section class="space-y-4">
-					<h2 class="text-h2 text-primary font-serif">The Duality</h2>
-					<p class="text-body text-secondary font-sans leading-relaxed">
-						These two pieces exist as a unified work, exploring the Buddhist concept that
-						enlightenment comes not from rejecting the shadow self, but from understanding it.
-						God and Devil are not adversaries—they are aspects of the same consciousness,
-						two faces of the human condition sitting in parallel meditation.
-					</p>
-					<p class="text-body text-secondary font-sans leading-relaxed">
-						In Mongolian tradition, spiritual forces exist in balance. This work draws from
-						both Buddhist philosophy and shamanic understanding: that wisdom comes from
-						integrating opposites, not from choosing one over the other.
-					</p>
-				</section>
+						<!-- Technical Details -->
+						<section class="space-y-4">
+							<h2 class="text-h2 text-primary font-serif">Details</h2>
+							<div class="space-y-3">
+								<div class="flex items-center space-x-4">
+									<span class="text-tiny text-tertiary w-24 font-mono tracking-wider uppercase"
+										>Year</span
+									>
+									<span class="text-body text-secondary font-sans">{godAndDevil.year}</span>
+								</div>
+								<div class="flex items-center space-x-4">
+									<span class="text-tiny text-tertiary w-24 font-mono tracking-wider uppercase"
+										>Material</span
+									>
+									<span class="text-body text-secondary font-sans">{godAndDevil.material}</span>
+								</div>
+								<div class="flex items-center space-x-4">
+									<span class="text-tiny text-tertiary w-24 font-mono tracking-wider uppercase"
+										>Size</span
+									>
+									<span class="text-body text-secondary font-sans">{godAndDevil.dimensions}</span>
+								</div>
+							</div>
+						</section>
 
-				<!-- Technical Details -->
-				<section class="space-y-4">
-					<h2 class="text-h2 text-primary font-serif">Details</h2>
-					<div class="space-y-3">
-						<div class="flex items-center space-x-4">
-							<span class="text-tiny text-tertiary w-24 font-mono tracking-wider uppercase">Year</span>
-							<span class="text-body text-secondary font-sans">{godAndDevil.year}</span>
-						</div>
-						<div class="flex items-center space-x-4">
-							<span class="text-tiny text-tertiary w-24 font-mono tracking-wider uppercase">Material</span>
-							<span class="text-body text-secondary font-sans">{godAndDevil.material}</span>
-						</div>
-						<div class="flex items-center space-x-4">
-							<span class="text-tiny text-tertiary w-24 font-mono tracking-wider uppercase">Size</span>
-							<span class="text-body text-secondary font-sans">{godAndDevil.dimensions}</span>
-						</div>
+						<!-- Call to Action -->
+						<section class="pt-8 text-center">
+							<div class="space-y-4">
+								<a
+									href="/contact"
+									class="text-small inline-block border border-bronze bg-transparent px-8 py-3 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
+								>
+									Inquire About This Collection
+								</a>
+								<p class="text-small text-tertiary font-sans">
+									Available as a pair or individually. Contact for pricing and availability.
+								</p>
+							</div>
+						</section>
 					</div>
-				</section>
-
-				<!-- Call to Action -->
-				<section class="pt-8 text-center">
-					<div class="space-y-4">
-						<a
-							href="/contact"
-							class="text-small inline-block border border-bronze bg-transparent px-8 py-3 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
-						>
-							Inquire About This Collection
-						</a>
-						<p class="text-small text-tertiary font-sans">
-							Available as a pair or individually. Contact for pricing and availability.
-						</p>
-					</div>
-				</section>
 				</div>
 			</div>
-		</div>
 		</div>
 
 		<!-- Image Zoom Modal -->

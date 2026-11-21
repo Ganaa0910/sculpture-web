@@ -50,31 +50,32 @@ Museum-quality presentation with dark gallery aesthetics. Every design decision 
 ## Color Palette
 
 ### Backgrounds
+
 ```css
---bg-primary: #0a0a0a      /* Almost black - main canvas */
---bg-secondary: #141414     /* Card backgrounds, sections */
---bg-elevated: #1a1a1a      /* Hover states, modals */
+--bg-primary: #0a0a0a /* Almost black - main canvas */ --bg-secondary: #141414
+	/* Card backgrounds, sections */ --bg-elevated: #1a1a1a /* Hover states, modals */;
 ```
 
 ### Bronze Accents
+
 ```css
---bronze-light: #C9A961     /* Highlights, hover states */
---bronze-mid: #B8860B        /* Links, active states */
---bronze-dark: #8B6914       /* Borders, subtle accents */
+--bronze-light: #c9a961 /* Highlights, hover states */ --bronze-mid: #b8860b
+	/* Links, active states */ --bronze-dark: #8b6914 /* Borders, subtle accents */;
 ```
 
 ### Text Hierarchy
+
 ```css
---text-primary: #e5e5e5      /* Main text - off-white */
---text-secondary: #a3a3a3    /* Secondary information */
---text-tertiary: #737373     /* Captions, metadata */
---text-muted: #525252        /* Footer, disabled states */
+--text-primary: #e5e5e5 /* Main text - off-white */ --text-secondary: #a3a3a3
+	/* Secondary information */ --text-tertiary: #737373 /* Captions, metadata */
+	--text-muted: #525252 /* Footer, disabled states */;
 ```
 
 ### Borders & Dividers
+
 ```css
---border-subtle: #262626     /* Subtle section divisions */
---border-medium: #404040     /* Cards, components */
+--border-subtle: #262626 /* Subtle section divisions */ --border-medium: #404040
+	/* Cards, components */;
 ```
 
 ### Why These Colors
@@ -91,28 +92,34 @@ Museum-quality presentation with dark gallery aesthetics. Every design decision 
 ### Font Pairing
 
 **Headings (Juraan, Page Titles)**
+
 ```css
 font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
 ```
+
 - Elegant serif for prestige and timelessness
 - Museum catalog aesthetic
 - Perfect for artist branding
 
 **Body Text (Descriptions, Bio)**
+
 ```css
 font-family: 'Inter', 'SF Pro', system-ui, sans-serif;
 ```
+
 - Clean, highly readable sans-serif
 - Modern but neutral
 - Excellent at all sizes
 
 **Metadata (Optional - Dates, Dimensions)**
+
 ```css
 font-family: 'JetBrains Mono', 'Courier New', monospace;
 font-size: 0.75rem;
 text-transform: uppercase;
 letter-spacing: 0.1em;
 ```
+
 - Technical precision for artwork details
 - Gallery label aesthetic
 
@@ -120,22 +127,22 @@ letter-spacing: 0.1em;
 
 ```css
 /* Hero/Juraan */
---text-hero: clamp(3rem, 8vw, 6rem);      /* 48-96px responsive */
-font-weight: 400;  /* Light weight for elegance */
+--text-hero: clamp(3rem, 8vw, 6rem); /* 48-96px responsive */
+font-weight: 400; /* Light weight for elegance */
 line-height: 1.1;
 
 /* Page Headings */
---text-h1: clamp(2.5rem, 5vw, 4rem);      /* 40-64px */
+--text-h1: clamp(2.5rem, 5vw, 4rem); /* 40-64px */
 font-weight: 400;
 line-height: 1.2;
 
 /* Section Headings */
---text-h2: clamp(1.75rem, 3vw, 2.5rem);   /* 28-40px */
+--text-h2: clamp(1.75rem, 3vw, 2.5rem); /* 28-40px */
 font-weight: 500;
 line-height: 1.3;
 
 /* Sculpture Titles */
---text-h3: clamp(1.25rem, 2vw, 1.75rem);  /* 20-28px */
+--text-h3: clamp(1.25rem, 2vw, 1.75rem); /* 20-28px */
 font-weight: 500;
 line-height: 1.4;
 
@@ -145,12 +152,12 @@ font-weight: 400;
 line-height: 1.7;
 
 /* Small Text (Captions, Metadata) */
---text-small: clamp(0.875rem, 1vw, 1rem);  /* 14-16px */
+--text-small: clamp(0.875rem, 1vw, 1rem); /* 14-16px */
 font-weight: 400;
 line-height: 1.6;
 
 /* Tiny (Footer, Copyright) */
---text-tiny: 0.75rem;                       /* 12px */
+--text-tiny: 0.75rem; /* 12px */
 font-weight: 400;
 line-height: 1.5;
 ```
@@ -161,18 +168,18 @@ line-height: 1.5;
 
 ```css
 /* Consistent 8px base rhythm */
---space-xs: 0.5rem;    /* 8px */
---space-sm: 1rem;      /* 16px */
---space-md: 1.5rem;    /* 24px */
---space-lg: 2rem;      /* 32px */
---space-xl: 3rem;      /* 48px */
---space-2xl: 4rem;     /* 64px */
---space-3xl: 6rem;     /* 96px */
---space-4xl: 8rem;     /* 128px */
+--space-xs: 0.5rem; /* 8px */
+--space-sm: 1rem; /* 16px */
+--space-md: 1.5rem; /* 24px */
+--space-lg: 2rem; /* 32px */
+--space-xl: 3rem; /* 48px */
+--space-2xl: 4rem; /* 64px */
+--space-3xl: 6rem; /* 96px */
+--space-4xl: 8rem; /* 128px */
 
 /* Section spacing */
---section-padding-mobile: 3rem;   /* 48px */
---section-padding-desktop: 6rem;  /* 96px */
+--section-padding-mobile: 3rem; /* 48px */
+--section-padding-desktop: 6rem; /* 96px */
 
 /* Container constraints */
 --container-max: 1400px;
@@ -183,6 +190,7 @@ line-height: 1.5;
 ## Component Styles
 
 ### Navigation
+
 ```css
 /* Minimal, floating nav with backdrop blur */
 background: rgba(10, 10, 10, 0.8);
@@ -202,6 +210,7 @@ transition: color 0.3s ease;
 ```
 
 ### Sculpture Cards
+
 ```css
 /* Card container */
 background: var(--bg-secondary);
@@ -219,6 +228,7 @@ transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 ```
 
 ### Buttons & Links
+
 ```css
 /* Primary action button */
 background: transparent;
@@ -243,6 +253,7 @@ border-bottom-color: var(--bronze-light);
 ```
 
 ### Lightbox
+
 ```css
 /* Overlay */
 background: rgba(0, 0, 0, 0.95);
@@ -266,6 +277,7 @@ font-size: 2rem;
 ## Layout Patterns
 
 ### Hero Section Structure
+
 ```
 ┌─────────────────────────────────────┐
 │                                     │
@@ -283,9 +295,10 @@ font-size: 2rem;
 ```
 
 ### Gallery Grid Layout
+
 ```
 Desktop: 3 columns with 32px gap
-Tablet:  2 columns with 24px gap  
+Tablet:  2 columns with 24px gap
 Mobile:  1 column with 16px gap
 
 Consistent aspect ratio per row
@@ -293,6 +306,7 @@ Masonry effect optional for varied heights
 ```
 
 ### Page Transitions
+
 ```css
 /* Smooth page transitions */
 duration: 600ms;
@@ -310,62 +324,62 @@ transform: translateY(20px) → translateY(0);
 ```js
 // tailwind.config.js
 export default {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-  theme: {
-    extend: {
-      colors: {
-        bg: {
-          primary: '#0a0a0a',
-          secondary: '#141414',
-          elevated: '#1a1a1a'
-        },
-        bronze: {
-          light: '#C9A961',
-          DEFAULT: '#B8860B',
-          dark: '#8B6914'
-        },
-        text: {
-          primary: '#e5e5e5',
-          secondary: '#a3a3a3',
-          tertiary: '#737373',
-          muted: '#525252'
-        },
-        border: {
-          subtle: '#262626',
-          medium: '#404040'
-        }
-      },
-      fontFamily: {
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'Courier New', 'monospace']
-      },
-      fontSize: {
-        hero: 'clamp(3rem, 8vw, 6rem)',
-        h1: 'clamp(2.5rem, 5vw, 4rem)',
-        h2: 'clamp(1.75rem, 3vw, 2.5rem)',
-        h3: 'clamp(1.25rem, 2vw, 1.75rem)'
-      },
-      spacing: {
-        section: 'clamp(3rem, 8vw, 6rem)'
-      },
-      animation: {
-        'fade-in': 'fadeIn 0.6s ease-out',
-        'slide-up': 'slideUp 0.8s ease-out'
-      },
-      keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' }
-        },
-        slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' }
-        }
-      }
-    }
-  },
-  plugins: []
+	content: ['./src/**/*.{html,js,svelte,ts}'],
+	theme: {
+		extend: {
+			colors: {
+				bg: {
+					primary: '#0a0a0a',
+					secondary: '#141414',
+					elevated: '#1a1a1a'
+				},
+				bronze: {
+					light: '#C9A961',
+					DEFAULT: '#B8860B',
+					dark: '#8B6914'
+				},
+				text: {
+					primary: '#e5e5e5',
+					secondary: '#a3a3a3',
+					tertiary: '#737373',
+					muted: '#525252'
+				},
+				border: {
+					subtle: '#262626',
+					medium: '#404040'
+				}
+			},
+			fontFamily: {
+				serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				mono: ['JetBrains Mono', 'Courier New', 'monospace']
+			},
+			fontSize: {
+				hero: 'clamp(3rem, 8vw, 6rem)',
+				h1: 'clamp(2.5rem, 5vw, 4rem)',
+				h2: 'clamp(1.75rem, 3vw, 2.5rem)',
+				h3: 'clamp(1.25rem, 2vw, 1.75rem)'
+			},
+			spacing: {
+				section: 'clamp(3rem, 8vw, 6rem)'
+			},
+			animation: {
+				'fade-in': 'fadeIn 0.6s ease-out',
+				'slide-up': 'slideUp 0.8s ease-out'
+			},
+			keyframes: {
+				fadeIn: {
+					'0%': { opacity: '0' },
+					'100%': { opacity: '1' }
+				},
+				slideUp: {
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				}
+			}
+		}
+	},
+	plugins: []
 };
 ```
 
@@ -418,22 +432,27 @@ artist-portfolio/
 ## Development
 
 ### Setup
+
 ```bash
 npm install
 ```
 
 ### Run Development Server
+
 ```bash
 npm run dev
 ```
+
 Server runs at `http://localhost:5173`
 
 ### Build for Production
+
 ```bash
 npm run build
 ```
 
 ### Preview Production Build
+
 ```bash
 npm run preview
 ```
@@ -443,6 +462,7 @@ npm run preview
 ## Deployment
 
 ### Vercel (Recommended)
+
 ```bash
 # Install Vercel CLI
 npm install -g vercel
@@ -452,6 +472,7 @@ vercel --prod
 ```
 
 ### Environment Variables
+
 ```
 # .env (if needed for contact form)
 VITE_CONTACT_EMAIL=artist@email.com
@@ -462,18 +483,21 @@ VITE_CONTACT_EMAIL=artist@email.com
 ## Content Requirements
 
 ### Images
+
 - **Format:** JPG or PNG
 - **Resolution:** Minimum 2000px on longest side
 - **Optimization:** Compress without visible quality loss
 - **Naming:** Descriptive filenames (sculpture-name-2024.jpg)
 
 ### Videos
+
 - **Format:** MP4 (H.264)
 - **Resolution:** 1920x1080 or 3840x2160
 - **Duration:** Keep under 2 minutes for optimal loading
 - **Hosting:** YouTube unlisted or Vimeo Pro recommended
 
 ### Text Content
+
 - **Artist Bio:** 200-400 words
 - **Sculpture Descriptions:** 50-100 words each
 - **Artist Statement:** 100-200 words (optional)
@@ -483,12 +507,14 @@ VITE_CONTACT_EMAIL=artist@email.com
 ## Design References
 
 ### Visual Inspiration
+
 - [Dashi Namdakov](https://dashi-art.com) - Primary reference
 - Museum digital collections (Met, MoMA)
 - High-end gallery websites (Gagosian, White Cube)
 - Editorial photography portfolios
 
 ### NOT Like
+
 - Colorful startup landing pages
 - Social media aesthetics
 - Dribbble UI showcases
@@ -577,4 +603,4 @@ Facebook: [facebook.com/artistname]
 
 ---
 
-*Built with precision and care by 910studio - Creative web experiences*
+_Built with precision and care by 910studio - Creative web experiences_

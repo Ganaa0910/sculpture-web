@@ -11,25 +11,31 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"format": "prettier --write .",
-		"lint": "prettier --check ."
+		"lint": "prettier --check .",
+		"deploy": "vite build && wrangler deploy"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-vercel": "^6.0.0",
-		"@sveltejs/kit": "^2.47.1",
-		"@sveltejs/vite-plugin-svelte": "^6.2.1",
+		"@sveltejs/adapter-cloudflare": "^9.0.0",
+		"@sveltejs/kit": "^3.0.0",
+		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@tailwindcss/forms": "^0.5.10",
 		"@tailwindcss/typography": "^0.5.19",
-		"@tailwindcss/vite": "^4.1.14",
+		"@tailwindcss/vite": "^4.3.5",
 		"@vitest/browser-playwright": "^4.0.5",
 		"playwright": "^1.56.1",
 		"prettier": "^3.6.2",
 		"prettier-plugin-svelte": "^3.4.0",
 		"prettier-plugin-tailwindcss": "^0.7.1",
 		"sharp": "^0.34.5",
-		"svelte": "^5.41.0",
-		"tailwindcss": "^4.1.14",
-		"vite": "^7.1.10",
+		"svelte": "^5.57.2",
+		"tailwindcss": "^4.3.5",
+		"vite": "^8.0.12",
 		"vitest": "^4.0.5",
-		"vitest-browser-svelte": "^2.0.1"
+		"vitest-browser-svelte": "^2.0.1",
+		"wrangler": "^4.166.0"
+	},
+	"imports": {
+		"#lib": "./src/lib/index.js",
+		"#lib/*": "./src/lib/*"
 	}
 }

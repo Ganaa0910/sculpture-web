@@ -16,7 +16,10 @@ function slugify(text) {
 }
 
 function parseInfoMd(content) {
-	const lines = content.trim().split('\n').filter(line => line.trim());
+	const lines = content
+		.trim()
+		.split('\n')
+		.filter((line) => line.trim());
 
 	return {
 		title: lines[0]?.trim() || '',
@@ -37,9 +40,10 @@ function getImages(folderPath, folderName) {
 			images.push(`/sculptures/${folderName}/${entry.name}`);
 		} else if (entry.isDirectory()) {
 			// Handle subfolders like God and devil/Buddha
-			const subImages = fs.readdirSync(fullPath, { withFileTypes: true })
-				.filter(f => f.isFile() && /\.(jpg|jpeg|png|JPG|JPEG|PNG)$/i.test(f.name))
-				.map(f => `/sculptures/${folderName}/${entry.name}/${f.name}`);
+			const subImages = fs
+				.readdirSync(fullPath, { withFileTypes: true })
+				.filter((f) => f.isFile() && /\.(jpg|jpeg|png|JPG|JPEG|PNG)$/i.test(f.name))
+				.map((f) => `/sculptures/${folderName}/${entry.name}/${f.name}`);
 			images.push(...subImages);
 		}
 	}
@@ -49,8 +53,9 @@ function getImages(folderPath, folderName) {
 
 function generateSculptures() {
 	const sculptures = [];
-	const folders = fs.readdirSync(sculpturesDir, { withFileTypes: true })
-		.filter(entry => entry.isDirectory());
+	const folders = fs
+		.readdirSync(sculpturesDir, { withFileTypes: true })
+		.filter((entry) => entry.isDirectory());
 
 	for (const folder of folders) {
 		const folderPath = path.join(sculpturesDir, folder.name);
@@ -85,7 +90,7 @@ function generateSculptures() {
 		};
 
 		// Remove undefined values
-		Object.keys(sculpture).forEach(key => {
+		Object.keys(sculpture).forEach((key) => {
 			if (sculpture[key] === undefined) {
 				delete sculpture[key];
 			}

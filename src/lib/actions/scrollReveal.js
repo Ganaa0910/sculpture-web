@@ -3,12 +3,7 @@
  * Uses Intersection Observer for performance
  */
 export function scrollReveal(node, options = {}) {
-	const {
-		delay = 0,
-		duration = 400,
-		distance = 20,
-		once = true
-	} = options;
+	const { delay = 0, duration = 400, distance = 20, once = true } = options;
 
 	// Set initial state - subtle starting position
 	node.style.opacity = '0';
@@ -81,7 +76,7 @@ export function staggerReveal(node, options = {}) {
 
 	// Cap the stagger so items don't wait too long
 	const cappedIndex = Math.min(index, 6);
-	const delay = baseDelay + (cappedIndex * stagger);
+	const delay = baseDelay + cappedIndex * stagger;
 
 	return scrollReveal(node, {
 		delay,

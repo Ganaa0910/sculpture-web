@@ -46,7 +46,9 @@ async function optimizeImage(imagePath) {
 			return;
 		}
 
-		console.log(`🔄 Processing ${imagePath} (${originalSizeMB}MB, ${metadata.width}x${metadata.height})`);
+		console.log(
+			`🔄 Processing ${imagePath} (${originalSizeMB}MB, ${metadata.width}x${metadata.height})`
+		);
 
 		// Create a backup path
 		const backupPath = imagePath.replace(/\.(jpg|jpeg|JPG|JPEG|png|PNG)$/, '.original.$1');
@@ -79,7 +81,6 @@ async function optimizeImage(imagePath) {
 		await fs.unlink(imagePath);
 		await fs.rename(imagePath + '.tmp', imagePath);
 		await fs.unlink(backupPath);
-
 	} catch (error) {
 		console.error(`❌ Error optimizing ${imagePath}:`, error.message);
 	}

@@ -122,54 +122,84 @@
 		<!-- Close button -->
 		<button
 			onclick={close}
-			class="absolute top-6 right-6 z-10 text-bronze-light hover:text-bronze transition-colors p-2"
+			class="absolute top-6 right-6 z-10 p-2 text-bronze-light transition-colors hover:text-bronze"
 			aria-label="Close zoom view"
 		>
-			<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+			<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M6 18L18 6M6 6l12 12"
+				/>
 			</svg>
 		</button>
 
 		<!-- Zoom controls -->
 		<div class="absolute top-6 left-6 z-10 flex flex-col gap-2">
 			<button
-				onclick={(e) => { e.stopPropagation(); scale = Math.min(scale + 0.5, 4); }}
-				class="bg-bg-secondary/80 backdrop-blur text-bronze-light hover:text-bronze border border-border-subtle hover:border-bronze-dark transition-all p-2 rounded"
+				onclick={(e) => {
+					e.stopPropagation();
+					scale = Math.min(scale + 0.5, 4);
+				}}
+				class="rounded border border-border-subtle bg-bg-secondary/80 p-2 text-bronze-light backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze"
 				aria-label="Zoom in"
 			>
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M12 4v16m8-8H4"
+					/>
 				</svg>
 			</button>
 			<button
-				onclick={(e) => { e.stopPropagation(); scale = Math.max(scale - 0.5, 1); if (scale === 1) { translateX = 0; translateY = 0; } }}
-				class="bg-bg-secondary/80 backdrop-blur text-bronze-light hover:text-bronze border border-border-subtle hover:border-bronze-dark transition-all p-2 rounded"
+				onclick={(e) => {
+					e.stopPropagation();
+					scale = Math.max(scale - 0.5, 1);
+					if (scale === 1) {
+						translateX = 0;
+						translateY = 0;
+					}
+				}}
+				class="rounded border border-border-subtle bg-bg-secondary/80 p-2 text-bronze-light backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze"
 				aria-label="Zoom out"
 			>
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
 				</svg>
 			</button>
 			<button
-				onclick={(e) => { e.stopPropagation(); resetTransform(); }}
-				class="bg-bg-secondary/80 backdrop-blur text-bronze-light hover:text-bronze border border-border-subtle hover:border-bronze-dark transition-all p-2 rounded text-tiny"
+				onclick={(e) => {
+					e.stopPropagation();
+					resetTransform();
+				}}
+				class="text-tiny rounded border border-border-subtle bg-bg-secondary/80 p-2 text-bronze-light backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze"
 				aria-label="Reset zoom"
 			>
-				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+					/>
 				</svg>
 			</button>
 		</div>
 
 		<!-- Instructions -->
-		<div class="absolute bottom-6 left-1/2 -translate-x-1/2 text-bronze-light/60 text-tiny font-mono tracking-wider uppercase text-center px-4">
+		<div
+			class="text-tiny absolute bottom-6 left-1/2 -translate-x-1/2 px-4 text-center font-mono tracking-wider text-bronze-light/60 uppercase"
+		>
 			<span class="hidden md:inline">Scroll to zoom • Drag to pan • ESC to close</span>
 			<span class="md:hidden">Pinch to zoom • Drag to pan</span>
 		</div>
 
 		<!-- Image container -->
 		<div
-			class="max-w-[90vw] max-h-[90vh] overflow-hidden cursor-{scale > 1 ? 'move' : 'zoom-in'}"
+			class="max-h-[90vh] max-w-[90vw] overflow-hidden cursor-{scale > 1 ? 'move' : 'zoom-in'}"
 			onclick={(e) => e.stopPropagation()}
 			onwheel={handleWheel}
 			onmousedown={handleMouseDown}
@@ -185,8 +215,9 @@
 			<img
 				{src}
 				{alt}
-				class="max-w-full max-h-[90vh] object-contain transition-transform duration-200 select-none"
-				style="transform: scale({scale}) translate({translateX / scale}px, {translateY / scale}px); cursor: {isDragging ? 'grabbing' : scale > 1 ? 'grab' : 'zoom-in'};"
+				class="max-h-[90vh] max-w-full object-contain transition-transform duration-200 select-none"
+				style="transform: scale({scale}) translate({translateX / scale}px, {translateY /
+					scale}px); cursor: {isDragging ? 'grabbing' : scale > 1 ? 'grab' : 'zoom-in'};"
 				draggable="false"
 			/>
 		</div>

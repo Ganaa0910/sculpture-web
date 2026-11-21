@@ -5,7 +5,7 @@ import type {
 	Exhibition,
 	About,
 	Blog
-} from '$lib/types/strapi';
+} from '#lib/types/strapi.ts';
 
 // Strapi API configuration
 const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'http://localhost:1337';
@@ -47,8 +47,8 @@ async function fetchStrapi<T>(
 // Sculptures API
 export async function getSculptures(featured?: boolean): Promise<StrapiEntity<Sculpture>[]> {
 	const params: Record<string, string> = {
-		'populate': '*',
-		'sort': 'order:asc'
+		populate: '*',
+		sort: 'order:asc'
 	};
 
 	if (featured !== undefined) {
@@ -62,7 +62,7 @@ export async function getSculptures(featured?: boolean): Promise<StrapiEntity<Sc
 export async function getSculptureBySlug(slug: string): Promise<StrapiEntity<Sculpture> | null> {
 	const params = {
 		'filters[slug][$eq]': slug,
-		'populate': '*'
+		populate: '*'
 	};
 
 	const response = await fetchStrapi<StrapiEntity<Sculpture>[]>('/sculptures', params);
@@ -72,8 +72,8 @@ export async function getSculptureBySlug(slug: string): Promise<StrapiEntity<Scu
 // Exhibitions API
 export async function getExhibitions(): Promise<StrapiEntity<Exhibition>[]> {
 	const params = {
-		'populate': '*',
-		'sort': 'startDate:desc'
+		populate: '*',
+		sort: 'startDate:desc'
 	};
 
 	const response = await fetchStrapi<StrapiEntity<Exhibition>[]>('/exhibitions', params);
@@ -83,7 +83,7 @@ export async function getExhibitions(): Promise<StrapiEntity<Exhibition>[]> {
 export async function getExhibitionBySlug(slug: string): Promise<StrapiEntity<Exhibition> | null> {
 	const params = {
 		'filters[slug][$eq]': slug,
-		'populate': '*'
+		populate: '*'
 	};
 
 	const response = await fetchStrapi<StrapiEntity<Exhibition>[]>('/exhibitions', params);
@@ -93,7 +93,7 @@ export async function getExhibitionBySlug(slug: string): Promise<StrapiEntity<Ex
 // About API (single type)
 export async function getAbout(): Promise<StrapiEntity<About> | null> {
 	const params = {
-		'populate': '*'
+		populate: '*'
 	};
 
 	const response = await fetchStrapi<StrapiEntity<About>>('/about', params);
@@ -103,8 +103,8 @@ export async function getAbout(): Promise<StrapiEntity<About> | null> {
 // Blog API
 export async function getBlogs(limit?: number): Promise<StrapiEntity<Blog>[]> {
 	const params: Record<string, string> = {
-		'populate': '*',
-		'sort': 'publishedAt:desc'
+		populate: '*',
+		sort: 'publishedAt:desc'
 	};
 
 	if (limit) {
@@ -118,7 +118,7 @@ export async function getBlogs(limit?: number): Promise<StrapiEntity<Blog>[]> {
 export async function getBlogBySlug(slug: string): Promise<StrapiEntity<Blog> | null> {
 	const params = {
 		'filters[slug][$eq]': slug,
-		'populate': '*'
+		populate: '*'
 	};
 
 	const response = await fetchStrapi<StrapiEntity<Blog>[]>('/blogs', params);

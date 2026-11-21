@@ -1,4 +1,4 @@
-import { getSculptureBySlug } from '$lib/api/strapi';
+import { getSculptureBySlug } from '#lib/api/strapi.ts';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 

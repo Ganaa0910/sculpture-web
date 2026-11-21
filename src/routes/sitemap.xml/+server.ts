@@ -1,4 +1,4 @@
-import { sculptures } from '$lib/data/sculptures';
+import { sculptures } from '#lib/data/sculptures.ts';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = ({ url }) => {

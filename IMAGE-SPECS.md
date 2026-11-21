@@ -13,11 +13,13 @@ These images are causing layout issues and need to be replaced with properly cro
 ### 1. at-expo-sculpture (Hero Image)
 
 **Desktop Version** (`at-expo-sculpture-desktop.JPG`):
+
 - **Dimensions**: 1600 x 1000px (16:10 landscape)
 - **Crop**: Landscape orientation, focus on sculpture
 - **Format**: JPG, max 500KB
 
 **Mobile Version** (`at-expo-sculpture-mobile.JPG`):
+
 - **Dimensions**: 1080 x 1440px (3:4 portrait)
 - **Crop**: Portrait orientation, same subject but cropped for vertical
 - **Format**: JPG, max 500KB
@@ -27,11 +29,13 @@ These images are causing layout issues and need to be replaced with properly cro
 ### 2. crowd-1 (Exhibition Opening)
 
 **Desktop Version** (`crowd-1-desktop.JPG`):
+
 - **Dimensions**: 1080 x 1350px (4:5 portrait)
 - **Crop**: Portrait orientation showing crowd
 - **Format**: JPG, max 400KB
 
 **Mobile Version** (`crowd-1-mobile.JPG`):
+
 - **Dimensions**: 1080 x 1350px (4:5 portrait) - same crop
 - **Crop**: Can be same as desktop
 - **Format**: JPG, max 400KB
@@ -41,11 +45,13 @@ These images are causing layout issues and need to be replaced with properly cro
 ### 3. musician (Traditional Musician)
 
 **Desktop Version** (`musician-desktop.JPG`):
+
 - **Dimensions**: 1080 x 1350px (4:5 portrait)
 - **Crop**: Portrait orientation, musician in frame
 - **Format**: JPG, max 400KB
 
 **Mobile Version** (`musician-mobile.JPG`):
+
 - **Dimensions**: 1080 x 1350px (4:5 portrait) - same crop
 - **Crop**: Can be same as desktop
 - **Format**: JPG, max 400KB
@@ -55,11 +61,13 @@ These images are causing layout issues and need to be replaced with properly cro
 ### 4. god-and-devil (Exhibition Space)
 
 **Desktop Version** (`god-and-devil-desktop.JPG`):
+
 - **Dimensions**: 1920 x 1080px (16:9 landscape)
 - **Crop**: Wide landscape showing both sculptures
 - **Format**: JPG, max 600KB
 
 **Mobile Version** (`god-and-devil-mobile.JPG`):
+
 - **Dimensions**: 1080 x 1440px (3:4 portrait)
 - **Crop**: Portrait crop focusing on one sculpture or tighter framing
 - **Format**: JPG, max 500KB
@@ -69,6 +77,7 @@ These images are causing layout issues and need to be replaced with properly cro
 ## Current Images (Can Keep)
 
 These are working fine:
+
 - `crowd-2.JPG` - already correct ratio
 - `juraan-himself.JPG` - works as-is
 

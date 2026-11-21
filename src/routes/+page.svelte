@@ -1,7 +1,12 @@
 <script>
-	import OptimizedImage from '$lib/components/OptimizedImage.svelte';
-	import Seo from '$lib/components/Seo.svelte';
-	import { featuredSculpture, sculptures, getSculpturesByCategory, getSculptureById } from '$lib/data/sculptures';
+	import OptimizedImage from '#lib/components/OptimizedImage.svelte';
+	import Seo from '#lib/components/Seo.svelte';
+	import {
+		featuredSculpture,
+		sculptures,
+		getSculpturesByCategory,
+		getSculptureById
+	} from '#lib/data/sculptures.ts';
 
 	// Get a selection of sculptures for the gallery preview (excluding featured)
 	const galleryPreview = sculptures
@@ -169,67 +174,79 @@
 
 <!-- Highlight Work: God and Devil -->
 {#if godAndDevil && buddha && devil}
-<section class="relative py-section bg-bg-secondary/20 border-y border-border-subtle">
-	<div class="mx-auto max-w-7xl px-6">
-		<!-- Section Header -->
-		<div class="text-center mb-12">
-			<p class="text-tiny font-mono tracking-widest text-bronze-light uppercase mb-3">Highlight Work</p>
-			<h2 class="text-h1 text-primary mb-6 leading-tight" style="font-family: var(--font-family-juraan);">
-				{godAndDevil.title}
-			</h2>
-			<p class="text-h3 text-bronze-light font-serif mb-4">
-				A Meditation on Duality
-			</p>
-			<p class="text-body text-secondary font-sans leading-relaxed max-w-3xl mx-auto">
-				Two pieces in eternal dialogue—Buddha in serene contemplation, Devil in introspective meditation.
-				Neither purely good nor evil, both exist as reflections of human consciousness.
-			</p>
-		</div>
+	<section class="relative border-y border-border-subtle bg-bg-secondary/20 py-section">
+		<div class="mx-auto max-w-7xl px-6">
+			<!-- Section Header -->
+			<div class="mb-12 text-center">
+				<p class="text-tiny mb-3 font-mono tracking-widest text-bronze-light uppercase">
+					Highlight Work
+				</p>
+				<h2
+					class="text-h1 text-primary mb-6 leading-tight"
+					style="font-family: var(--font-family-juraan);"
+				>
+					{godAndDevil.title}
+				</h2>
+				<p class="text-h3 mb-4 font-serif text-bronze-light">A Meditation on Duality</p>
+				<p class="text-body text-secondary mx-auto max-w-3xl font-sans leading-relaxed">
+					Two pieces in eternal dialogue—Buddha in serene contemplation, Devil in introspective
+					meditation. Neither purely good nor evil, both exist as reflections of human
+					consciousness.
+				</p>
+			</div>
 
-		<!-- Split Image Layout -->
-		<div class="grid grid-cols-2 gap-0 mb-8">
-			<!-- Devil -->
-			<a href="/sculpture/god-and-devil" class="group relative aspect-[3/4] overflow-hidden">
-				<img
-					src={devil.image}
-					alt={devil.title}
-					class="h-full w-full object-cover transition-all duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105"
-					loading="lazy"
-				/>
-				<div class="absolute inset-0 bg-gradient-to-r from-transparent to-bg-primary/20 md:group-hover:to-bg-primary/10 transition-all duration-700 pointer-events-none"></div>
-				<!-- Label -->
-				<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary via-bg-primary/90 to-transparent p-6 pointer-events-none">
-					<p class="text-small text-bronze-light font-serif text-center">Devil</p>
-				</div>
-			</a>
+			<!-- Split Image Layout -->
+			<div class="mb-8 grid grid-cols-2 gap-0">
+				<!-- Devil -->
+				<a href="/sculpture/god-and-devil" class="group relative aspect-[3/4] overflow-hidden">
+					<img
+						src={devil.image}
+						alt={devil.title}
+						class="h-full w-full object-cover transition-all duration-700 md:grayscale md:group-hover:scale-105 md:group-hover:grayscale-0"
+						loading="lazy"
+					/>
+					<div
+						class="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent to-bg-primary/20 transition-all duration-700 md:group-hover:to-bg-primary/10"
+					></div>
+					<!-- Label -->
+					<div
+						class="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-bg-primary via-bg-primary/90 to-transparent p-6"
+					>
+						<p class="text-small text-center font-serif text-bronze-light">Devil</p>
+					</div>
+				</a>
 
-			<!-- Buddha -->
-			<a href="/sculpture/god-and-devil" class="group relative aspect-[3/4] overflow-hidden">
-				<img
-					src={buddha.image}
-					alt={buddha.title}
-					class="h-full w-full object-cover transition-all duration-700 md:grayscale md:group-hover:grayscale-0 md:group-hover:scale-105"
-					loading="lazy"
-				/>
-				<div class="absolute inset-0 bg-gradient-to-l from-transparent to-bg-primary/20 md:group-hover:to-bg-primary/10 transition-all duration-700 pointer-events-none"></div>
-				<!-- Label -->
-				<div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-bg-primary via-bg-primary/90 to-transparent p-6 pointer-events-none">
-					<p class="text-small text-bronze-light font-serif text-center">Buddha</p>
-				</div>
-			</a>
-		</div>
+				<!-- Buddha -->
+				<a href="/sculpture/god-and-devil" class="group relative aspect-[3/4] overflow-hidden">
+					<img
+						src={buddha.image}
+						alt={buddha.title}
+						class="h-full w-full object-cover transition-all duration-700 md:grayscale md:group-hover:scale-105 md:group-hover:grayscale-0"
+						loading="lazy"
+					/>
+					<div
+						class="pointer-events-none absolute inset-0 bg-gradient-to-l from-transparent to-bg-primary/20 transition-all duration-700 md:group-hover:to-bg-primary/10"
+					></div>
+					<!-- Label -->
+					<div
+						class="pointer-events-none absolute right-0 bottom-0 left-0 bg-gradient-to-t from-bg-primary via-bg-primary/90 to-transparent p-6"
+					>
+						<p class="text-small text-center font-serif text-bronze-light">Buddha</p>
+					</div>
+				</a>
+			</div>
 
-		<!-- CTA -->
-		<div class="text-center">
-			<a
-				href="/sculpture/god-and-devil"
-				class="text-small inline-block border border-bronze bg-transparent px-8 py-3 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
-			>
-				Explore This Work
-			</a>
+			<!-- CTA -->
+			<div class="text-center">
+				<a
+					href="/sculpture/god-and-devil"
+					class="text-small inline-block border border-bronze bg-transparent px-8 py-3 font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
+				>
+					Explore This Work
+				</a>
+			</div>
 		</div>
-	</div>
-</section>
+	</section>
 {/if}
 
 <!-- Gallery Preview Section -->
@@ -313,7 +330,7 @@
 		<!-- Editorial Layout -->
 		<div class="grid grid-cols-12 gap-4 md:gap-6">
 			<!-- Large Hero Image -->
-			<div class="group col-span-12 aspect-[3/4] overflow-hidden md:aspect-[16/10] md:col-span-8">
+			<div class="group col-span-12 aspect-[3/4] overflow-hidden md:col-span-8 md:aspect-[16/10]">
 				<OptimizedImage
 					src="/featured/at-expo-sculpture-desktop.JPG"
 					srcMobile="/featured/at-expo-sculpture-mobile.JPG"
@@ -348,7 +365,9 @@
 					class="h-full w-full object-cover transition-all duration-700 ease-out md:grayscale md:group-hover:scale-[1.02] md:group-hover:grayscale-0"
 				/>
 			</div>
-			<div class="group relative col-span-12 aspect-[3/4] overflow-hidden md:aspect-[16/9] md:col-span-8">
+			<div
+				class="group relative col-span-12 aspect-[3/4] overflow-hidden md:col-span-8 md:aspect-[16/9]"
+			>
 				<OptimizedImage
 					src="/featured/god-and-devil-desktop.JPG"
 					srcMobile="/featured/god-and-devil-mobile.JPG"
