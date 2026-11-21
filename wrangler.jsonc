@@ -3,5 +3,10 @@
 	"name": "juraan",
 	"compatibility_date": "2026-11-01",
 	"compatibility_flags": ["nodejs_compat"],
-	"observability": { "enabled": true }
+	"observability": { "enabled": true },
+	"workers_dev": true,
+	"routes": [
+		{ "pattern": "juraan.com", "custom_domain": true },
+		{ "pattern": "www.juraan.com", "custom_domain": true }
+	]
 }
