@@ -54,7 +54,7 @@
 </script>
 
 <nav
-	class="fixed top-0 z-50 w-full border-b border-bronze-dark/20 bg-bg-primary/85 backdrop-blur-nav transition-transform duration-300 ease-in-out {navHidden
+	class="site-nav fixed top-0 z-50 w-full border-b border-bronze-dark/20 bg-bg-primary/85 backdrop-blur-nav transition-transform duration-300 ease-in-out {navHidden
 		? '-translate-y-full'
 		: 'translate-y-0'}"
 >

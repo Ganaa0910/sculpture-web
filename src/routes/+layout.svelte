@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
 	import { onMount } from 'svelte';
-	import { beforeNavigate } from '$app/navigation';
+	import { beforeNavigate, onNavigate } from '$app/navigation';
 	import Navigation from '#lib/components/Navigation.svelte';
 	import Footer from '#lib/components/Footer.svelte';
 	let { children } = $props();
@@ -35,6 +35,18 @@
 	beforeNavigate(() => {
 		window.lenis?.stop();
 		window.lenis?.start();
+	});
+
+	// Subtle crossfade between pages via the native View Transitions API.
+	// Browsers without it just navigate normally.
+	onNavigate((navigation) => {
+		if (!document.startViewTransition) return;
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
 	});
 </script>
 
