@@ -1,225 +1,354 @@
 <script>
-	let { src = '', alt = '' } = $props();
+	/**
+	 * Fullscreen viewer on a native <dialog> (ESC, focus trap, top layer for free).
+	 * Zoom is done with transform-origin: the point under the cursor/finger stays put,
+	 * and panning just moves the origin. Mouse: click to zoom, move to explore, wheel to
+	 * zoom deeper. Touch: double-tap, pinch, drag.
+	 */
+	let { images = [], alt = '', onclose = () => {} } = $props();
 
-	let isOpen = $state(false);
+	const MAX = 5;
+	const CLICK_ZOOM = 2.5;
+
+	let dialog = $state();
+	let img = $state();
+	let index = $state(0);
 	let scale = $state(1);
-	let translateX = $state(0);
-	let translateY = $state(0);
-	let isDragging = $state(false);
-	let startX = 0;
-	let startY = 0;
-	let initialPinchDistance = 0;
-	let initialScale = 1;
+	let ox = $state(50); // transform-origin, % of the image box
+	let oy = $state(50);
 
-	export function open() {
-		isOpen = true;
-		resetTransform();
-		document.body.style.overflow = 'hidden';
+	let src = $derived(images[index] ?? '');
+	let zoomed = $derived(scale > 1.01);
+
+	export function open(i = 0) {
+		index = i;
+		reset();
+		dialog.showModal();
+		window.lenis?.stop();
 	}
 
-	export function close() {
-		isOpen = false;
-		document.body.style.overflow = '';
-		resetTransform();
-	}
-
-	function resetTransform() {
+	function reset() {
 		scale = 1;
-		translateX = 0;
-		translateY = 0;
+		ox = oy = 50;
 	}
 
-	function handleWheel(e) {
-		e.preventDefault();
-		const delta = e.deltaY * -0.002;
-		scale = Math.min(Math.max(1, scale + delta), 4);
-
-		if (scale === 1) {
-			translateX = 0;
-			translateY = 0;
-		}
+	function step(d) {
+		if (images.length < 2) return;
+		index = (index + d + images.length) % images.length;
+		reset();
 	}
 
-	function handleMouseDown(e) {
-		if (scale > 1) {
-			isDragging = true;
-			startX = e.clientX - translateX;
-			startY = e.clientY - translateY;
-		}
+	function onClose() {
+		window.lenis?.start();
+		onclose(index);
 	}
 
-	function handleMouseMove(e) {
-		if (isDragging) {
-			translateX = e.clientX - startX;
-			translateY = e.clientY - startY;
-		}
+	const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+	/** pointer position as % of the image's untransformed box */
+	function originAt(clientX, clientY) {
+		const r = img.getBoundingClientRect();
+		// getBoundingClientRect includes the current transform, so undo it
+		const w = r.width / scale;
+		const h = r.height / scale;
+		const left = r.left + (r.width - w) * (ox / 100);
+		const top = r.top + (r.height - h) * (oy / 100);
+		return [
+			clamp(((clientX - left) / w) * 100, 0, 100),
+			clamp(((clientY - top) / h) * 100, 0, 100)
+		];
 	}
 
-	function handleMouseUp() {
-		isDragging = false;
+	// --- mouse -------------------------------------------------------------
+	function onClick(e) {
+		if (e.pointerType === 'touch') return; // touch uses double-tap
+		if (zoomed) return reset();
+		[ox, oy] = originAt(e.clientX, e.clientY);
+		scale = CLICK_ZOOM;
 	}
 
-	function handleKeydown(e) {
-		if (e.key === 'Escape') close();
+	function onMouseMove(e) {
+		if (!zoomed) return;
+		[ox, oy] = originAt(e.clientX, e.clientY);
 	}
 
-	function getTouchDistance(touches) {
-		const dx = touches[0].clientX - touches[1].clientX;
-		const dy = touches[0].clientY - touches[1].clientY;
-		return Math.sqrt(dx * dx + dy * dy);
-	}
+	// wheel needs a non-passive listener to stop the page/dialog from scrolling
+	$effect(() => {
+		if (!img) return;
+		const onWheel = (e) => {
+			e.preventDefault();
+			if (!zoomed) [ox, oy] = originAt(e.clientX, e.clientY);
+			scale = clamp(scale * Math.exp(-e.deltaY * 0.0025), 1, MAX);
+			if (!zoomed) reset();
+		};
+		img.addEventListener('wheel', onWheel, { passive: false });
+		return () => img.removeEventListener('wheel', onWheel);
+	});
 
-	function handleTouchStart(e) {
-		if (e.touches.length === 1 && scale > 1) {
-			// Single finger drag
-			isDragging = true;
-			startX = e.touches[0].clientX - translateX;
-			startY = e.touches[0].clientY - translateY;
-		} else if (e.touches.length === 2) {
-			// Pinch to zoom
-			initialPinchDistance = getTouchDistance(e.touches);
-			initialScale = scale;
-		}
-	}
+	// --- touch -------------------------------------------------------------
+	const pts = new Map();
+	let pinch = null; // { d0, s0 }
+	let lastTap = 0;
 
-	function handleTouchMove(e) {
-		e.preventDefault();
-
-		if (e.touches.length === 1 && isDragging) {
-			// Single finger drag
-			translateX = e.touches[0].clientX - startX;
-			translateY = e.touches[0].clientY - startY;
-		} else if (e.touches.length === 2) {
-			// Pinch to zoom
-			const currentDistance = getTouchDistance(e.touches);
-			const scaleChange = currentDistance / initialPinchDistance;
-			scale = Math.min(Math.max(1, initialScale * scaleChange), 4);
-
-			if (scale === 1) {
-				translateX = 0;
-				translateY = 0;
+	function onPointerDown(e) {
+		if (e.pointerType !== 'touch') return;
+		pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+		if (pts.size === 2) {
+			const [a, b] = [...pts.values()];
+			pinch = { d0: Math.hypot(a.x - b.x, a.y - b.y), s0: scale };
+			if (!zoomed) [ox, oy] = originAt((a.x + b.x) / 2, (a.y + b.y) / 2);
+		} else if (pts.size === 1) {
+			const now = Date.now();
+			if (now - lastTap < 280) {
+				if (zoomed) reset();
+				else {
+					[ox, oy] = originAt(e.clientX, e.clientY);
+					scale = CLICK_ZOOM;
+				}
 			}
+			lastTap = now;
 		}
 	}
 
-	function handleTouchEnd(e) {
-		if (e.touches.length === 0) {
-			isDragging = false;
-			initialPinchDistance = 0;
+	function onPointerMove(e) {
+		if (e.pointerType !== 'touch' || !pts.has(e.pointerId)) return;
+		const prev = pts.get(e.pointerId);
+		pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+		if (pinch && pts.size === 2) {
+			const [a, b] = [...pts.values()];
+			scale = clamp((pinch.s0 * Math.hypot(a.x - b.x, a.y - b.y)) / pinch.d0, 1, MAX);
+		} else if (pts.size === 1 && zoomed) {
+			// moving the origin by Δ% shifts the content by Δ% · size · (scale − 1), so invert that
+			const r = img.getBoundingClientRect();
+			const k = 100 / (scale - 1);
+			ox = clamp(ox - ((e.clientX - prev.x) / (r.width / scale)) * k, 0, 100);
+			oy = clamp(oy - ((e.clientY - prev.y) / (r.height / scale)) * k, 0, 100);
 		}
+	}
+
+	function onPointerUp(e) {
+		pts.delete(e.pointerId);
+		if (pts.size < 2) pinch = null;
+		if (!zoomed && pts.size === 0) reset();
+	}
+
+	function onKeydown(e) {
+		if (e.key === 'ArrowRight') step(1);
+		else if (e.key === 'ArrowLeft') step(-1);
 	}
 </script>
 
-{#if isOpen}
-	<div
-		class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
-		onclick={close}
-		onkeydown={handleKeydown}
-		role="dialog"
-		aria-modal="true"
-		tabindex="-1"
-	>
-		<!-- Close button -->
-		<button
-			onclick={close}
-			class="absolute top-6 right-6 z-10 p-2 text-bronze-light transition-colors hover:text-bronze"
-			aria-label="Close zoom view"
-		>
-			<svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-				<path
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					stroke-width="2"
-					d="M6 18L18 6M6 6l12 12"
-				/>
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+<dialog
+	bind:this={dialog}
+	class="viewer"
+	onclose={onClose}
+	onkeydown={onKeydown}
+	onclick={(e) => e.target === dialog && dialog.close()}
+	aria-label={alt}
+>
+	<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
+	<img
+		bind:this={img}
+		{src}
+		alt="{alt}, image {index + 1} of {images.length}"
+		class:zoomed
+		style="transform: scale({scale}); transform-origin: {ox}% {oy}%;"
+		draggable="false"
+		onclick={onClick}
+		onpointermove={(e) => (e.pointerType === 'touch' ? onPointerMove(e) : onMouseMove(e))}
+		onpointerdown={onPointerDown}
+		onpointerup={onPointerUp}
+		onpointercancel={onPointerUp}
+	/>
+
+	<div class="bar top">
+		<span class="count">
+			{String(index + 1).padStart(2, '0')}
+			<span class="dim">/ {String(images.length).padStart(2, '0')}</span>
+		</span>
+		<form method="dialog">
+			<!-- svelte-ignore a11y_autofocus (focusing the close button is the dialog pattern) -->
+			<button class="icon" aria-label="Close viewer" autofocus>
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<path d="M6 6l12 12M18 6L6 18" />
+				</svg>
+			</button>
+		</form>
+	</div>
+
+	{#if images.length > 1}
+		<button class="icon nav prev" onclick={() => step(-1)} aria-label="Previous image">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+				<path d="M15 5l-7 7 7 7" />
 			</svg>
 		</button>
+		<button class="icon nav next" onclick={() => step(1)} aria-label="Next image">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+				<path d="M9 5l7 7-7 7" />
+			</svg>
+		</button>
+	{/if}
 
-		<!-- Zoom controls -->
-		<div class="absolute top-6 left-6 z-10 flex flex-col gap-2">
-			<button
-				onclick={(e) => {
-					e.stopPropagation();
-					scale = Math.min(scale + 0.5, 4);
-				}}
-				class="rounded border border-border-subtle bg-bg-secondary/80 p-2 text-bronze-light backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze"
-				aria-label="Zoom in"
-			>
-				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M12 4v16m8-8H4"
-					/>
-				</svg>
-			</button>
-			<button
-				onclick={(e) => {
-					e.stopPropagation();
-					scale = Math.max(scale - 0.5, 1);
-					if (scale === 1) {
-						translateX = 0;
-						translateY = 0;
-					}
-				}}
-				class="rounded border border-border-subtle bg-bg-secondary/80 p-2 text-bronze-light backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze"
-				aria-label="Zoom out"
-			>
-				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
-				</svg>
-			</button>
-			<button
-				onclick={(e) => {
-					e.stopPropagation();
-					resetTransform();
-				}}
-				class="text-tiny rounded border border-border-subtle bg-bg-secondary/80 p-2 text-bronze-light backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze"
-				aria-label="Reset zoom"
-			>
-				<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-					/>
-				</svg>
-			</button>
-		</div>
-
-		<!-- Instructions -->
-		<div
-			class="text-tiny absolute bottom-6 left-1/2 -translate-x-1/2 px-4 text-center font-mono tracking-wider text-bronze-light/60 uppercase"
+	<p class="hint">
+		<span class="fine"
+			>{zoomed ? 'Move to explore · click to reset' : 'Click to zoom · scroll for more'}</span
 		>
-			<span class="hidden md:inline">Scroll to zoom • Drag to pan • ESC to close</span>
-			<span class="md:hidden">Pinch to zoom • Drag to pan</span>
-		</div>
-
-		<!-- Image container -->
-		<div
-			class="max-h-[90vh] max-w-[90vw] overflow-hidden cursor-{scale > 1 ? 'move' : 'zoom-in'}"
-			onclick={(e) => e.stopPropagation()}
-			onwheel={handleWheel}
-			onmousedown={handleMouseDown}
-			onmousemove={handleMouseMove}
-			onmouseup={handleMouseUp}
-			onmouseleave={handleMouseUp}
-			ontouchstart={handleTouchStart}
-			ontouchmove={handleTouchMove}
-			ontouchend={handleTouchEnd}
-			role="button"
-			tabindex="0"
+		<span class="coarse"
+			>{zoomed ? 'Drag to explore · double-tap to reset' : 'Double-tap or pinch to zoom'}</span
 		>
-			<img
-				{src}
-				{alt}
-				class="max-h-[90vh] max-w-full object-contain transition-transform duration-200 select-none"
-				style="transform: scale({scale}) translate({translateX / scale}px, {translateY /
-					scale}px); cursor: {isDragging ? 'grabbing' : scale > 1 ? 'grab' : 'zoom-in'};"
-				draggable="false"
-			/>
-		</div>
-	</div>
-{/if}
+	</p>
+</dialog>
+
+<style>
+	.viewer {
+		width: 100vw;
+		height: 100dvh;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: #070707;
+		color: var(--color-text-primary);
+		overflow: hidden;
+		display: none;
+	}
+	.viewer[open] {
+		display: grid;
+		place-items: center;
+		animation: viewer-in 0.35s ease-out;
+	}
+	.viewer::backdrop {
+		background: rgb(0 0 0 / 0.9);
+	}
+
+	img {
+		max-width: 100vw;
+		max-height: 100dvh;
+		padding: 4.5rem clamp(0.5rem, 6vw, 6rem);
+		object-fit: contain;
+		user-select: none;
+		touch-action: none;
+		cursor: zoom-in;
+		transition:
+			transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+			transform-origin 0.12s linear;
+		animation: viewer-in 0.4s ease-out;
+	}
+	img.zoomed {
+		cursor: zoom-out;
+		transition:
+			transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1),
+			transform-origin 0.08s linear;
+	}
+
+	.bar {
+		position: fixed;
+		inset: 0 0 auto 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem clamp(1rem, 3vw, 2rem);
+		pointer-events: none;
+	}
+	.bar > * {
+		pointer-events: auto;
+	}
+	.count {
+		font-family: var(--font-family-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.2em;
+		color: var(--color-bronze-light);
+	}
+	.dim {
+		color: var(--color-text-tertiary);
+	}
+
+	.icon {
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border: 1px solid rgb(255 255 255 / 0.12);
+		border-radius: 999px;
+		background: rgb(10 10 10 / 0.6);
+		backdrop-filter: blur(8px);
+		color: var(--color-text-primary);
+		cursor: pointer;
+		transition:
+			border-color 0.3s,
+			color 0.3s;
+	}
+	.icon:hover,
+	.icon:focus-visible {
+		border-color: var(--color-bronze);
+		color: var(--color-bronze-light);
+		outline: none;
+	}
+	.icon svg {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+	.nav {
+		position: fixed;
+		top: 50%;
+		translate: 0 -50%;
+	}
+	.prev {
+		left: clamp(0.5rem, 2vw, 1.5rem);
+	}
+	.next {
+		right: clamp(0.5rem, 2vw, 1.5rem);
+	}
+
+	.hint {
+		position: fixed;
+		bottom: 1.25rem;
+		left: 50%;
+		translate: -50% 0;
+		margin: 0;
+		font-family: var(--font-family-mono);
+		font-size: 0.65rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-text-secondary);
+		white-space: nowrap;
+		pointer-events: none;
+		padding: 0.5rem 0.9rem;
+		border-radius: 999px;
+		background: rgb(10 10 10 / 0.65);
+		backdrop-filter: blur(8px);
+	}
+	.coarse {
+		display: none;
+	}
+	@media (pointer: coarse) {
+		.fine {
+			display: none;
+		}
+		.coarse {
+			display: inline;
+		}
+		.nav {
+			top: auto;
+			bottom: 3.5rem;
+			translate: none;
+		}
+	}
+
+	@keyframes viewer-in {
+		from {
+			opacity: 0;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.viewer[open],
+		img {
+			animation: none;
+			transition: none;
+		}
+	}
+</style>

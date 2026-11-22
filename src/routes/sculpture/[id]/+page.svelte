@@ -1,38 +1,56 @@
 <script>
 	import { page } from '$app/state';
-	import { getSculptureById } from '#lib/data/sculptures.ts';
+	import { sculptures, getSculptureById } from '#lib/data/sculptures.ts';
 	import ImageZoom from '#lib/components/ImageZoom.svelte';
 	import Seo from '#lib/components/Seo.svelte';
 
+	const works = sculptures.filter((s) => s.category === 'sculpture');
+
 	let sculpture = $derived(getSculptureById(page.params.id));
-	let selectedImageIndex = $state(0);
-	let zoomModal = $state();
+	let images = $derived(
+		sculpture?.gallery?.length ? sculpture.gallery : sculpture ? [sculpture.image] : []
+	);
+	let n = $derived(works.findIndex((s) => s.id === sculpture?.id));
+	let prevWork = $derived(works[(n - 1 + works.length) % works.length]);
+	let nextWork = $derived(works[(n + 1) % works.length]);
+	let dims = $derived(sculpture?.dimensions?.replace(/\s*x\s*/gi, ' × '));
 
-	let selectedImage = $derived(sculpture?.gallery?.[selectedImageIndex] || sculpture?.image || '');
+	let active = $state(0);
+	let track = $state();
+	let viewer = $state();
 
-	function selectImage(index) {
-		selectedImageIndex = index;
+	// new sculpture (prev/next links reuse this component) -> back to the first photo
+	$effect(() => {
+		sculpture?.id;
+		active = 0;
+		if (track) track.scrollLeft = 0;
+	});
+
+	function go(i, smooth = true) {
+		const count = images.length;
+		const target = (i + count) % count;
+		const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+		track.scrollTo({
+			left: target * track.clientWidth,
+			behavior: smooth && !reduce ? 'smooth' : 'auto'
+		});
 	}
 
-	function nextImage() {
-		if (sculpture?.gallery) {
-			selectedImageIndex = (selectedImageIndex + 1) % sculpture.gallery.length;
-		}
+	function onTrackScroll() {
+		active = Math.round(track.scrollLeft / track.clientWidth);
 	}
 
-	function prevImage() {
-		if (sculpture?.gallery) {
-			selectedImageIndex =
-				(selectedImageIndex - 1 + sculpture.gallery.length) % sculpture.gallery.length;
-		}
+	function onKeydown(e) {
+		if (images.length < 2 || document.querySelector('dialog[open]')) return;
+		if (e.target.closest?.('input, textarea, select')) return;
+		if (e.key === 'ArrowRight') go(active + 1);
+		else if (e.key === 'ArrowLeft') go(active - 1);
 	}
 
-	function openZoom() {
-		if (zoomModal) {
-			zoomModal.open();
-		}
-	}
+	const pad = (v) => String(v).padStart(2, '0');
 </script>
+
+<svelte:window onkeydown={onKeydown} />
 
 {#if sculpture}
 	<Seo
@@ -56,7 +74,7 @@
 
 <svelte:head>
 	{#if sculpture}
-		<link rel="preload" as="image" href={sculpture.image} fetchpriority="high" />
+		<link rel="preload" as="image" href={images[0]} fetchpriority="high" />
 	{:else}
 		<title>Sculpture Not Found — Juraan</title>
 		<meta name="robots" content="noindex" />
@@ -64,256 +82,137 @@
 </svelte:head>
 
 {#if sculpture}
-	<main class="relative min-h-screen bg-bg-primary">
-		<!-- Back Navigation - Fixed -->
-		<div class="fixed top-20 left-6 z-50 pt-4">
-			<a
-				href="/gallery"
-				class="text-secondary group inline-flex items-center space-x-2 border border-border-subtle bg-bg-primary/80 px-4 py-2 backdrop-blur transition-colors hover:text-bronze-light"
-			>
-				<svg
-					class="h-4 w-4 transition-transform group-hover:-translate-x-1"
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M10 19l-7-7m0 0l7-7m-7 7h18"
-					/>
-				</svg>
-				<span class="text-tiny font-sans tracking-wider uppercase">Back</span>
-			</a>
-		</div>
-
-		<!-- Hero Image Section -->
-		<section class="relative h-screen">
-			<!-- Main Image with Navigation -->
-			<div class="group relative h-full">
-				<div class="absolute inset-0 bg-bg-primary">
-					{#key selectedImageIndex}
+	<main class="detail">
+		<!-- Stage: swipeable photos, click to open the viewer -->
+		<section class="stage" aria-roledescription="carousel" aria-label="{sculpture.title} photos">
+			<div class="track" bind:this={track} onscroll={onTrackScroll} data-lenis-prevent>
+				{#each images as src, i (src)}
+					<button
+						class="slide"
+						onclick={() => viewer.open(i)}
+						aria-label="Enlarge photo {i + 1} of {images.length}"
+					>
 						<img
-							src={selectedImage}
-							alt={sculpture.title}
-							class="h-full w-full animate-fade-in object-contain"
-							loading="eager"
-							fetchpriority="high"
+							{src}
+							alt="{sculpture.title} by Juraan, view {i + 1}"
+							loading={i === 0 ? 'eager' : 'lazy'}
+							fetchpriority={i === 0 ? 'high' : undefined}
+							decoding="async"
 						/>
-					{/key}
-				</div>
-
-				<!-- Gradient Overlays for seamless vignette effect -->
-				<div
-					class="pointer-events-none absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-bg-primary via-bg-primary/30 via-bg-primary/60 to-transparent"
-				></div>
-				<div
-					class="pointer-events-none absolute inset-x-0 bottom-0 h-[40vh] bg-gradient-to-t from-bg-primary via-bg-primary/40 via-bg-primary/70 to-transparent"
-				></div>
-
-				<!-- Navigation Arrows -->
-				{#if sculpture.gallery && sculpture.gallery.length > 1}
-					<button
-						onclick={prevImage}
-						class="absolute top-1/2 left-4 z-20 -translate-y-1/2 border border-border-subtle bg-bg-secondary/50 p-3 text-text-primary backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze-light md:left-6 md:p-4 md:opacity-0 md:group-hover:opacity-100"
-						aria-label="Previous image"
-					>
-						<svg
-							class="h-5 w-5 md:h-6 md:w-6"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M15 19l-7-7 7-7"
-							/>
-						</svg>
 					</button>
+				{/each}
+			</div>
 
-					<button
-						onclick={nextImage}
-						class="absolute top-1/2 right-4 z-20 -translate-y-1/2 border border-border-subtle bg-bg-secondary/50 p-3 text-text-primary backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze-light md:right-6 md:p-4 md:opacity-0 md:group-hover:opacity-100"
-						aria-label="Next image"
+			{#if images.length > 1}
+				<button class="arrow prev" onclick={() => go(active - 1)} aria-label="Previous photo">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+						><path d="M15 5l-7 7 7 7" /></svg
 					>
-						<svg
-							class="h-5 w-5 md:h-6 md:w-6"
-							fill="none"
-							stroke="currentColor"
-							viewBox="0 0 24 24"
+				</button>
+				<button class="arrow next" onclick={() => go(active + 1)} aria-label="Next photo">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+						><path d="M9 5l7 7-7 7" /></svg
+					>
+				</button>
+			{/if}
+
+			<div class="stage-foot">
+				{#if images.length > 1}
+					<span class="count" aria-live="polite">
+						{pad(active + 1)} <span class="dim">/ {pad(images.length)}</span>
+					</span>
+					<span class="progress" aria-hidden="true">
+						<span style="width: {((active + 1) / images.length) * 100}%"></span>
+					</span>
+				{/if}
+				<button class="enlarge" onclick={() => viewer.open(active)}>
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+						><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" /></svg
+					>
+					Enlarge
+				</button>
+			</div>
+		</section>
+
+		<!-- Placard -->
+		<aside class="info">
+			<div class="info-inner">
+				<nav class="crumbs">
+					<a href="/gallery" class="back">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+							><path d="M19 12H5m6-6l-6 6 6 6" /></svg
 						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M9 5l7 7-7 7"
-							/>
-						</svg>
-					</button>
+						All works
+					</a>
+					{#if n >= 0}<span class="no">No. {pad(n + 1)} / {pad(works.length)}</span>{/if}
+				</nav>
 
-					<!-- Image Counter -->
-					<div
-						class="absolute bottom-8 left-4 z-20 border border-border-subtle bg-bg-secondary/80 px-4 py-2 backdrop-blur md:left-1/2 md:-translate-x-1/2 md:px-6 md:py-3"
-					>
-						<p class="text-tiny font-mono tracking-wider text-text-secondary">
-							{selectedImageIndex + 1} / {sculpture.gallery.length}
-						</p>
+				<h1 class="title">{sculpture.title}</h1>
+
+				<dl class="specs">
+					{#if sculpture.year}
+						<div>
+							<dt>Year</dt>
+							<dd>{sculpture.year}</dd>
+						</div>
+					{/if}
+					{#if sculpture.material}
+						<div>
+							<dt>Medium</dt>
+							<dd>{sculpture.material}</dd>
+						</div>
+					{/if}
+					{#if dims}
+						<div>
+							<dt>Dimensions</dt>
+							<dd>{dims} cm</dd>
+						</div>
+					{/if}
+				</dl>
+
+				{#if sculpture.description}
+					<p class="desc">{sculpture.description}</p>
+				{/if}
+
+				{#if images.length > 1}
+					<div class="thumbs" role="tablist" aria-label="Choose photo">
+						{#each images as src, i (src)}
+							<button
+								role="tab"
+								aria-selected={active === i}
+								aria-label="Photo {i + 1}"
+								class:active={active === i}
+								onclick={() => go(i)}
+							>
+								<img {src} alt="" loading="lazy" decoding="async" />
+							</button>
+						{/each}
 					</div>
 				{/if}
 
-				<!-- Zoom Button -->
-				<button
-					onclick={openZoom}
-					class="group/zoom absolute right-4 bottom-8 z-20 border border-border-subtle bg-bg-secondary/80 px-4 py-2 text-text-secondary backdrop-blur transition-all hover:border-bronze-dark hover:text-bronze-light md:right-8 md:px-6 md:py-3"
-				>
-					<span class="text-tiny flex items-center gap-2 font-mono tracking-wider uppercase">
-						<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								stroke-width="2"
-								d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
-							/>
-						</svg>
-						<span class="hidden md:inline">View Full Size</span>
-						<span class="md:hidden">Zoom</span>
-					</span>
-				</button>
-			</div>
-
-			<!-- Scroll Indicator -->
-			<div class="absolute bottom-24 left-1/2 z-10 -translate-x-1/2 md:bottom-12">
-				<div class="flex animate-bounce flex-col items-center gap-2">
-					<span
-						class="text-tiny md:text-small font-mono tracking-wider text-text-secondary uppercase"
-						>Scroll for details</span
+				<a href="/contact" class="inquire">
+					<span>Inquire about this work</span>
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+						><path d="M5 12h14m-6-6l6 6-6 6" /></svg
 					>
-					<svg
-						class="h-6 w-6 text-bronze-light"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							stroke-width="2"
-							d="M19 14l-7 7m0 0l-7-7m7 7V3"
-						/>
-					</svg>
-				</div>
+				</a>
+
+				{#if works.length > 1 && n >= 0}
+					<nav class="pager" aria-label="More works">
+						<a href="/sculpture/{prevWork.id}" class="pager-link">
+							<span class="pager-label">← Previous</span>
+							<span class="pager-title">{prevWork.title}</span>
+						</a>
+						<a href="/sculpture/{nextWork.id}" class="pager-link right">
+							<span class="pager-label">Next →</span>
+							<span class="pager-title">{nextWork.title}</span>
+						</a>
+					</nav>
+				{/if}
 			</div>
-		</section>
+		</aside>
 
-		<!-- Content Section -->
-		<section class="relative bg-bg-primary py-24">
-			<div class="mx-auto max-w-5xl px-6">
-				<!-- Title -->
-				<header class="mb-16 text-center">
-					<h1
-						class="text-hero text-primary mb-6 leading-tight"
-						style="font-family: var(--font-family-juraan);"
-					>
-						{sculpture.title}
-					</h1>
-					{#if sculpture.year}
-						<p class="text-h3 font-mono tracking-wider text-bronze-light">
-							{sculpture.year}
-						</p>
-					{/if}
-				</header>
-
-				<div class="grid grid-cols-1 gap-16 lg:grid-cols-3">
-					<!-- Description -->
-					<div class="space-y-8 lg:col-span-2">
-						{#if sculpture.description}
-							<section>
-								<h2 class="text-h3 text-primary mb-6 font-serif">About This Work</h2>
-								<p class="text-body text-secondary font-sans text-lg leading-relaxed">
-									{sculpture.description}
-								</p>
-							</section>
-						{/if}
-
-						<!-- Thumbnail Gallery -->
-						{#if sculpture.gallery && sculpture.gallery.length > 1}
-							<section>
-								<h2 class="text-h3 text-primary mb-6 font-serif">Gallery</h2>
-								<div class="grid grid-cols-4 gap-3 md:grid-cols-6">
-									{#each sculpture.gallery as img, i}
-										<button
-											onclick={() => selectImage(i)}
-											class="group/thumb aspect-square cursor-pointer overflow-hidden border transition-all duration-300 {selectedImageIndex ===
-											i
-												? 'border-bronze ring-2 ring-bronze/50'
-												: 'border-border-subtle hover:border-bronze-dark'}"
-										>
-											<img
-												src={img}
-												alt="{sculpture.title} - view {i + 1}"
-												class="h-full w-full object-cover transition-transform duration-300 group-hover/thumb:scale-110"
-												loading="lazy"
-											/>
-										</button>
-									{/each}
-								</div>
-							</section>
-						{/if}
-					</div>
-
-					<!-- Sidebar -->
-					<div class="space-y-8">
-						<!-- Technical Details -->
-						{#if sculpture.material || sculpture.dimensions}
-							<section class="space-y-6 border border-border-subtle bg-bg-secondary p-8">
-								<h2 class="text-h3 text-primary font-serif">Details</h2>
-								<div class="space-y-4">
-									{#if sculpture.material}
-										<div>
-											<span
-												class="text-tiny text-tertiary mb-2 block font-mono tracking-wider uppercase"
-												>Material</span
-											>
-											<span class="text-body text-secondary font-sans">{sculpture.material}</span>
-										</div>
-									{/if}
-									{#if sculpture.dimensions}
-										<div>
-											<span
-												class="text-tiny text-tertiary mb-2 block font-mono tracking-wider uppercase"
-												>Dimensions</span
-											>
-											<span class="text-body text-secondary font-sans">{sculpture.dimensions}</span>
-										</div>
-									{/if}
-								</div>
-							</section>
-						{/if}
-
-						<!-- Call to Action -->
-						<section class="space-y-6 border border-bronze-dark bg-bg-secondary p-8">
-							<h3 class="text-h3 text-primary font-serif">Interested?</h3>
-							<p class="text-small text-secondary font-sans leading-relaxed">
-								For inquiries about this work, collaborations, or exhibition opportunities, please
-								get in touch.
-							</p>
-							<a
-								href="/contact"
-								class="text-small block border border-bronze bg-transparent px-6 py-3 text-center font-sans tracking-wider text-bronze-light uppercase transition-all duration-300 hover:bg-bronze hover:text-bg-primary"
-							>
-								Get in Touch
-							</a>
-						</section>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- Image Zoom Modal -->
-		<ImageZoom bind:this={zoomModal} src={selectedImage} alt={sculpture.title} />
+		<ImageZoom bind:this={viewer} {images} alt={sculpture.title} onclose={(i) => go(i, false)} />
 	</main>
 {:else}
 	<main class="pt-24 pb-section">
@@ -331,3 +230,377 @@
 		</div>
 	</main>
 {/if}
+
+<style>
+	.detail {
+		--nav: 6rem;
+		padding-top: var(--nav);
+		background: var(--color-bg-primary);
+	}
+
+	/* ---------- Stage ---------- */
+	.stage {
+		position: relative;
+		height: 72svh;
+		background: radial-gradient(ellipse 60% 55% at 50% 45%, #1d1a16 0%, #0d0c0b 60%, #0a0a0a 100%);
+		animation: rise 0.7s ease-out both;
+	}
+	.track {
+		display: flex;
+		height: 100%;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		overscroll-behavior-x: contain;
+		scrollbar-width: none;
+	}
+	.track::-webkit-scrollbar {
+		display: none;
+	}
+	.slide {
+		flex: 0 0 100%;
+		height: 100%;
+		display: block; /* block, not grid: the img's height:100% must resolve against this box */
+		padding: 1.25rem 1.25rem 3.5rem;
+		scroll-snap-align: center;
+		background: none;
+		border: 0;
+		cursor: zoom-in;
+	}
+	.slide img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		filter: drop-shadow(0 30px 40px rgb(0 0 0 / 0.6));
+	}
+
+	.arrow {
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		display: none;
+		place-items: center;
+		width: 3rem;
+		height: 3rem;
+		border: 1px solid rgb(255 255 255 / 0.12);
+		border-radius: 999px;
+		background: rgb(10 10 10 / 0.55);
+		backdrop-filter: blur(8px);
+		color: var(--color-text-primary);
+		cursor: pointer;
+		transition:
+			border-color 0.3s,
+			color 0.3s,
+			opacity 0.3s;
+	}
+	.arrow svg,
+	.enlarge svg,
+	.back svg,
+	.inquire svg {
+		width: 1.1rem;
+		height: 1.1rem;
+		flex: none;
+	}
+	.arrow:hover,
+	.arrow:focus-visible {
+		border-color: var(--color-bronze);
+		color: var(--color-bronze-light);
+		outline: none;
+	}
+	.prev {
+		left: 1.5rem;
+	}
+	.next {
+		right: 1.5rem;
+	}
+
+	.stage-foot {
+		position: absolute;
+		inset: auto 0 0 0;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.9rem 1.25rem;
+		pointer-events: none;
+	}
+	.stage-foot > * {
+		pointer-events: auto;
+	}
+	.count {
+		font-family: var(--font-family-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.2em;
+		color: var(--color-bronze-light);
+	}
+	.dim {
+		color: var(--color-text-tertiary);
+	}
+	.progress {
+		flex: 1;
+		max-width: 10rem;
+		height: 1px;
+		background: rgb(255 255 255 / 0.12);
+	}
+	.progress span {
+		display: block;
+		height: 100%;
+		background: var(--color-bronze);
+		transition: width 0.4s ease;
+	}
+	.enlarge {
+		margin-left: auto;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.55rem 0.9rem;
+		border: 1px solid rgb(255 255 255 / 0.12);
+		border-radius: 999px;
+		background: rgb(10 10 10 / 0.55);
+		backdrop-filter: blur(8px);
+		font-family: var(--font-family-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-text-secondary);
+		cursor: pointer;
+		transition:
+			border-color 0.3s,
+			color 0.3s;
+	}
+	.enlarge:hover,
+	.enlarge:focus-visible {
+		border-color: var(--color-bronze);
+		color: var(--color-bronze-light);
+		outline: none;
+	}
+
+	/* ---------- Placard ---------- */
+	.info {
+		padding: 2.5rem 1.25rem 4rem;
+	}
+	.info-inner {
+		max-width: 34rem;
+		animation: rise 0.7s 0.1s ease-out both;
+	}
+	.crumbs {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+		font-family: var(--font-family-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+	}
+	.back {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: var(--color-text-secondary);
+		transition: color 0.3s;
+	}
+	.back:hover {
+		color: var(--color-bronze-light);
+	}
+	.back:hover svg {
+		translate: -3px 0;
+	}
+	.back svg {
+		transition: translate 0.3s;
+	}
+	.no {
+		color: var(--color-bronze);
+	}
+
+	.title {
+		margin: 0 0 2rem;
+		font-family: var(--font-family-juraan);
+		font-size: clamp(2.75rem, 6vw, 4.75rem);
+		font-weight: 400;
+		line-height: 0.95;
+		color: var(--color-text-primary);
+		text-wrap: balance;
+	}
+
+	.specs {
+		margin: 0 0 2rem;
+		border-top: 1px solid var(--color-border-subtle);
+	}
+	.specs div {
+		display: grid;
+		grid-template-columns: 8.5rem 1fr;
+		gap: 1rem;
+		padding: 0.85rem 0;
+		border-bottom: 1px solid var(--color-border-subtle);
+	}
+	.specs dt {
+		font-family: var(--font-family-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-text-tertiary);
+		padding-top: 0.2rem;
+	}
+	.specs dd {
+		margin: 0;
+		font-size: 1.05rem;
+		color: var(--color-text-primary);
+	}
+
+	.desc {
+		margin: 0 0 2rem;
+		font-size: 1.05rem;
+		line-height: 1.7;
+		color: var(--color-text-secondary);
+	}
+
+	.thumbs {
+		display: flex;
+		gap: 0.5rem;
+		margin-bottom: 2rem;
+		overflow-x: auto;
+		scrollbar-width: none;
+		padding: 3px;
+	}
+	.thumbs button {
+		flex: none;
+		width: 4.25rem;
+		aspect-ratio: 3 / 4;
+		padding: 0;
+		border: 0;
+		background: var(--color-bg-secondary);
+		outline: 1px solid var(--color-border-subtle);
+		outline-offset: 2px;
+		opacity: 0.5;
+		cursor: pointer;
+		transition:
+			opacity 0.3s,
+			outline-color 0.3s;
+	}
+	.thumbs button:hover,
+	.thumbs button:focus-visible {
+		opacity: 0.85;
+	}
+	.thumbs button.active {
+		opacity: 1;
+		outline-color: var(--color-bronze);
+	}
+	.thumbs img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.inquire {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1.1rem 1.4rem;
+		border: 1px solid var(--color-bronze);
+		color: var(--color-bronze-light);
+		font-family: var(--font-family-mono);
+		font-size: 0.78rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		transition:
+			background 0.35s,
+			color 0.35s;
+	}
+	.inquire:hover,
+	.inquire:focus-visible {
+		background: var(--color-bronze);
+		color: var(--color-bg-primary);
+		outline: none;
+	}
+	.inquire:hover svg {
+		translate: 4px 0;
+	}
+	.inquire svg {
+		transition: translate 0.3s;
+	}
+
+	.pager {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1px;
+		margin-top: 3rem;
+		background: var(--color-border-subtle);
+		border-block: 1px solid var(--color-border-subtle);
+	}
+	.pager-link {
+		display: grid;
+		gap: 0.35rem;
+		padding: 1.1rem 0.25rem;
+		background: var(--color-bg-primary);
+		transition: background 0.3s;
+	}
+	.pager-link.right {
+		text-align: right;
+	}
+	.pager-link:hover {
+		background: var(--color-bg-secondary);
+	}
+	.pager-label {
+		font-family: var(--font-family-mono);
+		font-size: 0.65rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--color-text-tertiary);
+	}
+	.pager-title {
+		font-family: var(--font-family-serif);
+		font-size: 1rem;
+		color: var(--color-text-primary);
+		transition: color 0.3s;
+	}
+	.pager-link:hover .pager-title {
+		color: var(--color-bronze-light);
+	}
+
+	/* ---------- Desktop: sticky stage left, placard right ---------- */
+	@media (min-width: 1024px) {
+		.detail {
+			display: grid;
+			grid-template-columns: minmax(0, 1.55fr) minmax(24rem, 1fr);
+			align-items: start;
+		}
+		.stage {
+			position: sticky;
+			top: var(--nav);
+			height: calc(100svh - var(--nav));
+		}
+		.slide {
+			padding: 2.5rem 5.5rem 4.5rem;
+		}
+		.arrow {
+			display: grid;
+			opacity: 0;
+		}
+		.stage:hover .arrow,
+		.arrow:focus-visible {
+			opacity: 1;
+		}
+		.stage-foot {
+			padding: 1.25rem 2rem;
+		}
+		.info {
+			min-height: calc(100svh - var(--nav));
+			display: flex;
+			align-items: center;
+			padding: 3rem clamp(2rem, 4vw, 4.5rem);
+			border-left: 1px solid var(--color-border-subtle);
+		}
+	}
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.stage,
+		.info-inner {
+			animation: none;
+		}
+	}
+</style>

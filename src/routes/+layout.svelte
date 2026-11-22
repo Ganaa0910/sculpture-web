@@ -1,6 +1,7 @@
 <script>
 	import '../app.css';
 	import { onMount } from 'svelte';
+	import { beforeNavigate } from '$app/navigation';
 	import Navigation from '#lib/components/Navigation.svelte';
 	import Footer from '#lib/components/Footer.svelte';
 	let { children } = $props();
@@ -12,6 +13,8 @@
 			easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
 			smoothWheel: true
 		});
+		// Exposed so overlays (image zoom) can pause page scrolling.
+		window.lenis = lenis;
 
 		// Animation frame loop
 		function raf(time) {
@@ -23,7 +26,15 @@
 		// Cleanup on destroy
 		return () => {
 			lenis.destroy();
+			window.lenis = undefined;
 		};
+	});
+
+	// A click during Lenis's glide would carry the glide onto the next page.
+	// stop() drops the in-flight animation so SvelteKit's scroll reset/restore wins.
+	beforeNavigate(() => {
+		window.lenis?.stop();
+		window.lenis?.start();
 	});
 </script>
 

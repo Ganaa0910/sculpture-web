@@ -8,13 +8,9 @@
 	const devil = getSculptureById('devil');
 
 	let zoomModal = $state();
-	let zoomImage = $state('');
 
 	function openZoom(imageSrc) {
-		zoomImage = imageSrc;
-		if (zoomModal) {
-			zoomModal.open();
-		}
+		zoomModal?.open(imageSrc === devil?.image ? 1 : 0);
 	}
 </script>
 
@@ -367,7 +363,7 @@
 		</div>
 
 		<!-- Image Zoom Modal -->
-		<ImageZoom bind:this={zoomModal} src={zoomImage} alt="God and Devil" />
+		<ImageZoom bind:this={zoomModal} images={[buddha.image, devil.image]} alt="God and Devil" />
 	</main>
 {:else}
 	<main class="pt-24 pb-section">
