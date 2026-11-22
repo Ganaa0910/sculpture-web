@@ -6,6 +6,8 @@ export interface Sculpture {
 	dimensions?: string;
 	description?: string;
 	image: string;
+	/** width / height of `image`, drives the gallery row layout */
+	aspect?: number;
 	gallery?: string[];
 	category?: 'sculpture' | 'drawing';
 	featured?: boolean;
@@ -19,6 +21,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '68x25x18',
 		image: '/sculptures/A girl blowing a Dandelion/_DSF6992.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/A girl blowing a Dandelion/_DSF6992.webp',
 			'/sculptures/A girl blowing a Dandelion/_DSF6995.webp',
@@ -33,6 +36,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '72x25x18',
 		image: '/sculptures/A man in love/_DSF7006.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/A man in love/_DSF7006.webp',
 			'/sculptures/A man in love/_DSF7012.webp',
@@ -48,6 +52,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '44x64x20',
 		image: '/sculptures/Alpha/_DSF7345.webp',
+		aspect: 1.555,
 		gallery: [
 			'/sculptures/Alpha/_DSF7345.webp',
 			'/sculptures/Alpha/_DSF7349.webp',
@@ -63,6 +68,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '35x50x28',
 		image: '/sculptures/Anger/_DSF7222.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Anger/_DSF7222.webp',
 			'/sculptures/Anger/_DSF7224.webp',
@@ -80,6 +86,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '30x87x38',
 		image: '/sculptures/Black Stallion/_DSF7395.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Black Stallion/_DSF7395.webp',
 			'/sculptures/Black Stallion/_DSF7407.webp',
@@ -95,6 +102,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '55x80x30',
 		image: '/sculptures/Bow-wielding-warrior/_DSF6761.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Bow-wielding-warrior/_DSF6761.webp',
 			'/sculptures/Bow-wielding-warrior/_DSF6778.webp'
@@ -108,6 +116,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '40x61x18',
 		image: '/sculptures/Brothers/_DSF7372.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Brothers/_DSF7372.webp',
 			'/sculptures/Brothers/_DSF7380.webp',
@@ -122,6 +131,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '33x46x27',
 		image: '/sculptures/Bull/_DSF7271.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Bull/_DSF7271.webp',
 			'/sculptures/Bull/_DSF7281.webp',
@@ -139,6 +149,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '103x70x40',
 		image: '/sculptures/Chairman/_DSF6887.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Chairman/_DSF6887.webp',
 			'/sculptures/Chairman/_DSF6890.webp',
@@ -155,6 +166,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '44x53x24',
 		image: '/sculptures/Chico/_DSF7582.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Chico/_DSF7582.webp',
 			'/sculptures/Chico/_DSF7592.webp',
@@ -169,6 +181,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '83x70x36',
 		image: '/sculptures/Deer/_DSF6866.webp',
+		aspect: 1.351,
 		gallery: [
 			'/sculptures/Deer/_DSF6866.webp',
 			'/sculptures/Deer/_DSF6873.webp',
@@ -183,6 +196,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '114x66x60',
 		image: '/sculptures/Desireling/_DSF6972.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Desireling/_DSF6972.webp',
 			'/sculptures/Desireling/_DSF6973.webp',
@@ -199,6 +213,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '92x37x30',
 		image: '/sculptures/Dragon/_DSF6923.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Dragon/_DSF6923.webp',
 			'/sculptures/Dragon/_DSF6926.webp',
@@ -213,6 +228,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '45x50x32',
 		image: '/sculptures/God and devil/Buddha/1.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/God and devil/Buddha/1.webp',
 			'/sculptures/God and devil/Buddha/_DSF7501.webp',
@@ -234,6 +250,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '45x50x32',
 		image: '/sculptures/God and devil/Devil/1.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/God and devil/Devil/1.webp',
 			'/sculptures/God and devil/Devil/_DSF7532.webp',
@@ -251,6 +268,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '45x50x32 (each piece)',
 		image: '/featured/god-and-devil.JPG',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/God and devil/Buddha/Buddha.JPG',
 			'/sculptures/God and devil/Devil/Devil in Meditation.JPG'
@@ -265,6 +283,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '56x70x40',
 		image: '/sculptures/Ibex/_DSF7188.webp',
+		aspect: 1.394,
 		gallery: [
 			'/sculptures/Ibex/_DSF7188.webp',
 			'/sculptures/Ibex/_DSF7205.webp',
@@ -280,6 +299,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '82x35x30',
 		image: '/sculptures/Love/_DSF6909.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Love/_DSF6909.webp',
 			'/sculptures/Love/_DSF6912.webp',
@@ -295,6 +315,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '44x40x30',
 		image: '/sculptures/Lynx/IMG_0461.JPG',
+		aspect: 0.667,
 		gallery: ['/sculptures/Lynx/IMG_0461.JPG', '/sculptures/Lynx/IMG_0462.JPG'],
 		category: 'sculpture'
 	},
@@ -305,6 +326,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '32x37x22',
 		image: '/sculptures/Memento Mori/_DSF7313.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Memento Mori/_DSF7313.webp',
 			'/sculptures/Memento Mori/_DSF7318.webp',
@@ -319,6 +341,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '100x45x35',
 		image: "/sculptures/Mind's Cosmos/_DSF6639 20.43.09.webp",
+		aspect: 0.667,
 		gallery: [
 			"/sculptures/Mind's Cosmos/_DSF6639 20.43.09.webp",
 			"/sculptures/Mind's Cosmos/_DSF6643.webp",
@@ -338,6 +361,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '81x90x40',
 		image: '/sculptures/Moose/_DSF6746.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Moose/_DSF6746.webp',
 			'/sculptures/Moose/_DSF6751.webp',
@@ -353,6 +377,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '10x60x34',
 		image: '/sculptures/Morning/IMG_0457.JPG',
+		aspect: 0.667,
 		category: 'sculpture'
 	},
 	{
@@ -362,6 +387,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '53x30x20',
 		image: '/sculptures/Myth/_DSF7027.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Myth/_DSF7027.webp',
 			'/sculptures/Myth/_DSF7028.webp',
@@ -376,6 +402,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '25x40x35',
 		image: '/sculptures/Old warrior/_DSF7119.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Old warrior/_DSF7119.webp',
 			'/sculptures/Old warrior/_DSF7123.webp',
@@ -392,6 +419,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '115x85x30',
 		image: '/sculptures/Pegasus/_DSF6979.webp',
+		aspect: 0.705,
 		gallery: [
 			'/sculptures/Pegasus/_DSF6979.webp',
 			'/sculptures/Pegasus/_DSF6986.png',
@@ -405,6 +433,7 @@ export const sculptures: Sculpture[] = [
 		year: 2024,
 		material: 'Bronze, cast and patinated',
 		image: '/sculptures/Racing Horse/_DSF7357.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Racing Horse/_DSF7357.webp',
 			'/sculptures/Racing Horse/_DSF7363.webp',
@@ -419,6 +448,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '79x90x10',
 		image: '/sculptures/Running man/_DSF6833.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Running man/_DSF6833.webp',
 			'/sculptures/Running man/_DSF6834.webp',
@@ -433,6 +463,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: 'Dimensions to be provided',
 		image: '/sculptures/Shaman/_DSF6844.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Shaman/_DSF6844.webp',
 			'/sculptures/Shaman/_DSF6845.webp',
@@ -447,6 +478,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '30x20x20',
 		image: '/sculptures/Strength-of-a-Lion/_DSF7453.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Strength-of-a-Lion/_DSF7453.webp',
 			'/sculptures/Strength-of-a-Lion/_DSF7457.webp',
@@ -464,6 +496,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '22x64x18',
 		image: '/sculptures/Stretch/_DSF7430.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Stretch/_DSF7430.webp',
 			'/sculptures/Stretch/_DSF7431.webp',
@@ -480,6 +513,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '44x70x20',
 		image: '/sculptures/Takhi/_DSF7158.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Takhi/_DSF7158.webp',
 			'/sculptures/Takhi/_DSF7176.webp',
@@ -494,6 +528,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '38x50x30',
 		image: '/sculptures/The King/_DSF7142.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/The King/_DSF7142.webp',
 			'/sculptures/The King/_DSF7152.webp',
@@ -508,6 +543,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '71x50x26',
 		image: '/sculptures/Victory/_DSF6782.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Victory/_DSF6782.webp',
 			'/sculptures/Victory/_DSF6784.webp',
@@ -523,6 +559,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '37x66x28',
 		image: '/sculptures/Welcome/_DSF7070.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Welcome/_DSF7070.webp',
 			'/sculptures/Welcome/_DSF7073.webp',
@@ -541,6 +578,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '54x53x30',
 		image: '/sculptures/Wild Boar/_DSF7329.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/Wild Boar/_DSF7329.webp',
 			'/sculptures/Wild Boar/_DSF7331.webp',
@@ -555,6 +593,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '67x60x30',
 		image: '/sculptures/Wind/_DSF6689.webp',
+		aspect: 0.667,
 		gallery: [
 			'/sculptures/Wind/_DSF6689.webp',
 			'/sculptures/Wind/_DSF6690.webp',
@@ -574,6 +613,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '113x35x30',
 		image: '/sculptures/Woman/_DSF6936.webp',
+		aspect: 0.707,
 		gallery: [
 			'/sculptures/Woman/_DSF6936.webp',
 			'/sculptures/Woman/_DSF6946.webp',
@@ -589,6 +629,7 @@ export const sculptures: Sculpture[] = [
 		material: 'Bronze, cast and patinated',
 		dimensions: '38x48x23',
 		image: '/sculptures/pig/_DSF7096.webp',
+		aspect: 1.5,
 		gallery: [
 			'/sculptures/pig/_DSF7096.webp',
 			'/sculptures/pig/_DSF7101.webp',
